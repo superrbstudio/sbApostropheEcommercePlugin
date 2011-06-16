@@ -5,7 +5,7 @@ sb_ecom_index:
 
 sb_ecom_categories:
   url: /:slug
-  param: { module: sbEcom, action: index }
+  param: { module: sbEcom, action: category }
   class: aRoute
   
 sb_ecom_product:
@@ -14,3 +14,23 @@ sb_ecom_product:
   options: { model: sbEcomProduct, type: object }
   class: aDoctrineRoute
   requirements: { slug: '[\w-]+' }
+  
+sb_ecom_basket:
+  url: /
+  param: { module: sbEcomBasket, action: index }
+  class: aRoute
+  
+sb_ecom_basket_action:
+  url: /:action 
+  param: { module: sbEcomBasket }
+  class: aRoute
+  
+sb_ecom_checkout:
+  url: /
+  param: { module: sbEcomCheckout, action: index }
+  class: aRoute
+  
+sb_ecom_checkout_action:
+  url: /:action 
+  param: { module: sbEcomCheckout }
+  class: aRoute
