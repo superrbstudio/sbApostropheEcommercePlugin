@@ -1,0 +1,62 @@
+options: 
+  type: INNODB
+  
+# The product object
+sbEcomProduct:
+  actAs:
+    Timestampable: ~
+    Taggable: ~
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    author_id:
+      type: integer
+    title:
+      type: string(255)
+      notnull: true
+    slug:
+      type: varchar(255)
+      notnull: true
+    cost:
+      type: decimal(18)
+      scale: 2
+      default: 0
+    tax:
+      type: float
+      default: 20
+  relations:
+    Author:
+      class: sfGuardUser
+      foreignAlias: EcomProductAuthor
+      local: author_id
+      foreign: id
+      onDelete: SET NULL
+    Categories:
+      foreignAlias: EcomProducts
+      class: aCategory
+      refClass: sbEcomProductToCategory
+      local: ecom_product_id
+      foreign: category_id
+
+# Link the product to Apostrophe Products
+sbEcomProductToCategory:
+  columns:
+    ecom_product_id:
+      type: integer
+      primary: true
+    category_id:
+      type: integer
+      primary: true
+  relations:
+    EcomProduct:
+      foreignAlias: EcomProductCategories
+      class: sbEcomProduct
+      local: ecom_product_id
+      onDelete: CASCADE
+    Category:
+      foreignAlias: EcomProductCategories
+      class: aCategory
+      local: category_id
+      onDelete: CASCADE

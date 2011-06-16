@@ -1,0 +1,16 @@
+sb_ecom_index:
+  url: /
+  param: { module: sbEcom, action: index }
+  class: aRoute
+
+sb_ecom_categories:
+  url: /:slug
+  param: { module: sbEcom, action: index }
+  class: aRoute
+  
+sb_ecom_product:
+  url: /item/:slug
+  param: { module: sbEcom, action: product }
+  options: { model: sbEcomProduct, type: object }
+  class: aDoctrineRoute
+  requirements: { slug: '[\w-]+' }

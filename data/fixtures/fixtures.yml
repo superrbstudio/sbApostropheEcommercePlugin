@@ -1,0 +1,47 @@
+# Some test categories
+aCategory: 
+  TestCategory1:
+    name: Test Category 1
+    description: This is used for the shop fixtures
+    slug: test-category-1
+  TestCategory2:
+    name: Test Category 2
+    description: This is used for the shop fixtures
+    slug: test-category-2
+  TestCategory3:
+    name: Test Category 3
+    description: This is used for the shop fixtures
+    slug: test-category-3
+    
+# Some test products
+sbEcomProduct:
+  TestProduct1:
+    title: Test Product 1
+    slug: test-product-1
+    cost: 29.99
+    tax: 20
+    Author: sgu_admin
+    Tags: [ tag1, tag2, tag3 ]
+  TestProduct2:
+    title: Test Product 2
+    slug: test-product-2
+    cost: 15.99
+    tax: 20
+    Author: sgu_admin
+    Tags: [ tag2, tag3, tag4 ]
+  TestProduct3:
+    title: Test Product 3
+    slug: test-product-3
+    cost: 99.95
+    tax: 20
+    Author: sgu_admin
+    Tags: [ tag3, tag4, tag5 ]
+  TestProduct4:
+    title: Test Product 4
+    slug: test-product-4
+    cost: 45.50
+    tax: 20
+    Author: sgu_admin
+    Tags: [ tag4, tag5, tag6 ]
+  
+  
