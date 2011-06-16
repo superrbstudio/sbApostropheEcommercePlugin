@@ -26,6 +26,13 @@ sbEcomProduct:
     tax:
       type: float
       default: 20
+      scale: 4
+    postage_weight:
+      type: float
+      scale: 4
+    is_featured:
+      type: boolean
+      default: false
   relations:
     Author:
       class: sfGuardUser
@@ -40,7 +47,7 @@ sbEcomProduct:
       local: ecom_product_id
       foreign: category_id
 
-# Link the product to Apostrophe Products
+# Link the product to Apostrophe categories
 sbEcomProductToCategory:
   columns:
     ecom_product_id:
@@ -60,3 +67,24 @@ sbEcomProductToCategory:
       class: aCategory
       local: category_id
       onDelete: CASCADE
+
+# Basket Items attached to session
+sbEcomBasketProduct:
+  actAs:
+    Timestampable: ~
+  columns:
+    session_id:
+      type: varchar(255)
+    product_id:
+      type: integer
+    quantity:
+      type: integer
+      default: 1
+  relations:
+    EcomProduct:
+      class: sbEcomProduct
+      foreignAlias: EcomBasketProduct
+      local: product_id
+      foreign: id
+      onDelete: SET NULL
+    

@@ -22,6 +22,7 @@ sbEcomProduct:
     tax: 20
     Author: sgu_admin
     Tags: [ tag1, tag2, tag3 ]
+    Categories: [ TestCategory1 ]
   TestProduct2:
     title: Test Product 2
     slug: test-product-2
@@ -29,6 +30,7 @@ sbEcomProduct:
     tax: 20
     Author: sgu_admin
     Tags: [ tag2, tag3, tag4 ]
+    Categories: [ TestCategory2 ]
   TestProduct3:
     title: Test Product 3
     slug: test-product-3
@@ -36,6 +38,7 @@ sbEcomProduct:
     tax: 20
     Author: sgu_admin
     Tags: [ tag3, tag4, tag5 ]
+    Categories: [ TestCategory1, TestCategory2 ]
   TestProduct4:
     title: Test Product 4
     slug: test-product-4
@@ -43,5 +46,6 @@ sbEcomProduct:
     tax: 20
     Author: sgu_admin
     Tags: [ tag4, tag5, tag6 ]
+    Categories: [ TestCategory3, TestCategory2 ]
   
   

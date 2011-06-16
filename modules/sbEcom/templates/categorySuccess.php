@@ -5,4 +5,4 @@
  * and open the template in the editor.
  */
 ?>
-<h3>This is the shop index template</h3>
+<h3>This is the category detail page</h3>
