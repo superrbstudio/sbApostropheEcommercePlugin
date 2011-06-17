@@ -41,11 +41,20 @@ sbEcomProduct:
       foreign: id
       onDelete: SET NULL
     Categories:
-      foreignAlias: EcomProducts
+      foreignAlias: EcomProductCategories
       class: aCategory
       refClass: sbEcomProductToCategory
       local: ecom_product_id
       foreign: category_id
+      
+aCategory:
+  relations:
+    EcomProducts:
+      class: sbEcomProduct
+      foreignAlias: EcomProductCategories
+      refClass: sbEcomProductToCategory
+      local: category_id
+      foreign: ecom_product_id
 
 # Link the product to Apostrophe categories
 sbEcomProductToCategory:
