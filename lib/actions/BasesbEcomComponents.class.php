@@ -7,6 +7,10 @@
  * @subpackage sbEcom
  * @author     Giles Smith
  */
-abstract class BasesbEcomComponents extends aComponents 
+abstract class BasesbEcomComponents extends sfComponents 
 {
+	public function executeSidebar()
+	{
+		
+	}
 }
