@@ -1,3 +1,5 @@
+<?php $now = date('Y-m-d H:i:s') ?>
+
 # Some test categories
 aCategory: 
   TestCategory1:
@@ -47,5 +49,61 @@ sbEcomProduct:
     Author: sgu_admin
     Tags: [ tag4, tag5, tag6 ]
     Categories: [ TestCategory3, TestCategory2 ]
-  
-  
+    
+aPage:
+  home:
+    children:
+      shop:
+        slug: "/shop"
+        published_at: '<?php echo $now ?>'
+        engine: sbEcom
+        Areas:
+          shop_en_title:
+            name: title
+            culture: en
+            latest_version: 1
+            AreaVersions:
+              shop_en_title_version_1:
+                version: 1
+                AreaVersionSlots:
+                  shop_en_title_version_1_permid_1:
+                    permid: 1
+                    Slot:
+                      type: aText 
+                      value: "Shop"
+      basket:
+        slug: "/basket"
+        published_at: '<?php echo $now ?>'
+        engine: sbEcomBasket
+        Areas:
+          basket_en_title:
+            name: title
+            culture: en
+            latest_version: 1
+            AreaVersions:
+              basket_en_title_version_1:
+                version: 1
+                AreaVersionSlots:
+                  basket_en_title_version_1_permid_1:
+                    permid: 1
+                    Slot:
+                      type: aText 
+                      value: "Basket"
+      checkout:
+        slug: "/checkout"
+        published_at: '<?php echo $now ?>'
+        engine: sbEcomCheckout
+        Areas:
+          checkout_en_title:
+            name: title
+            culture: en
+            latest_version: 1
+            AreaVersions:
+              checkout_en_title_version_1:
+                version: 1
+                AreaVersionSlots:
+                  checkout_en_title_version_1_permid_1:
+                    permid: 1
+                    Slot:
+                      type: aText 
+                      value: "Checkout"
