@@ -22,6 +22,8 @@ sbEcomProduct:
     slug: test-product-1
     cost: 29.99
     tax: 20
+    postage_weight: 0.24
+    is_featured: false
     Author: sgu_admin
     Tags: [ tag1, tag2, tag3 ]
     Categories: [ TestCategory1 ]
@@ -30,6 +32,8 @@ sbEcomProduct:
     slug: test-product-2
     cost: 15.99
     tax: 20
+    postage_weight: 0.50
+    is_featured: false
     Author: sgu_admin
     Tags: [ tag2, tag3, tag4 ]
     Categories: [ TestCategory2 ]
@@ -38,6 +42,8 @@ sbEcomProduct:
     slug: test-product-3
     cost: 99.95
     tax: 20
+    postage_weight: 1.5
+    is_featured: true
     Author: sgu_admin
     Tags: [ tag3, tag4, tag5 ]
     Categories: [ TestCategory1, TestCategory2 ]
@@ -46,9 +52,71 @@ sbEcomProduct:
     slug: test-product-4
     cost: 45.50
     tax: 20
+    postage_weight: 0.90
+    is_featured: true
     Author: sgu_admin
     Tags: [ tag4, tag5, tag6 ]
     Categories: [ TestCategory3, TestCategory2 ]
+  TestProduct5:
+    title: Test Product 5
+    slug: test-product-5
+    cost: 45.50
+    tax: 20
+    postage_weight: 0.15
+    is_featured: false
+    Author: sgu_admin
+    Tags: [ tag5, tag6, tag7 ]
+    Categories: [ TestCategory1 ]
+  TestProduct6:
+    title: Test Product 6
+    slug: test-product-6
+    cost: 22.95
+    tax: 20
+    postage_weight: 0.05
+    is_featured: true
+    Author: sgu_admin
+    Tags: [ tag2, tag3, tag4 ]
+    Categories: [ TestCategory1 ]
+  TestProduct7:
+    title: Test Product 7
+    slug: test-product-7
+    cost: 59.99
+    tax: 20
+    postage_weight: 0.05
+    is_featured: false
+    Author: sgu_admin
+    Tags: [ tag2, tag3, tag4 ]
+    Categories: [ TestCategory1 ]
+  TestProduct8:
+    title: Test Product 8
+    slug: test-product-8
+    cost: 19.99
+    tax: 20
+    postage_weight: 2.5
+    is_featured: false
+    Author: sgu_admin
+    Tags: [ tag5, tag6, tag7 ]
+    Categories: [ TestCategory1 ]
+  TestProduct9:
+    title: Test Product 9
+    slug: test-product-9
+    cost: 15.49
+    tax: 20
+    postage_weight: 3.2
+    is_featured: false
+    Author: sgu_admin
+    Tags: [ tag1, tag2, tag3 ]
+    Categories: [ TestCategory1 ]
+  TestProduct10:
+    title: Test Product 10
+    slug: test-product-10
+    cost: 99.99
+    tax: 20
+    postage_weight: 0.5
+    is_featured: true
+    Author: sgu_admin
+    Tags: [ tag1, tag3, tag5 ]
+    Categories: [ TestCategory1 ]
     
 aPage:
   home:
