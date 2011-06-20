@@ -1,0 +1,62 @@
+/* 
+    Document   : sb-ecom-main
+    Created on : Jun 20, 2011, 10:51:55 AM
+    Author     : pureroon
+    Description:
+        Styles for sbApostropheEcommercePlugin
+*/
+
+#sb-ecom-main {
+	float: left;
+	clear: both;
+	position: relative;
+	width: 100%;
+}
+
+.sb-ecom  .a-content, .sb-ecom-admin .a-content {
+	width: 720px;
+	float: left;
+	clear: none;
+}
+
+.sb-ecom .ecom-featured-products, .sb-ecom .ecom-product-categories {
+	margin: 0;
+	padding: 0;
+}
+
+.sb-ecom .ecom-featured-products li, .sb-ecom .ecom-product-categories li {
+	list-style-type: none;
+	margin: 0px 20px 20px 0;
+	float: left;
+	padding: 10px;
+	background-color: #EFEFEF;
+	border: 1px solid #DDD;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	overflow: visible;
+}
+
+.sb-ecom li.end {
+	margin-right: 0;
+}
+
+.sb-ecom .ecom-featured-products li {
+	width: 204px;
+}
+
+.sb-ecom .ecom-product-categories li {
+	width: 327px;
+}
+
+.sb-ecom .sb-ecom-featured-products-group, .sb-ecom .sb-ecom-product-categories-group {
+	clear: both;
+}
+
+.sb-ecom .ecom-product-more, .sb-ecom .ecom-category-more {
+	float: right;
+}
