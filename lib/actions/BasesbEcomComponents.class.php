@@ -9,6 +9,11 @@
  */
 abstract class BasesbEcomComponents extends sfComponents 
 {
+	public function preExecute()
+  {
+    parent::preExecute();
+  }
+	
 	public function executeSidebar()
 	{
 		

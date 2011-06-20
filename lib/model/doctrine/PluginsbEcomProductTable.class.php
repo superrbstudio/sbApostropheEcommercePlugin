@@ -36,11 +36,12 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		 */
 		public static function getProductCategories()
 		{
+			$fast = sfConfig::get('app_a_fasthydrate', false);
 			return Doctrine_Query::create()
-							->select('c.id')
+							->select('c.id, c.slug, c.name')
 							->from('aCategory c')
 							->innerJoin('c.EcomProducts p')
-							->execute();
+							->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 		}
 		
 		/**
@@ -51,12 +52,13 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		 */
 		public static function getProductsInCategory(aCategory $category)
 		{
+			$fast = sfConfig::get('app_a_fasthydrate', false);
 			return Doctrine_Query::create()
-							->select('p.id')
+							->select('p.id, p.title, p.cost, p.tax, p.slug')
 							->from('sbEcomProduct p')
 							->innerJoin('p.Categories c')
 							->where('c.id = ?', $category->getId())
-							->execute();
+							->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 		}
 		
 		/**
@@ -68,5 +70,16 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		public static function getProductCategoryBySlug($slug)
 		{
 			return aCategoryTable::getInstance()->findOneBySlug($slug);
+		}
+		
+		/**
+		 * Return a product from a given slug
+		 * 
+		 * @param string $slug
+		 * @return sbEcomProduct
+		 */
+		public static function getProductBySlug($slug)
+		{
+			return self::getInstance()->findOneBySlug($slug);
 		}
 }

@@ -4,7 +4,7 @@ sb_ecom_index:
   class: aRoute
 
 sb_ecom_categories:
-  url: /:slug
+  url: /:cat
   param: { module: sbEcom, action: category }
   class: aRoute
   
