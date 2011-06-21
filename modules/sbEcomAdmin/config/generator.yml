@@ -1,0 +1,24 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sbEcomProduct
+    theme:                 aAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sb_ecom_product_sbEcomAdmin
+    with_doctrine_route:   true
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title:   Products List
+        display: [title, cost, tax, postage_weight, is_featured, updated_at]
+      filter:  ~
+      form:    ~
+      edit:    
+        title: Editing Product "%%title%%"
+      new:     
+        title: New Product

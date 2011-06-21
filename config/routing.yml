@@ -34,3 +34,14 @@ sb_ecom_checkout_action:
   url: /:action 
   param: { module: sbEcomCheckout }
   class: aRoute
+  
+## Admin Routes
+
+sb_ecom_product_sbEcomAdmin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sbEcomProduct
+    module:               sbEcomAdmin
+    prefix_path:          /sbEcomAdmin
+    column:               id
+    with_wildcard_routes: true
