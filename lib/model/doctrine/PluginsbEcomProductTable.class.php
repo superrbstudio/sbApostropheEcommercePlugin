@@ -82,4 +82,15 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		{
 			return self::getInstance()->findOneBySlug($slug);
 		}
+		
+		/**
+		 * Return a product from a given id
+		 *
+		 * @param integer $id
+		 * @return sbEcomProduct
+		 */
+		public static function getProductById($id)
+		{
+			return self::getInstance()->findOneById($id);
+		}
 }
