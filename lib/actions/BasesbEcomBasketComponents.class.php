@@ -4,7 +4,7 @@
  * Base sbEcomBasket components for the sbApostropheEcommerce Plugin
  * 
  * @package    sbApostropheEcommercePlugin
- * @subpackage sbEcom
+ * @subpackage sbEcomBasket
  * @author     Giles Smith
  */
 abstract class BasesbEcomBasketComponents extends sfComponents 

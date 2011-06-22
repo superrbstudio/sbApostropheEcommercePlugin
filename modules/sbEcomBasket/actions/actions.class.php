@@ -1,9 +1,5 @@
 <?php
 
-class sbEcomBasketActions extends aEngineActions 
+class sbEcomBasketActions extends BasesbEcomBasketActions 
 {
-	public function executeIndex(sfWebRequest $request)
-	{
-		
-	}
 }
