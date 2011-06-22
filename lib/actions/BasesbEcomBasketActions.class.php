@@ -15,7 +15,7 @@ abstract class BasesbEcomBasketActions extends aEngineActions
 	
 	public function executeIndex(sfWebRequest $request)
 	{
-		
+		$this->basket = sbEcomBasketTable::getUsersBasket(session_id());
 	}
 	
 	public function executeAdd(sfWebRequest $request)

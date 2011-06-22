@@ -21,7 +21,7 @@ class sbEcomBasket
 			{
 				if($product instanceof sbEcomBasketProduct)
 				{
-					$this->products[] = $product;
+					$this->basketProducts[] = $product;
 					$this->total      += ($product->getEcomProduct()->getCost() * $product->getQuantity());
 					$this->tax        += (($product->getEcomProduct()->getCost() * ($product->getEcomProduct()->getTax() / 100)) * $product->getQuantity());
 					$this->numItems   += $product->getQuantity();
