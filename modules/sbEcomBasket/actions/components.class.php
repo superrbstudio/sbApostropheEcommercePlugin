@@ -1,6 +1,6 @@
 <?php
 
-class sbEcomBasketComponents extends BaseEcomBasketComponents 
+class sbEcomBasketComponents extends BasesbEcomBasketComponents 
 {
 	
 }

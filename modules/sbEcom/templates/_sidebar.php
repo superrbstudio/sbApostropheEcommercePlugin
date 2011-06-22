@@ -22,3 +22,6 @@
 </div>
 <?php endif ?>
 
+<hr class="a-hr" />
+<?php echo include_component('sbEcomBasket', 'BasketSummary'); ?>
+
