@@ -6,7 +6,6 @@
 ?>
 
 <?php if(count($categories) > 1): ?>
-<hr class="a-hr" />
 <div class="a-subnav-section categories">
   <h4><?php echo a_('Categories') ?></h4>
   <div class="a-filter-options blog clearfix">
