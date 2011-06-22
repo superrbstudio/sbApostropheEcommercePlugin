@@ -46,6 +46,12 @@ sbEcomProduct:
       refClass: sbEcomProductToCategory
       local: ecom_product_id
       foreign: category_id
+    BasketProduct:
+      foreignAlias: EcomBasketProduct
+      class: sbEcomBasketProduct
+      local: id
+      foreign: product_id
+      onDelete: CASCADE
       
 aCategory:
   relations:
@@ -95,5 +101,5 @@ sbEcomBasketProduct:
       foreignAlias: EcomBasketProduct
       local: product_id
       foreign: id
-      onDelete: SET NULL
+      onDelete: CASCADE
     

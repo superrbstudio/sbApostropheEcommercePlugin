@@ -60,3 +60,12 @@
 .sb-ecom .ecom-product-more, .sb-ecom .ecom-category-more {
 	float: right;
 }
+
+.sb-ecom .sb-ecom-basket-summary-list li {
+	float: right;
+	width: 50%;
+}
+
+.sb-ecom .sb-ecom-basket-summary-list li.num-items {
+	text-align: right;
+}

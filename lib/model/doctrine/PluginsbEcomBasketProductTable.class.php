@@ -10,11 +10,11 @@ class PluginsbEcomBasketProductTable extends Doctrine_Table
     /**
      * Returns an instance of this class.
      *
-     * @return object PluginsbEcomBasketProductTable
+     * @return object sbEcomBasketProduct
      */
     public static function getInstance()
     {
-        return Doctrine_Core::getTable('PluginsbEcomBasketProduct');
+        return Doctrine_Core::getTable('sbEcomBasketProduct');
     }
 		
 		/**
@@ -81,5 +81,10 @@ class PluginsbEcomBasketProductTable extends Doctrine_Table
 			
 			$basketProduct->setQuantity($basketProduct->getQuantity() + 1);
 			return $basketProduct->save();
+		}
+		
+		public static function getProductsInUsersBasket($sessionId)
+		{
+			return self::getInstance()->findBy('session_id', $sessionId);
 		}
 }

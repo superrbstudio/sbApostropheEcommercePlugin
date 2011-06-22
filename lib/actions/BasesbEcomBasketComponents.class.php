@@ -16,6 +16,6 @@ abstract class BasesbEcomBasketComponents extends sfComponents
 	
 	public function executeBasketSummary()
 	{
-		
+		$this->basket = sbEcomBasketTable::getUsersBasket(session_id());
 	}
 }
