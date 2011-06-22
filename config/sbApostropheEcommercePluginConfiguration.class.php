@@ -3,9 +3,9 @@
 /**
  * sbApostropheEcommerce configuration.
  * 
- * @package     apostropheBlogPlugin
+ * @package     sbApostropheEcommercePlugin
  * @subpackage  config
- * @author      Your name here
+ * @author      Giles Smith <tech@superrb.com>
  * @version     SVN: $Id: PluginConfiguration.class.php 17207 2009-04-10 15:36:26Z Kris.Wallsmith $
  */
 class sbApostropheEcommercePluginConfiguration extends sfPluginConfiguration
