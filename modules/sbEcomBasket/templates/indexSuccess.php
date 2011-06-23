@@ -21,9 +21,9 @@
 					<a href="<?php echo url_for('@sb_ecom_product?slug=' . $basketProduct->getEcomProduct()->getSlug()); ?>"><?php echo $basketProduct->getEcomProduct()->getTitle(); ?></a>
 				</td>
 				<td class="product-quantity">
-					<a href="<?php echo url_for('@sb_ecom_basket_action?action=plus&id=' . $basketProduct->getEcomProduct()->getId()); ?>"><span>+</span></a>
-					<?php echo $basketProduct->getQuantity(); ?>
 					<a href="<?php echo url_for('@sb_ecom_basket_action?action=subtract&id=' . $basketProduct->getEcomProduct()->getId()); ?>"><span>-</span></a>
+					<?php echo $basketProduct->getQuantity(); ?>
+					<a href="<?php echo url_for('@sb_ecom_basket_action?action=plus&id=' . $basketProduct->getEcomProduct()->getId()); ?>"><span>+</span></a>
 				</td>
 				<td class="product-remove"><a href="<?php echo url_for('@sb_ecom_basket_action?action=delete&product=' . $basketProduct->getId()); ?>"><span>Delete</span></a>
 			</tr>

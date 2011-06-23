@@ -69,3 +69,25 @@
 .sb-ecom .sb-ecom-basket-summary-list li.num-items {
 	text-align: right;
 }
+
+#ecom-basket-table {
+	width: 100%;
+}
+
+#ecom-basket-table .product-title {
+	width: 60%;
+}
+
+#ecom-basket-table .product-quantity {
+	text-align: center;
+	width: 20%;
+}
+
+#ecom-basket-table .product-remove {
+	width: 20%;
+	text-align: center;
+}
+
+.sbEcomBasket .a-content {
+	width: 100%;
+}

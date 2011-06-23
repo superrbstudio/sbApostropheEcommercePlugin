@@ -15,7 +15,7 @@ class sbEcomBasket
 	
 	public function __construct($products = null) 
 	{
-		if(!is_null($products))
+		if(is_array($products))
 		{
 			foreach($products as $product)
 			{
