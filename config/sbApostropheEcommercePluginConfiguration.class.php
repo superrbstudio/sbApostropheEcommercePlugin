@@ -32,7 +32,7 @@ class sbApostropheEcommercePluginConfiguration extends sfPluginConfiguration
   {
     $user = sfContext::getInstance()->getUser();
  
-    if ($user->hasCredential('blog_author') || $user->hasCredential('blog_admin'))
+    if ($user->hasCredential('sb_ecom_product_admin'))
     {
       aTools::addGlobalButtons(array(
         new aGlobalButton('products', 'Products', '@sb_ecom_product_sbEcomAdmin', 'a-blog-btn')

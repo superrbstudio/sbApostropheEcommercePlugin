@@ -122,6 +122,15 @@ sbEcomProduct:
     Tags: [ tag1, tag3, tag5 ]
     Categories: [ TestCategory1 ]
     
+sfGuardPermission:
+  sfGuardPermission_sb_ecom_product_admin:
+    name: sb_ecom_product_admin
+    description: 'Ecommerce Product Administrator'
+sfGuardGroupPermission:  
+  sfGuardGroupPermission_admin_sb_job_board_admin:
+    Group: sfGuardGroup_admin
+    Permission: sfGuardPermission_sb_ecom_product_admin
+    
 aPage:
   home:
     children:

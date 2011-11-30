@@ -6,6 +6,10 @@ sbEcomProduct:
   actAs:
     Timestampable: ~
     Taggable: ~
+    Sluggable:
+      unique: true
+      fields: [ reference, title ]
+      canUpdate: false
   columns:
     id:
       type: integer
@@ -16,6 +20,8 @@ sbEcomProduct:
     title:
       type: string(255)
       notnull: true
+    description:
+      type: clob
     slug:
       type: varchar(255)
       notnull: true
@@ -27,9 +33,21 @@ sbEcomProduct:
       type: float
       default: 20
       scale: 4
+    postage_weight_or_fixed:
+      type: enum
+      values: { weight, fixed }
+      default: weight
     postage_weight:
       type: float
       scale: 4
+      default: 0
+    postage_fixed_cost:
+      type: float
+      scale: 2
+      default: 0
+    call_to_buy:
+      type: boolean
+      default: false
     is_featured:
       type: boolean
       default: false
@@ -52,6 +70,11 @@ sbEcomProduct:
       local: id
       foreign: product_id
       onDelete: CASCADE
+    aSearchDocuments:
+      class: aSearchDocument
+      refClass: sbEcomProductToASearchDocument
+      foreign: a_search_document_id
+      local: sb_ecom_product_id
       
 aCategory:
   relations:
@@ -102,4 +125,27 @@ sbEcomBasketProduct:
       local: product_id
       foreign: id
       onDelete: CASCADE
+      
+sbEcomProductToASearchDocument:
+  columns:
+    a_search_document_id:
+      type: integer
+    # Must be your table name followed by _id
+    sb_ecom_product_id:
+      type: integer
+  relations:
+    aSearchDocument:
+      local: a_search_document_id
+      foreign: id
+      class: aSearchDocument
+      onDelete: cascade
+    sbEcomProduct:
+      local: sb_ecom_product_id
+      foreign: id
+      class: sbEcomProduct
+      onDelete: cascade
+  options:
+    symfony:
+      form:   false
+      filter: false
     
