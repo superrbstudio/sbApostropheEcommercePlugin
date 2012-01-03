@@ -1,16 +1,12 @@
 <?php
 
-require_once dirname(__FILE__).'/../lib/sbEcomAdminGeneratorConfiguration.class.php';
-require_once dirname(__FILE__).'/../lib/sbEcomAdminGeneratorHelper.class.php';
-
 /**
  * sbEcomAdmin actions.
  *
- * @package    asandbox
+ * @package    sbEcommercePlugin
  * @subpackage sbEcomAdmin
- * @author     Your name here
- * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
+ * @author     Giles Smith <tech@superrb.com>
  */
-class sbEcomAdminActions extends autoSbEcomAdminActions
+class sbEcomAdminActions extends BasesbEcomAdminActions
 {
 }
