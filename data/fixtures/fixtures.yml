@@ -29,6 +29,7 @@ sbEcomProduct:
     postage_weight: 0.24
     is_featured: false
     Author: sgu_admin
+    Brand: Brand1
     Tags: [ tag1, tag2, tag3 ]
     Categories: [ TestCategory1 ]
   TestProduct2:
@@ -39,6 +40,7 @@ sbEcomProduct:
     postage_weight: 0.50
     is_featured: true
     Author: sgu_admin
+    Brand: Brand2
     Tags: [ tag2, tag3, tag4 ]
     Categories: [ TestCategory2 ]
   TestProduct3:
@@ -49,6 +51,7 @@ sbEcomProduct:
     postage_weight: 1.5
     is_featured: true
     Author: sgu_admin
+    Brand: Brand3
     Tags: [ tag3, tag4, tag5 ]
     Categories: [ TestCategory1, TestCategory2 ]
   TestProduct4:
@@ -59,6 +62,7 @@ sbEcomProduct:
     postage_weight: 0.90
     is_featured: true
     Author: sgu_admin
+    Brand: Brand1
     Tags: [ tag4, tag5, tag6 ]
     Categories: [ TestCategory3, TestCategory2 ]
   TestProduct5:
@@ -69,6 +73,7 @@ sbEcomProduct:
     postage_weight: 0.15
     is_featured: false
     Author: sgu_admin
+    Brand: Brand2
     Tags: [ tag5, tag6, tag7 ]
     Categories: [ TestCategory1, TestCategory4 ]
   TestProduct6:
@@ -79,6 +84,7 @@ sbEcomProduct:
     postage_weight: 0.05
     is_featured: true
     Author: sgu_admin
+    Brand: Brand3
     Tags: [ tag2, tag3, tag4 ]
     Categories: [ TestCategory1 ]
   TestProduct7:
@@ -89,6 +95,7 @@ sbEcomProduct:
     postage_weight: 0.05
     is_featured: true
     Author: sgu_admin
+    Brand: Brand1
     Tags: [ tag2, tag3, tag4 ]
     Categories: [ TestCategory1 ]
   TestProduct8:
@@ -99,6 +106,7 @@ sbEcomProduct:
     postage_weight: 2.5
     is_featured: false
     Author: sgu_admin
+    Brand: Brand2
     Tags: [ tag5, tag6, tag7 ]
     Categories: [ TestCategory1 ]
   TestProduct9:
@@ -109,6 +117,7 @@ sbEcomProduct:
     postage_weight: 3.2
     is_featured: false
     Author: sgu_admin
+    Brand: Brand3
     Tags: [ tag1, tag2, tag3 ]
     Categories: [ TestCategory1 ]
   TestProduct10:
@@ -119,8 +128,27 @@ sbEcomProduct:
     postage_weight: 0.5
     is_featured: true
     Author: sgu_admin
+    Brand: Brand1
     Tags: [ tag1, tag3, tag5 ]
     Categories: [ TestCategory1 ]
+    
+# Product Brands
+sbEcomBrand:
+  Brand1:
+    title: Test Brand 1
+    description: "This is Brand 1"
+    Author: sgu_admin
+    Tags: [ tag1, tag2, tag3 ]
+  Brand2:
+    title: Test Brand 2
+    description: "This is Brand 2"
+    Author: sgu_admin
+    Tags: [ tag3, tag4, tag5 ]
+  Brand3:
+    title: Test Brand 3
+    description: "This is Brand 3"
+    Author: sgu_admin
+    Tags: [ tag1, tag3, tag5 ]
     
 sfGuardPermission:
   sfGuardPermission_sb_ecom_product_admin:

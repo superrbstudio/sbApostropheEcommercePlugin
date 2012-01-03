@@ -8,7 +8,7 @@ sbEcomProduct:
     Taggable: ~
     Sluggable:
       unique: true
-      fields: [ reference, title ]
+      fields: [ title ]
       canUpdate: false
   columns:
     id:
@@ -17,14 +17,14 @@ sbEcomProduct:
       autoincrement: true
     author_id:
       type: integer
+    brand_id:
+      type: integer
     title:
       type: string(255)
       notnull: true
+      unique: true
     description:
       type: clob
-    slug:
-      type: varchar(255)
-      notnull: true
     cost:
       type: decimal(18)
       scale: 2
@@ -35,7 +35,7 @@ sbEcomProduct:
       scale: 4
     postage_weight_or_fixed:
       type: enum
-      values: { weight, fixed }
+      values: [ weight, fixed, free ]
       default: weight
     postage_weight:
       type: float
@@ -51,6 +51,15 @@ sbEcomProduct:
     is_featured:
       type: boolean
       default: false
+    is_out_of_stock:
+      type: boolean
+      default: false
+    number_in_stock:
+      type: integer
+      default: 0
+    active: 
+      type: boolean
+      default: true
   relations:
     Author:
       class: sfGuardUser
@@ -58,12 +67,22 @@ sbEcomProduct:
       local: author_id
       foreign: id
       onDelete: SET NULL
+    ProductDescriptions:
+      class: sbEcomProductDescription
+      foreignAlias: EcomProductDescriptionProduct
+      local: id
+      foreign: product_id
     Categories:
       foreignAlias: EcomProductCategories
       class: aCategory
       refClass: sbEcomProductToCategory
       local: ecom_product_id
       foreign: category_id
+    Brand:
+      foreignAlias: EcomProductBrands
+      class: sbEcomBrand
+      local: brand_id
+      foreign: id
     BasketProduct:
       foreignAlias: EcomBasketProduct
       class: sbEcomBasketProduct
@@ -75,7 +94,81 @@ sbEcomProduct:
       refClass: sbEcomProductToASearchDocument
       foreign: a_search_document_id
       local: sb_ecom_product_id
+  indexes:
+    active: { fields: active }
+    author: { fields: author_id }
+    brand: { fields: brand_id }
+    call_to_buy: { fields: call_to_buy }
+    tax: { fields: tax }
+    postage_weight_or_fixed: { fields: postage_weight_or_fixed }
+    is_featured: { fields: is_featured }
+    is_out_of_stock: { fields: is_out_of_stock }
+    
+sbEcomBrand:
+  actAs:
+    Timestampable: ~
+    Taggable: ~
+    Sluggable:
+      unique: true
+      fields: [ title ]
+      canUpdate: false
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    author_id:
+      type: integer
+    title:
+      type: string(255)
+      notnull: true
+      unique: true
+    description:
+      type: clob
+  relations:
+    Author:
+      class: sfGuardUser
+      foreignAlias: EcomBrandAuthor
+      local: author_id
+      foreign: id
+      onDelete: SET NULL
+  indexes:
+    title: { fields: title }
+    author: { fields: author_id }
       
+sbEcomProductDescription:
+  actAs:
+    Timestampable: ~
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    author_id:
+      type: integer
+    product_id:
+      type: integer
+    title:
+      type: string(255)
+      notnull: true
+      unique: true
+    description:
+      type: clob
+  relations:
+    Author:
+      class: sfGuardUser
+      foreignAlias: EcomProductDescriptionAuthor
+      local: author_id
+      foreign: id
+      onDelete: SET NULL
+    Product:
+      class: sbEcomProduct
+      foreignAlias: EcomProductDescriptionProduct
+      local: product_id
+      foreign: id
+      onDelete: CASCADE
+    
+# Extend the Apostrophe Category to include Relationship     
 aCategory:
   relations:
     EcomProducts:
