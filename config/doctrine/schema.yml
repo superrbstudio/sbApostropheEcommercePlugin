@@ -9,7 +9,7 @@ sbEcomProduct:
     Sluggable:
       unique: true
       fields: [ title ]
-      canUpdate: false
+      canUpdate: true
   columns:
     id:
       type: integer
@@ -23,6 +23,8 @@ sbEcomProduct:
       type: string(255)
       notnull: true
       unique: true
+    internal_reference:
+      type: string(255)
     description:
       type: clob
     cost:
@@ -111,7 +113,7 @@ sbEcomBrand:
     Sluggable:
       unique: true
       fields: [ title ]
-      canUpdate: false
+      canUpdate: true
   columns:
     id:
       type: integer

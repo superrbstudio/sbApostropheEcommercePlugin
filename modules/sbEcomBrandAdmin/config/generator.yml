@@ -1,0 +1,20 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sbEcomBrand
+    theme:                 aAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sb_ecom_product_sbEcomBrandAdmin
+    with_doctrine_route:   true
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    ~
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

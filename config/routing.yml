@@ -42,6 +42,15 @@ sb_ecom_product_sbEcomAdmin:
   options:
     model:                sbEcomProduct
     module:               sbEcomAdmin
-    prefix_path:          /sbEcomAdmin
+    prefix_path:          /sb-ecommerce/product
+    column:               id
+    with_wildcard_routes: true
+    
+sb_ecom_product_sbEcomBrandAdmin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sbEcomBrand
+    module:               sbEcomBrandAdmin
+    prefix_path:          /sb-ecommerce/brand
     column:               id
     with_wildcard_routes: true
