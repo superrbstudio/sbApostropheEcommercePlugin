@@ -15,7 +15,7 @@ generator:
       fields:  ~
       list:    
         title:   Products List
-        display: [title, cost, tax, postage_weight, is_featured, updated_at]
+        display: [title, cost, tax, active, is_featured, is_out_of_stock, updated_at]
       filter:  ~
       form:    ~
       edit:    

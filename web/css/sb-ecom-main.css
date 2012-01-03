@@ -6,6 +6,14 @@
         Styles for sbApostropheEcommercePlugin
 */
 
+.alt.sb-ecom-products > .icon, .alt.sb-ecom-brands > .icon {
+	background-position: -20px -1400px;
+}
+
+.sb-ecom-new-product {
+	z-index: 10;
+}
+
 #sb-ecom-main {
 	float: left;
 	clear: both;

@@ -45,6 +45,8 @@ sb_ecom_product_sbEcomAdmin:
     prefix_path:          /sb-ecommerce/product
     column:               id
     with_wildcard_routes: true
+    collection_actions:
+      new_with_title: post
     
 sb_ecom_product_sbEcomBrandAdmin:
   class: sfDoctrineRouteCollection

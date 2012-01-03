@@ -35,8 +35,8 @@ class sbApostropheEcommercePluginConfiguration extends sfPluginConfiguration
     if ($user->hasCredential('sb_ecom_product_admin'))
     {
       aTools::addGlobalButtons(array(
-        new aGlobalButton('sb-ecom-products', 'Products', '@sb_ecom_product_sbEcomAdmin', 'a-blog-btn'),
-				new aGlobalButton('sb-ecom-brands', 'Brands', '@sb_ecom_product_sbEcomBrandAdmin', 'a-blog-btn')
+        new aGlobalButton('sb-ecom-products', 'Products', '@sb_ecom_product_sbEcomAdmin', 'sb-ecom-products'),
+				new aGlobalButton('sb-ecom-brands', 'Brands', '@sb_ecom_product_sbEcomBrandAdmin', 'sb-ecom-brands')
       ));
     }
   }

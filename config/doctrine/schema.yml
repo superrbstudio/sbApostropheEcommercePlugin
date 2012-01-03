@@ -23,7 +23,9 @@ sbEcomProduct:
       type: string(255)
       notnull: true
       unique: true
-    internal_reference:
+    long_title:
+      type: string(999)
+    reference:
       type: string(255)
     description:
       type: clob
@@ -55,13 +57,13 @@ sbEcomProduct:
       default: false
     is_out_of_stock:
       type: boolean
-      default: false
+      default: true
     number_in_stock:
       type: integer
       default: 0
     active: 
       type: boolean
-      default: true
+      default: false
   relations:
     Author:
       class: sfGuardUser
