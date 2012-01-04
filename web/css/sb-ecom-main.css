@@ -10,8 +10,82 @@
 	background-position: -20px -1400px;
 }
 
+.a-btn.sb-ecom-product-home-btn > .icon {
+	background-position: -20px -1720px;
+}
+
+.sbEcomAdmin td.cke_contents {
+	width: 98%;
+}
+
+.sbEcomAdmin td.cke_bottom {
+	display: none;
+}
+
+span.required {
+	color: #ff0000;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description {
+	width: 960px;
+	margin-bottom: 5px;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td {
+	clear: none;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td.title {
+	width: 20%;
+	padding-left: 10px;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td.description {
+	width: 60%;
+	padding: 10px 0;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td.actions {
+	padding-left: 10px;
+	width: 10%;
+}
+
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td.title, 
+.sbEcomAdmin.a-admin .a-form-row .sb-ecom-product-description td.actions {
+	padding-top: 5px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+}
+
+.sbEcomAdmin input.large {
+	width: 400px;
+	min-width: 400px;
+}
+
+.sbEcomAdmin input.medium{
+	width: 300px;
+	min-width: 300px;
+}
+
+.sbEcomAdmin input.small {
+	width: 150px;
+	min-width: 150px;
+}
+
+.sbEcomAdmin input.very-small {
+	width: 65px;
+	min-width: 65px;
+}
 .sb-ecom-new-product {
 	z-index: 10;
+}
+
+.sbEcomAdmin .a-subnav-wrapper {
+	display: none;
+}
+
+.sbEcomAdmin .a-content, .sbEcomAdmin .a-admin-content, .sbEcomAdmin .a-admin-footer {
+	width: 100%;
 }
 
 #sb-ecom-main {

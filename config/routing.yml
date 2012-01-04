@@ -42,7 +42,7 @@ sb_ecom_product_sbEcomAdmin:
   options:
     model:                sbEcomProduct
     module:               sbEcomAdmin
-    prefix_path:          /sb-ecommerce/product
+    prefix_path:          /sb-ecommerce/products
     column:               id
     with_wildcard_routes: true
     collection_actions:
@@ -53,6 +53,6 @@ sb_ecom_product_sbEcomBrandAdmin:
   options:
     model:                sbEcomBrand
     module:               sbEcomBrandAdmin
-    prefix_path:          /sb-ecommerce/brand
+    prefix_path:          /sb-ecommerce/brands
     column:               id
     with_wildcard_routes: true

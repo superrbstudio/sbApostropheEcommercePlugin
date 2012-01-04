@@ -14,19 +14,14 @@ abstract class PluginsbEcomProduct extends BasesbEcomProduct
 {
 	public function getSearchText()
 	{
-		/*$slotContent = '';
-
-		$page = aPageTable::retrieveBySlugWithSlots(aPageTable::getFirstEnginePage('sbJobBoardJob')->slug . "/" . $this->getSlug());
-
-		if($page)
+		$extraDescriptions = '';
+		
+		foreach($this->Descriptions as $description)
 		{
-			foreach($page->getArea('jobDescription') as $slot)
-			{
-				$slotContent .= ' ' . $slot->getText();
-			}
-		}*/
+			$extraDescriptions .= $description->getTitle() . " " . strip_tags($description->getDescription());
+		}
 
-		return $this->getTitle() . " " . $this->getDescription() . " " . implode(' ', $this->getTags());
+		return $this->getTitle() . " " . $this->getDescription() . " " . $extraDescriptions . " " . implode(' ', $this->getTags());
 	}
 
 	public function getSummary()

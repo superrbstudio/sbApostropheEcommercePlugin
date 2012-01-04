@@ -12,5 +12,11 @@
  */
 abstract class PluginsbEcomProductDescription extends BasesbEcomProductDescription
 {
+	public function postSave($event) 
+	{
+		// remove product descriptions that aren't complete
+		sbEcomProductDescriptionTable::deleteInvalidDescriptions();
+		parent::postSave($event);
+	}
 
 }

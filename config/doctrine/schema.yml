@@ -71,11 +71,6 @@ sbEcomProduct:
       local: author_id
       foreign: id
       onDelete: SET NULL
-    ProductDescriptions:
-      class: sbEcomProductDescription
-      foreignAlias: EcomProductDescriptionProduct
-      local: id
-      foreign: product_id
     Categories:
       foreignAlias: EcomProductCategories
       class: aCategory
@@ -154,10 +149,11 @@ sbEcomProductDescription:
       type: integer
     title:
       type: string(255)
-      notnull: true
-      unique: true
     description:
       type: clob
+    display_order:
+      type: integer
+      default: 1
   relations:
     Author:
       class: sfGuardUser
@@ -165,12 +161,12 @@ sbEcomProductDescription:
       local: author_id
       foreign: id
       onDelete: SET NULL
-    Product:
-      class: sbEcomProduct
-      foreignAlias: EcomProductDescriptionProduct
+    sbEcomProduct:
+      alias:        Product
+      foreignType:  many
+      foreignAlias: Descriptions
+      onDelete:     cascade
       local: product_id
-      foreign: id
-      onDelete: CASCADE
     
 # Extend the Apostrophe Category to include Relationship     
 aCategory:

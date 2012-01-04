@@ -7,13 +7,18 @@
  */
 class PluginsbEcomProductDescriptionTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object PluginsbEcomProductDescriptionTable
-     */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('PluginsbEcomProductDescription');
-    }
+	/**
+		* Returns an instance of this class.
+		*
+		* @return object PluginsbEcomProductDescriptionTable
+		*/
+	public static function getInstance()
+	{
+			return Doctrine_Core::getTable('PluginsbEcomProductDescription');
+	}
+		
+	public static function deleteInvalidDescriptions()
+	{
+		return Doctrine_Query::create()->delete('sbEcomProductDescription')->where('title = ?', '')->execute();
+	}
 }

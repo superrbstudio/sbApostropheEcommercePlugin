@@ -12,13 +12,30 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
+      fields:
+        list_homepage_link: { label: '' }
+        slug: { help: 'The url segment used to generate a unique URL for the product (e.g. http://domain.com/product/url-segment)' }
+        long_title: { help: 'A longer version of the title that can be more descriptive' }
+        reference: { help: 'Normally used for your own internal reference as a quick way of identifying products' }
+        brand_id: { help: 'If this site supports brand pages you can attach a brand to this product' }
+        active: { help: 'Only active products appear on the main website' }
+        is_featured: { help: 'Select to make this product appear in the featured sections of the website', label: 'Featured Product' }
+        Descriptions: { label: 'Current Descriptions' }
+        newDescriptions: { label: 'Add New Description' }
       list:    
         title:   Products List
-        display: [title, cost, tax, active, is_featured, is_out_of_stock, updated_at]
-      filter:  ~
+        display: [ _list_homepage_link, title, cost, tax, active, is_featured, is_out_of_stock, updated_at]
+      filter:  
+        fields:   [ title, active, is_featured, is_out_of_stock ]
+        display:  [ title, active, is_featured, is_out_of_stock ]
       form:    ~
       edit:    
         title: Editing Product "%%title%%"
+        display:
+          Main Details: [ title, slug, long_title, reference, brand_id, description, active, is_featured ]
+          Costing & Postage: [ cost, tax, postage_weight_or_fixed, postage_weight, postage_fixed_cost, call_to_buy ]
+          Stock Details: [ is_out_of_stock, number_in_stock ]
+          Categories & Tags: [ categories_list, tags ]
+          Product Descriptions: [ _product_descriptions ]
       new:     
         title: New Product
