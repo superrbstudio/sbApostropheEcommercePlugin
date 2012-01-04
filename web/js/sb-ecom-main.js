@@ -59,7 +59,25 @@ function sbEcomAdminSubmitNewForm(form) {
 }
 
 function sbEcomProductSetUpDescriptions() {
-	setRowColors();
+	sbEcomSetRowColors();
+	sbEcomSetCallToBuySwitch();
+	sbEcomSetOutOfStockSwitch();
+	sbEcomSetPostageTypeSwitch();
+	
+	$('#sb_ecom_product_call_to_buy').change(function() {
+		sbEcomSetCallToBuySwitch();
+		return false;
+	});
+	
+	$('#sb_ecom_product_is_out_of_stock').change(function() {
+		sbEcomSetOutOfStockSwitch();
+		return false;
+	});
+	
+	$('#sb_ecom_product_postage_weight_or_fixed').change(function() {
+		sbEcomSetPostageTypeSwitch();
+		return false;
+	});
 	
 	$('.sb-ecom-product-description tr.description-row').each(function() {
 		if($(this).hasClass('new') && $(this).find('.sb-ecom-description-title').val() == '') {
@@ -72,7 +90,7 @@ function sbEcomProductSetUpDescriptions() {
 		var row = $(this).attr('data-delete-row');
 		$('.' + row + ' .sb-ecom-description-title').val('');
 		$('.' + row).remove();
-		setRowColors();
+		sbEcomSetRowColors();
 		return false;
 	});
 	
@@ -91,12 +109,12 @@ function sbEcomProductSetUpDescriptions() {
 		if(hideAddButton) {
 			$(this).css('display', 'none');
 		}
-		setRowColors();
+		sbEcomSetRowColors();
 		return false;
 	})
 }
 
-function setRowColors() {
+function sbEcomSetRowColors() {
 	// Set the colors on the table
 	var alternate = true;
 	$('.sb-ecom-product-description tr.description-row').each(function() {
@@ -108,4 +126,47 @@ function setRowColors() {
 			alternate = true;
 		}
 	});
+}
+
+function sbEcomSetCallToBuySwitch() {
+	if ($('#sb_ecom_product_call_to_buy').is(':checked')) {
+		$('#sb_ecom_product_cost').attr('disabled', 'disabled');
+		$('#sb_ecom_product_tax').attr('disabled', 'disabled');
+	} else {
+		$('#sb_ecom_product_cost').attr('disabled', '');
+		$('#sb_ecom_product_tax').attr('disabled', '');
+	}
+}
+
+function sbEcomSetOutOfStockSwitch() {
+	if($('#sb_ecom_product_is_out_of_stock').is(':checked')) {
+		$('#sb_ecom_product_number_in_stock').val(0);
+		$('#sb_ecom_product_number_in_stock').attr('disabled', 'disabled');
+	} else {
+		$('#sb_ecom_product_number_in_stock').attr('disabled', '');
+	}
+}
+
+function sbEcomSetPostageTypeSwitch() {
+	switch($('#sb_ecom_product_postage_weight_or_fixed option:selected').val()) {
+		case 'weight':
+			$('#sb_ecom_product_postage_weight').attr('disabled', '');
+			$('#sb_ecom_product_postage_fixed_cost').attr('disabled', 'disabled');
+			$('#sb_ecom_product_postage_fixed_cost').val(0.00);
+			
+			break;
+			
+		case 'fixed':
+			$('#sb_ecom_product_postage_weight').attr('disabled', 'disabled');
+			$('#sb_ecom_product_postage_weight').val(0.00);
+			$('#sb_ecom_product_postage_fixed_cost').attr('disabled', '');
+			break;
+			
+		default:
+			$('#sb_ecom_product_postage_weight').attr('disabled', 'disabled');
+			$('#sb_ecom_product_postage_fixed_cost').attr('disabled', 'disabled');
+			$('#sb_ecom_product_postage_weight').val(0.00);
+			$('#sb_ecom_product_postage_fixed_cost').val(0.00);
+			$('#sb_ecom_product_postage_weight_or_fixed').val('free');
+	}
 }

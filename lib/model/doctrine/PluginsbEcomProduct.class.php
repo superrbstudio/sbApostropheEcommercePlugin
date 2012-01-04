@@ -28,6 +28,21 @@ abstract class PluginsbEcomProduct extends BasesbEcomProduct
 	{
 		return $this->getTitle() . " " . $this->getDescription();
 	}
+	
+	public function preSave($event) 
+	{
+		parent::preSave($event);
+		
+		if($this->getIsOutOfStock())
+		{
+			$this->setNumberInStock(0);
+		}
+		
+		if($this->getNumberInStock() > 0)
+		{
+			$this->getIsOutOfStock(false);
+		}
+	}
 
 	public function postSave($event)
 	{

@@ -22,6 +22,8 @@ generator:
         is_featured: { help: 'Select to make this product appear in the featured sections of the website', label: 'Featured Product' }
         Descriptions: { label: 'Current Descriptions' }
         newDescriptions: { label: 'Add New Description' }
+        call_to_buy: { help: "When selected the price will not be shown and the user will not be able to add the product to their cart" }
+        postage_weight_or_fixed: { label: "Calculator Type", help: "Set whether postage is to be calculated by weight or using a fixed cost" }
       list:    
         title:   Products List
         display: [ _list_homepage_link, title, cost, tax, active, is_featured, is_out_of_stock, updated_at]
@@ -32,8 +34,9 @@ generator:
       edit:    
         title: Editing Product "%%title%%"
         display:
-          Main Details: [ title, slug, long_title, reference, brand_id, description, active, is_featured ]
-          Costing & Postage: [ cost, tax, postage_weight_or_fixed, postage_weight, postage_fixed_cost, call_to_buy ]
+          Main Details: [ _product_link, title, slug, long_title, reference, brand_id, description, active, is_featured ]
+          Costing: [ call_to_buy, cost, tax ]
+          Postage: [ postage_weight_or_fixed, postage_weight, postage_fixed_cost ]
           Stock Details: [ is_out_of_stock, number_in_stock ]
           Categories & Tags: [ categories_list, tags ]
           Product Descriptions: [ _product_descriptions ]

@@ -40,7 +40,7 @@ sbEcomProduct:
     postage_weight_or_fixed:
       type: enum
       values: [ weight, fixed, free ]
-      default: weight
+      default: free
     postage_weight:
       type: float
       scale: 4
