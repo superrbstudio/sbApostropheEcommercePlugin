@@ -152,8 +152,17 @@ sbEcomBrand:
     
 sfGuardPermission:
   sfGuardPermission_sb_ecom_product_admin:
-    name: sb_ecom_product_admin
-    description: 'Ecommerce Product Administrator'
+    name: sb_ecom_admin
+    description: 'Ecommerce Administrator'
+  sfGuardPermission_sb_ecom_product_editor:
+    name: sb_ecom_product_editor
+    description: 'Ecommerce Product Editor'
+  sfGuardPermission_sb_ecom_brand_editor:
+    name: sb_ecom_brand_editor
+    description: 'Ecommerce Brand Editor'
+  sfGuardPermission_sb_ecom_orders_editor:
+    name: sb_ecom_orders_editor
+    description: 'Ecommerce Orders Editor'
 sfGuardGroupPermission:  
   sfGuardGroupPermission_admin_sb_job_board_admin:
     Group: sfGuardGroup_admin
