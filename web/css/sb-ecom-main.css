@@ -57,22 +57,22 @@ span.required {
 	padding-bottom: 10px;
 }
 
-.sbEcomAdmin input.large {
+.sbEcomAdmin input.large, .sbEcomBrandAdmin input.large {
 	width: 400px;
 	min-width: 400px;
 }
 
-.sbEcomAdmin input.medium{
+.sbEcomAdmin input.medium, .sbEcomBrandAdmin input.medium {
 	width: 300px;
 	min-width: 300px;
 }
 
-.sbEcomAdmin input.small {
+.sbEcomAdmin input.small, .sbEcomBrandAdmin input.small {
 	width: 150px;
 	min-width: 150px;
 }
 
-.sbEcomAdmin input.very-small {
+.sbEcomAdmin input.very-small, .sbEcomBrandAdmin input.very-small {
 	width: 65px;
 	min-width: 65px;
 }
@@ -80,11 +80,12 @@ span.required {
 	z-index: 10;
 }
 
-.sbEcomAdmin .a-subnav-wrapper {
+.sbEcomAdmin .a-subnav-wrapper, .sbEcomBrandAdmin .a-subnav-wrapper {
 	display: none;
 }
 
-.sbEcomAdmin .a-content, .sbEcomAdmin .a-admin-content, .sbEcomAdmin .a-admin-footer {
+.sbEcomAdmin .a-content, .sbEcomAdmin .a-admin-content, .sbEcomAdmin .a-admin-footer,
+.sbEcomBrandAdmin .a-content, .sbEcomBrandAdmin .a-admin-content, .sbEcomBrandAdmin .a-admin-footer {
 	width: 100%;
 }
 

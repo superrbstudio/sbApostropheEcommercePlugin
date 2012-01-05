@@ -12,9 +12,25 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      fields:  
+        slug: { help: 'The url segment used to generate a unique URL for the product (e.g. http://domain.com/shop/brand/url-segment)' }
+        meta_title: { help: Used to populate the page title that appears at the top of the browser window }
+        meta_description: { help: Often used by search engines to display a short summary of your page }
+        meta_keywords: { help: Used by some search engines to work out what content is available on your page }
+      list:    
+        title: Brands List
+        display: [ title, updated_at ]
+      filter:  
+        fields:   [ title ]
+        display:  [ title ]
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:    
+        title: Editing product brand "%%title%%"
+        display:
+          Main Details: [ title, slug ]
+          Meta Details: [ meta_title, meta_description, meta_keywords ]
+      new:
+        title: Add new product brand
+        display:
+          Main Details: [ title, slug ]
+          Meta Details: [ meta_title, meta_description, meta_keywords ]

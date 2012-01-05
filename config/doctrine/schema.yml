@@ -25,6 +25,12 @@ sbEcomProduct:
       unique: true
     long_title:
       type: string(999)
+    meta_title:
+      type: string(255)
+    meta_description:
+      type: string(255)
+    meta_keywords:
+      type: string(255)
     reference:
       type: string(255)
     description:
@@ -122,8 +128,12 @@ sbEcomBrand:
       type: string(255)
       notnull: true
       unique: true
-    description:
-      type: clob
+    meta_title:
+      type: string(255)
+    meta_description:
+      type: string(255)
+    meta_keywords:
+      type: string(255)
   relations:
     Author:
       class: sfGuardUser

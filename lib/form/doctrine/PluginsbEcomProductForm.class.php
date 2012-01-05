@@ -39,18 +39,31 @@ abstract class PluginsbEcomProductForm extends BasesbEcomProductForm
 		$this->setWidget('description', new aWidgetFormRichTextarea(array('tool' => 'sbEcom', 'height' => 182), array()));
 		$this->setValidator('description', new sfValidatorHtml(array('required' => false), array()));
 		
+		// meta information
+		$this->setWidget('meta_title', new sfWidgetFormInputText(array('label' => 'Meta title<span class="required">*</span>'), array('class' => 'large')));
+		$this->setValidator('meta_title', new sfValidatorString(array(), array('required' => 'Please fill in the product meta title')));
+		
+		$this->setWidget('meta_description', new sfWidgetFormInputText(array('label' => 'Meta description<span class="required">*</span>'), array('class' => 'large')));
+		$this->setValidator('meta_description', new sfValidatorString(array(), array('required' => 'Please fill in the product meta description')));
+		
+		$this->setWidget('meta_keywords', new sfWidgetFormInputText(array('label' => 'Meta keywords<span class="required">*</span>'), array('class' => 'large')));
+		$this->setValidator('meta_keywords', new sfValidatorString(array(), array('required' => 'Please fill in the product meta keywords')));
+		
+		// Costing details
 		$this->setWidget('cost', new sfWidgetFormInputText(array(), array('class' => 'small')));
 		$this->setValidator('cost', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
 		
 		$this->setWidget('tax', new sfWidgetFormInputText(array(), array('class' => 'small')));
 		$this->setValidator('tax', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
 		
+		// Postage details
 		$this->setWidget('postage_weight', new sfWidgetFormInputText(array(), array('class' => 'small')));
 		$this->setValidator('postage_weight', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
 		
 		$this->setWidget('postage_fixed_cost', new sfWidgetFormInputText(array(), array('class' => 'small')));
 		$this->setValidator('postage_fixed_cost', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
 		
+		// Product Descriptions
 		if(!$this->isNew())
 		{
 			$product = $this->getObject();

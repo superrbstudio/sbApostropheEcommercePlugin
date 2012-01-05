@@ -136,17 +136,23 @@ sbEcomProduct:
 sbEcomBrand:
   Brand1:
     title: Test Brand 1
-    description: "This is Brand 1"
+    meta_title: Test Brand 1
+    meta_description: "This is Brand 1"
+    meta_keywords: "keyword1, keyword2"
     Author: sgu_admin
     Tags: [ tag1, tag2, tag3 ]
   Brand2:
     title: Test Brand 2
-    description: "This is Brand 2"
+    meta_title: Test Brand 2
+    meta_description: "This is Brand 2"
+    meta_keywords: "keyword1, keyword2"
     Author: sgu_admin
     Tags: [ tag3, tag4, tag5 ]
   Brand3:
     title: Test Brand 3
-    description: "This is Brand 3"
+    meta_title: Test Brand 3
+    meta_description: "This is Brand 3"
+    meta_keywords: "keyword1, keyword2"
     Author: sgu_admin
     Tags: [ tag1, tag3, tag5 ]
     
