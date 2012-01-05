@@ -130,6 +130,8 @@ function sbEcomSetRowColors() {
 
 function sbEcomSetCallToBuySwitch() {
 	if ($('#sb_ecom_product_call_to_buy').is(':checked')) {
+		$('#sb_ecom_product_cost').val(0);
+		$('#sb_ecom_product_tax').val(0);
 		$('#sb_ecom_product_cost').attr('disabled', 'disabled');
 		$('#sb_ecom_product_tax').attr('disabled', 'disabled');
 	} else {
