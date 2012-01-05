@@ -39,6 +39,18 @@ abstract class PluginsbEcomProductForm extends BasesbEcomProductForm
 		$this->setWidget('description', new aWidgetFormRichTextarea(array('tool' => 'sbEcom', 'height' => 182), array()));
 		$this->setValidator('description', new sfValidatorHtml(array('required' => false), array()));
 		
+		$this->setWidget('cost', new sfWidgetFormInputText(array(), array('class' => 'small')));
+		$this->setValidator('cost', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
+		
+		$this->setWidget('tax', new sfWidgetFormInputText(array(), array('class' => 'small')));
+		$this->setValidator('tax', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
+		
+		$this->setWidget('postage_weight', new sfWidgetFormInputText(array(), array('class' => 'small')));
+		$this->setValidator('postage_weight', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
+		
+		$this->setWidget('postage_fixed_cost', new sfWidgetFormInputText(array(), array('class' => 'small')));
+		$this->setValidator('postage_fixed_cost', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
+		
 		if(!$this->isNew())
 		{
 			$product = $this->getObject();
