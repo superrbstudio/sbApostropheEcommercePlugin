@@ -88,6 +88,10 @@ span.required {
 	width: 100%;
 }
 
+.sbEcomAdmin .a-admin-form-container .a-ui.a-controls {
+	padding-top: 20px;
+}
+
 #sb-ecom-main {
 	float: left;
 	clear: both;
