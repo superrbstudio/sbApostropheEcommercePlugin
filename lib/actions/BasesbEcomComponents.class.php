@@ -18,4 +18,18 @@ abstract class BasesbEcomComponents extends sfComponents
 	{
 		
 	}
+	
+	/**
+	 * Displays a simple text form for product searches
+	 * @param sfWebRequest $request 
+	 */
+	public function executeQuickSearch(sfWebRequest $request)
+	{
+		$this->form = new sbEcomQuickSearchForm();
+		
+		if($request->getParameter('s') != '')
+		{
+			$this->form->setDefault('s', $request->getParameter('s'));
+		}
+	}
 }
