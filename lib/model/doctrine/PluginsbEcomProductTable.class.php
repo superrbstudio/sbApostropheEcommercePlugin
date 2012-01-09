@@ -147,9 +147,12 @@ class PluginsbEcomProductTable extends Doctrine_Table
 	 * @param sbEcomProduct $product
 	 * @return mixed - False when unable to find an image, otherwise the image object 
 	 */
-	public static function getFirstImage(sbEcomProduct $product)
+	public static function getFirstImage($product)
 	{
 		$page = aPageTable::retrieveBySlugWithSlots(self::getSlideShowSlug($product));
+		
+		if(!$page) { return false; }
+		
 		$slot = $page->getSlot(self::getSlideShowName($product));
 		
 		if($slot)
