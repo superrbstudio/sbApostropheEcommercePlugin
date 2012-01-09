@@ -34,14 +34,26 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		 * 
 		 * @return Doctrine_Collection
 		 */
-		public static function getProductCategories()
+		public static function getProductCategories($active = null, $params = array())
 		{
 			$fast = sfConfig::get('app_a_fasthydrate', false);
-			return Doctrine_Query::create()
-							->select('c.id, c.slug, c.name')
+			$base = Doctrine_Query::create()
+							->select('c.*')
 							->from('aCategory c')
 							->innerJoin('c.EcomProducts p')
-							->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+							->where(1);
+			
+			if(is_bool($active))
+			{
+				$base->andwhere('p.active = ?', $active);
+			}
+			
+			if(isset($params['order_by']))
+			{
+				$base->orderBy($params['order_by']);
+			}
+			
+			return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 		}
 		
 		/**

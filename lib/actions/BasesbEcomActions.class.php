@@ -64,6 +64,6 @@ abstract class BasesbEcomActions extends aEngineActions
 	protected function getEcomInfo()
 	{
 		// get all categories that have products
-		$this->categories = sbEcomProductTable::getProductCategories();
+		$this->categories = sbEcomProductTable::getProductCategories(true, array('order_by' => 'c.name asc'));
 	}
 }
