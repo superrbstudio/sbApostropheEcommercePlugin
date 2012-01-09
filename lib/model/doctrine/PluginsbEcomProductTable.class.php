@@ -9,113 +9,159 @@
  */
 class PluginsbEcomProductTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object PluginsbEcomProductTable
-     */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('sbEcomProduct');
-    }
-		
-		/**
-		 * Returns all featured products
-		 * 
-		 * @return Doctrine_Collection 
-		 */
-		public static function getFeaturedProducts($category = null)
+	/**
+		* Returns an instance of this class.
+		*
+		* @return object PluginsbEcomProductTable
+		*/
+	public static function getInstance()
+	{
+			return Doctrine_Core::getTable('sbEcomProduct');
+	}
+
+	/**
+		* Returns all featured products
+		* 
+		* @return Doctrine_Collection 
+		*/
+	public static function getFeaturedProducts($category = null)
+	{
+		return self::getInstance()->findByIsFeatured(1);
+	}
+
+	/**
+		* Returns all categories that are being used by shop products
+		* 
+		* @return Doctrine_Collection
+		*/
+	public static function getProductCategories($active = null, $params = array())
+	{
+		$fast = sfConfig::get('app_a_fasthydrate', false);
+		$base = Doctrine_Query::create()
+						->select('c.*')
+						->from('aCategory c')
+						->innerJoin('c.EcomProducts p')
+						->where(1);
+
+		if(is_bool($active))
 		{
-			return self::getInstance()->findByIsFeatured(1);
+			$base->andwhere('p.active = ?', $active);
 		}
-		
-		/**
-		 * Returns all categories that are being used by shop products
-		 * 
-		 * @return Doctrine_Collection
-		 */
-		public static function getProductCategories($active = null, $params = array())
+
+		if(isset($params['order_by']))
 		{
-			$fast = sfConfig::get('app_a_fasthydrate', false);
-			$base = Doctrine_Query::create()
-							->select('c.*')
-							->from('aCategory c')
-							->innerJoin('c.EcomProducts p')
-							->where(1);
+			$base->orderBy($params['order_by']);
+		}
+
+		return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+	}
+
+	/**
+		* Returns all product in a given category
+		* 
+		* @param aCategory $category 
+		* @param boolean $active
+		* @param array $params
+		* @return Doctrine_Collection
+		*/
+	public static function getProductsInCategory(aCategory $category, $active = null, $params = array())
+	{
+		$fast = sfConfig::get('app_a_fasthydrate', false);
+		$base = Doctrine_Query::create()
+						->select('p.*')
+						->from('sbEcomProduct p')
+						->innerJoin('p.Categories c')
+						->where('c.id = ?', $category->getId());
+
+		if(is_bool($active))
+		{
+			$base->andWhere('p.active = ?', $active);
+		}
+
+		if(isset($params['order_by']))
+		{
+			$base->orderBy($params['order_by']);
+		}
+
+		return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+	}
+
+	/**
+		* Find an aCategory by its Slug
+		* 
+		* @param string $slug
+		* @return aCategory 
+		*/
+	public static function getProductCategoryBySlug($slug)
+	{
+		return aCategoryTable::getInstance()->findOneBySlug($slug);
+	}
+
+	/**
+		* Return a product from a given slug
+		* 
+		* @param string $slug
+		* @return sbEcomProduct
+		*/
+	public static function getProductBySlug($slug)
+	{
+		return self::getInstance()->findOneBySlug($slug);
+	}
+
+	/**
+		* Return a product from a given id
+		*
+		* @param integer $id
+		* @return sbEcomProduct
+		*/
+	public static function getProductById($id)
+	{
+		return self::getInstance()->findOneById($id);
+	}
+
+	/**
+	 * Creates a unique name for the product slideshow
+	 * 
+	 * @param sbEcomProduct $product
+	 * @return string 
+	 */
+	public static function getSlideShowName(sbEcomProduct $product)
+	{
+		return  'sb-ecom-product-' . $product['id'];
+	}
+	
+	/**
+	 * Creates a unique slug for the product slideshow
+	 * 
+	 * @param sbEcomProduct $product
+	 * @return string 
+	 */
+	public static function getSlideShowSlug(sbEcomProduct $product)
+	{
+		return 'sb-ecom-product-' . $product['id'];
+	}
+	
+	/**
+	 * Returns the first image in a product slideshow
+	 * 
+	 * @param sbEcomProduct $product
+	 * @return mixed - False when unable to find an image, otherwise the image object 
+	 */
+	public static function getFirstImage(sbEcomProduct $product)
+	{
+		$page = aPageTable::retrieveBySlugWithSlots(self::getSlideShowSlug($product));
+		$slot = $page->getSlot(self::getSlideShowName($product));
+		
+		if($slot)
+		{
+			$images = $slot->getOrderedMediaItems();
 			
-			if(is_bool($active))
+			if($images)
 			{
-				$base->andwhere('p.active = ?', $active);
+				return $images[0];
 			}
-			
-			if(isset($params['order_by']))
-			{
-				$base->orderBy($params['order_by']);
-			}
-			
-			return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 		}
-		
-		/**
-		 * Returns all product in a given category
-		 * 
-		 * @param aCategory $category 
-		 * @param boolean $active
-		 * @param array $params
-		 * @return Doctrine_Collection
-		 */
-		public static function getProductsInCategory(aCategory $category, $active = null, $params = array())
-		{
-			$fast = sfConfig::get('app_a_fasthydrate', false);
-			$base = Doctrine_Query::create()
-							->select('p.*')
-							->from('sbEcomProduct p')
-							->innerJoin('p.Categories c')
-							->where('c.id = ?', $category->getId());
 			
-			if(is_bool($active))
-			{
-				$base->andWhere('p.active = ?', $active);
-			}
-			
-			if(isset($params['order_by']))
-			{
-				$base->orderBy($params['order_by']);
-			}
-			
-			return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
-		}
-		
-		/**
-		 * Find an aCategory by its Slug
-		 * 
-		 * @param string $slug
-		 * @return aCategory 
-		 */
-		public static function getProductCategoryBySlug($slug)
-		{
-			return aCategoryTable::getInstance()->findOneBySlug($slug);
-		}
-		
-		/**
-		 * Return a product from a given slug
-		 * 
-		 * @param string $slug
-		 * @return sbEcomProduct
-		 */
-		public static function getProductBySlug($slug)
-		{
-			return self::getInstance()->findOneBySlug($slug);
-		}
-		
-		/**
-		 * Return a product from a given id
-		 *
-		 * @param integer $id
-		 * @return sbEcomProduct
-		 */
-		public static function getProductById($id)
-		{
-			return self::getInstance()->findOneById($id);
-		}
+		return false;
+	}
 }
