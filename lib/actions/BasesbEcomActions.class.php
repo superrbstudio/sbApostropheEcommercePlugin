@@ -26,10 +26,16 @@ abstract class BasesbEcomActions extends aEngineActions
 		// verify category exists
 		$this->category = sbEcomProductTable::getProductCategoryBySlug($request->getParameter('cat'));
 		$this->forward404If((!($this->category instanceof aCategory)));
-		$this->response->setTitle(sfConfig::get('app_a_title_prefix', '') . $this->category->getName() . sfConfig::get('app_a_title_suffix', ''));
 		
-		// get all products in category and apply tag filters
-		$this->products = sbEcomProductTable::getProductsInCategory($this->category);
+		// Set Meta data
+		$prefix = aTools::getOptionI18n('title_prefix');
+    $suffix = aTools::getOptionI18n('title_suffix');
+    $this->getResponse()->setTitle($prefix . $this->category->getMetaTitle() . $suffix, false);
+		$this->getResponse()->addMeta('description', $this->category->getMetaDescription());
+		$this->getResponse()->addMeta('keywords', $this->category->getMetaKeywords());
+		
+		// get all products in category
+		$this->products = sbEcomProductTable::getProductsInCategory($this->category, true, array('order_by' => 'title asc'));
 	}
 	
 	public function executeProduct(sfWebRequest $request)

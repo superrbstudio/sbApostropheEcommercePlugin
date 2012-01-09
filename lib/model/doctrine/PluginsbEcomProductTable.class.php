@@ -48,21 +48,34 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		 * Returns all product in a given category
 		 * 
 		 * @param aCategory $category 
+		 * @param boolean $active
+		 * @param array $params
 		 * @return Doctrine_Collection
 		 */
-		public static function getProductsInCategory(aCategory $category)
+		public static function getProductsInCategory(aCategory $category, $active = null, $params = array())
 		{
 			$fast = sfConfig::get('app_a_fasthydrate', false);
-			return Doctrine_Query::create()
-							->select('p.id, p.title, p.cost, p.tax, p.slug')
+			$base = Doctrine_Query::create()
+							->select('p.*')
 							->from('sbEcomProduct p')
 							->innerJoin('p.Categories c')
-							->where('c.id = ?', $category->getId())
-							->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+							->where('c.id = ?', $category->getId());
+			
+			if(is_bool($active))
+			{
+				$base->andWhere('p.active = ?', $active);
+			}
+			
+			if(isset($params['order_by']))
+			{
+				$base->orderBy($params['order_by']);
+			}
+			
+			return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 		}
 		
 		/**
-		 * Find an aCategory by it's Slug
+		 * Find an aCategory by its Slug
 		 * 
 		 * @param string $slug
 		 * @return aCategory 

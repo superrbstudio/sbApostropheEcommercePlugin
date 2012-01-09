@@ -22,6 +22,8 @@ class BasesbEcomAddToBasketForm extends sfForm
 		for($i = 1; $i <= 10; $i++){ $choices[$i] = $i; }
 		$this->setWidget('quantity', new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Quantity')));
 		$this->setValidator('quantity', new sfValidatorChoice(array('choices' => array_keys($choices))));
+		
+		$this->widgetSchema->setNameFormat('sb_ecom_add_to_basket[%s]');
 	}
 }
 
