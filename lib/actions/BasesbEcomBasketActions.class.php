@@ -20,8 +20,8 @@ abstract class BasesbEcomBasketActions extends aEngineActions
 	
 	public function executeAdd(sfWebRequest $request)
 	{
-		$this->forward404If(is_null($request->getParameter('id')));
-		$product = sbEcomProductTable::getProductById($request->getParameter('id'));
+		$this->forward404If(is_null($request->getParameter('product_id')));
+		$product = sbEcomProductTable::getProductById($request->getParameter('product_id'));
 		$this->forward404If(!($product instanceof sbEcomProduct));
 		$success = sbEcomBasketProductTable::addProductToBasket($product->getId(), session_id());
 		$this->getUser()->setFlash('basketAddSuccess', $success);

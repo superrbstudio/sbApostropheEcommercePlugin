@@ -34,8 +34,24 @@ abstract class BasesbEcomActions extends aEngineActions
 	
 	public function executeProduct(sfWebRequest $request)
 	{
-		// verify product and load
 		$this->product = sbEcomProductTable::getProductBySlug($request->getParameter('slug'));
+		$this->forward404Unless($this->product instanceof sbEcomProduct);
+		$this->forward404Unless($this->product->getActive());
+		
+		// Set Meta data
+		$prefix = aTools::getOptionI18n('title_prefix');
+    $suffix = aTools::getOptionI18n('title_suffix');
+    $this->getResponse()->setTitle($prefix . $this->product->getMetaTitle() . $suffix, false);
+		$this->getResponse()->addMeta('description', $this->product->getMetaDescription());
+		$this->getResponse()->addMeta('keywords', $this->product->getMetaKeywords());
+		
+		// get the user
+		$this->user = $this->getUser();
+		
+		// get the basket form
+		$this->basketForm = new sbEcomAddToBasketForm();
+		$this->basketForm->setDefault('product_id', $this->product->getId());
+		$this->basketForm->setDefault('count', 1);
 		
 	}
 	
