@@ -125,7 +125,7 @@ class PluginsbEcomProductTable extends Doctrine_Table
 	 * @param sbEcomProduct $product
 	 * @return string 
 	 */
-	public static function getSlideShowName(sbEcomProduct $product)
+	public static function getSlideShowName($product)
 	{
 		return  'sb-ecom-product-' . $product['id'];
 	}
@@ -136,7 +136,7 @@ class PluginsbEcomProductTable extends Doctrine_Table
 	 * @param sbEcomProduct $product
 	 * @return string 
 	 */
-	public static function getSlideShowSlug(sbEcomProduct $product)
+	public static function getSlideShowSlug($product)
 	{
 		return 'sb-ecom-product-' . $product['id'];
 	}

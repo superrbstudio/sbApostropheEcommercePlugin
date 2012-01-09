@@ -32,4 +32,12 @@ abstract class BasesbEcomComponents extends sfComponents
 			$this->form->setDefault('s', $request->getParameter('s'));
 		}
 	}
+	
+	public function executeSlideShow(sfWebRequest $request)
+	{
+		$defaults = array('class' => 'sb-location-main',
+											'dimensions' => sfConfig::get('app_sbEcom_slideshow', array('width' => 600, 'height' => 400)));
+		if(!is_array($this->params)){ $this->params = array(); }
+		$this->params     = array_merge($defaults, $this->params);
+	}
 }
