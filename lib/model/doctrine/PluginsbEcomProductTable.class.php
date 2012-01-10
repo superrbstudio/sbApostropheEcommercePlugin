@@ -24,9 +24,39 @@ class PluginsbEcomProductTable extends Doctrine_Table
 		* 
 		* @return Doctrine_Collection 
 		*/
-	public static function getFeaturedProducts($category = null)
+	public static function getFeaturedProducts($category = null, $active = null, $params = array())
 	{
-		return self::getInstance()->findByIsFeatured(1);
+		$fast = sfConfig::get('app_a_fasthydrate', false);
+		$base = Doctrine_Query::create()->select('p.*')
+						->from('sbEcomProduct p')
+						->where('p.is_featured = ?', true);
+		
+		if($category != null)
+		{
+			$base->innerJoin('aCategory c');
+			
+			if(is_array($category))
+			{
+				$base->andWhereIn('c.id', $category);
+			}
+		}
+		
+		if(is_bool($active))
+		{
+			$base->andWhere('p.active = ?', $active);
+		}
+		
+		if(isset($params['order_by']))
+		{
+			$base->orderBy($params['order_by']);
+		}
+		
+		if(isset($params['limit']) and is_numeric($params['limit']))
+		{
+			$base->limit($params['limit']);
+		}
+						
+		return $base->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
 	}
 
 	/**
