@@ -38,7 +38,7 @@ abstract class BasesbEcomActions extends aEngineActions
 		$this->products = sbEcomProductTable::getProductsInCategory($this->category, true, array('order_by' => 'title asc'));
 		
 		// register a javascript record of the category
-		a_js_call('sbEcomRegisterCategoryView()');
+		a_js_call('sbEcomRegisterCategoryView(\'' . url_for('@sb_ecom_categories?cat=' . $this->category->getSlug()) . '\', \'' . $this->category->getName() . '\')');
 	}
 	
 	public function executeProduct(sfWebRequest $request)
@@ -62,6 +62,17 @@ abstract class BasesbEcomActions extends aEngineActions
 		$this->basketForm->setDefault('product_id', $this->product->getId());
 		$this->basketForm->setDefault('count', 1);
 		
+		if($this->product->Categories instanceof Doctrine_Collection)
+		{
+			$categories = array();
+			
+			foreach($this->product->Categories as $category)
+			{
+				$categories[] = array('url' => url_for('@sb_ecom_categories?cat=' . $category['slug']), 'title' => $category['name']);
+			}
+			
+			a_js_call('sbEcomUpdateCategoryBreadCrumb(\'' . json_encode($categories) . '\')');
+		}
 	}
 	
 	protected function getEcomInfo()
