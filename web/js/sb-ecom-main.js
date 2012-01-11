@@ -172,3 +172,7 @@ function sbEcomSetPostageTypeSwitch() {
 			$('#sb_ecom_product_postage_weight_or_fixed').val('free');
 	}
 }
+
+function sbEcomRegisterCategoryView() {
+	$.cookie('last_category', window.location.pathname);
+}

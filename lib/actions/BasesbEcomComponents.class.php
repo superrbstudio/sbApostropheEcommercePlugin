@@ -33,6 +33,10 @@ abstract class BasesbEcomComponents extends sfComponents
 		}
 	}
 	
+	/**
+	 * Displays a slideshow for an e-commerce product
+	 * @param sfWebRequest $request
+	 */
 	public function executeSlideShow(sfWebRequest $request)
 	{
 		$defaults = array('class' => 'sb-location-main',
@@ -41,3 +45,14 @@ abstract class BasesbEcomComponents extends sfComponents
 		$this->params     = array_merge($defaults, $this->params);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -36,6 +36,9 @@ abstract class BasesbEcomActions extends aEngineActions
 		
 		// get all products in category
 		$this->products = sbEcomProductTable::getProductsInCategory($this->category, true, array('order_by' => 'title asc'));
+		
+		// register a javascript record of the category
+		a_js_call('sbEcomRegisterCategoryView()');
 	}
 	
 	public function executeProduct(sfWebRequest $request)
