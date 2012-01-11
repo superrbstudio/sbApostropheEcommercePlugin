@@ -173,20 +173,19 @@ function sbEcomSetPostageTypeSwitch() {
 	}
 }
 
-function sbEcomRegisterCategoryView(url, title) {
-	var items = '{ "url": "' + url + '", "title": "' + title + '" }';
+function sbEcomRegisterCategoryView(items) {
 	$.cookie('last_category', items);
 }
 
 function sbEcomUpdateCategoryBreadCrumb(cats) {
 	var categories = $.parseJSON(cats);
-	if($.cookie('last_category') == ''){ return false; }
+	if($.cookie('last_category') == '' || $.cookie('last_category') == null){ return false; }
 	var lastCategory = $.parseJSON($.cookie('last_category'));
 	
 	if(lastCategory.url != '') {
 		for (var i in categories) {
-			if(lastCategory.url == categories[i].url) {
-				$('#globalBreadcrumbs .sb-ecom-product-category a').attr('href', lastCategory.url);
+			if(decodeURIComponent(lastCategory.url) == decodeURIComponent(categories[i].url)) {
+				$('#globalBreadcrumbs .sb-ecom-product-category a').attr('href', decodeURIComponent(lastCategory.url));
 				$('#globalBreadcrumbs .sb-ecom-product-category a').html(lastCategory.title);
 				return false;
 			}

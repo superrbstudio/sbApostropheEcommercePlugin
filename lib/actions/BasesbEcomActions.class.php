@@ -38,7 +38,8 @@ abstract class BasesbEcomActions extends aEngineActions
 		$this->products = sbEcomProductTable::getProductsInCategory($this->category, true, array('order_by' => 'title asc'));
 		
 		// register a javascript record of the category
-		a_js_call('sbEcomRegisterCategoryView(\'' . url_for('@sb_ecom_categories?cat=' . $this->category->getSlug()) . '\', \'' . $this->category->getName() . '\')');
+		$items = array('url' => url_for('@sb_ecom_categories?cat=' . $this->category->getSlug()), 'title' => $this->category->getName());
+		a_js_call('sbEcomRegisterCategoryView(?)',  json_encode($items));
 	}
 	
 	public function executeProduct(sfWebRequest $request)
@@ -68,10 +69,13 @@ abstract class BasesbEcomActions extends aEngineActions
 			
 			foreach($this->product->Categories as $category)
 			{
-				$categories[] = array('url' => url_for('@sb_ecom_categories?cat=' . $category['slug']), 'title' => $category['name']);
+				$categories[] = array('url' => urlencode(url_for('@sb_ecom_categories?cat=' . $category['slug'])), 'title' => urlencode($category['name']));
 			}
 			
-			a_js_call('sbEcomUpdateCategoryBreadCrumb(\'' . json_encode($categories) . '\')');
+			if(count($categories) > 0)
+			{
+				a_js_call('sbEcomUpdateCategoryBreadCrumb(?)', json_encode($categories));
+			}
 		}
 	}
 	
