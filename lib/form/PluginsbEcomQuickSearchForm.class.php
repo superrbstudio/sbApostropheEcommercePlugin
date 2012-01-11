@@ -13,5 +13,7 @@ class PluginsbEcomQuickSearchForm extends sfForm
 		parent::setup();
 		$this->setWidget('s', new sfWidgetFormInputText(array('label' => 'Search')));
 		$this->setValidator('s', new sfValidatorString(array('required' => true), array('required' => 'Please enter a search term')));
+		
+		$this->disableCSRFProtection();
 	}
 }

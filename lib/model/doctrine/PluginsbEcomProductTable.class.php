@@ -215,4 +215,31 @@ class PluginsbEcomProductTable extends Doctrine_Table
 
 		return $return;
 	}
+	
+	public static function getProductsBySearch($search, $params = array())
+	{
+		$fast = sfConfig::get('app_a_fasthydrate', false);
+		
+		$root = Doctrine_Query::create()
+						->select('p.*')
+						->from('sbEcomProduct p');
+		
+		aTools::$searchService->addSearchToQuery($root,$search, array('culture' => aTools::getUserCulture()));
+		
+		if(isset($params['order_by']))
+		{
+			$root->orderBy($params['order_by']);
+		}
+		else
+		{
+			$root->orderBy('weight DESC');
+		}
+		
+		if(isset($params['limit']))
+		{
+			$root->limit($params['limit']);
+		}
+		
+		return $root->execute(array(), $fast ? Doctrine::HYDRATE_ARRAY : Doctrine::HYDRATE_RECORD);
+	}
 }

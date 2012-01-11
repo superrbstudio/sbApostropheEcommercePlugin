@@ -76,6 +76,21 @@ abstract class BasesbEcomActions extends aEngineActions
 		}
 	}
 	
+	public function executeSearch($request)
+	{
+		$this->form = new sbEcomSearchForm();
+		$values = array('s' => $request->getParameter('s'));
+		$this->form->bind($values);
+		$this->searchValid = false;
+		$this->products = array();
+		
+		if($this->form->isValid() and $request->getParameter('s') != '')
+		{
+			$this->searchValid = true;
+			$this->products = sbEcomProductTable::getProductsBySearch($this->form->getValue('s'));
+		}
+	}
+	
 	protected function getEcomInfo()
 	{
 		// get all categories that have products

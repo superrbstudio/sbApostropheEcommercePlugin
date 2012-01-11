@@ -21,12 +21,12 @@ abstract class PluginsbEcomProduct extends BasesbEcomProduct
 			$extraDescriptions .= $description->getTitle() . " " . strip_tags($description->getDescription());
 		}
 
-		return $this->getTitle() . " " . $this->getDescription() . " " . $extraDescriptions . " " . implode(' ', $this->getTags());
+		return $this->getReference() . " " . $this->getTitle() . " " . $this->getLongTitle() . " " . $this->getMetTitle() . " " . $this->getMetaDescription() . " " . $this->getMetaKeywords() . " " . $this->getDescription() . " " . $extraDescriptions . " " . implode(' ', $this->getTags());
 	}
 
 	public function getSummary()
 	{
-		return $this->getTitle() . " " . $this->getDescription();
+		return $this->getTitle() . " " . $this->getLongTitle() . " " . $this->getDescription();
 	}
 	
 	public function preSave($event) 
