@@ -197,4 +197,22 @@ class PluginsbEcomProductTable extends Doctrine_Table
 			
 		return false;
 	}
+	
+	/**
+	 * Returns an array of sbGoogleSitemapPage objects for use by the google sitemap plugin
+	 * @return array
+	 */
+	public static function pagesForSitemap()
+	{
+		$return = array();
+		$products = self::getInstance()->findByActive(true);
+		$host = sfContext::getInstance()->getRequest()->getHost();
+
+		foreach($products as $product)
+		{
+			$return[] = new sbGoogleSitemapPage($host, url_for('@sb_ecom_product?slug=' . $product['slug']), false, 'weekly', 0.8, strtotime($product['updated_at']));
+		}
+
+		return $return;
+	}
 }

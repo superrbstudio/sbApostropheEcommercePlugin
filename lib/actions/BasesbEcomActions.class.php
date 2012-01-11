@@ -15,10 +15,7 @@ abstract class BasesbEcomActions extends aEngineActions
 	}
 	
 	public function executeIndex(sfWebRequest $request)
-	{
-		// get all featured products
-		$this->featuredProducts = sbEcomProductTable::getFeaturedProducts();
-		
+	{	
 	}
 	
 	public function executeCategory(sfWebRequest $request)
