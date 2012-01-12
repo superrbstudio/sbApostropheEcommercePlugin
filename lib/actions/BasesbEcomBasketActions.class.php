@@ -20,10 +20,7 @@ abstract class BasesbEcomBasketActions extends aEngineActions
 	}
 	
 	public function executeAdd(sfWebRequest $request)
-	{
-		// turn off cache for the user for the remainder of their time on the site
-		$this->getUser()->setAttribute('aCacheInvalid', true);
-		
+	{	
 		// must be posted
 		$this->forward404Unless($request->getMethod() == 'POST');
 		
