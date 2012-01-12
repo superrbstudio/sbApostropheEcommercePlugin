@@ -12,5 +12,19 @@
  */
 abstract class PluginsbEcomBasketProduct extends BasesbEcomBasketProduct
 {
+	public function getCost()
+	{
+		return $this->getEcomProduct()->getCost() * $this->getQuantity();
+	}
+	
+	public function getTax()
+	{
+		return (($this->getEcomProduct()->getTax() / 100) * $this->getEcomProduct()->getCost()) * $this->getQuantity();
+	}
+	
+	public function getTotalCost()
+	{
+		return $this->getCost() + $this->getTax();
+	}
 
 }

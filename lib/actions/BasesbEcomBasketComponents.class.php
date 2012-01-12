@@ -16,11 +16,17 @@ abstract class BasesbEcomBasketComponents extends sfComponents
 	
 	public function executeBasketSummary()
 	{
-		$this->basket = sbEcomBasketTable::getUsersBasket(session_id());
+		$this->basket = sbEcomBasketTable::getUsersBasket();
 	}
 	
 	public function executeAddToBasketForm()
 	{
 		$this->basketForm = new sbEcomAddToBasketForm();
+		
+		if($this->product instanceof sbEcomProduct)
+		{
+			$values = array('product_id' => $this->product['id'], 'quantity' => 1);
+			$this->basketForm->setDefaults($values);
+		}
 	}
 }
