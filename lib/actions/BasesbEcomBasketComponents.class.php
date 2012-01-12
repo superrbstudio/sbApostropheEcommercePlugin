@@ -12,6 +12,7 @@ abstract class BasesbEcomBasketComponents extends sfComponents
 	public function preExecute()
   {
     parent::preExecute();
+		$this->getUser->setFlash('aCacheInvalid', true);
   }
 	
 	public function executeBasketSummary()
