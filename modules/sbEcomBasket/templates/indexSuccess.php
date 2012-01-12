@@ -5,8 +5,10 @@
 
 <div id="sb-ecom-main-basket" class="sb-ecom-main clearfix">
 	
+	<h1 clas="sb-ecom-basket-title">Your Basket</h1>
+	
 <?php if($basket->getNumProducts() > 0) : ?>
-	<table id="sb-ecom-basket-table a-ui">
+	<table id="sb-ecom-basket-table" class="a-ui">
 		<thead>
 			<tr>
 				<th class="sb-ecom-basket-product-image">Image</th>
@@ -18,7 +20,7 @@
 			</tr>
 		</thead>
 		<tbody>
-	<?php foreach($basket->getBasketProducts() as $basketProduct): ?>
+	<?php $i = 0; foreach($basket->getBasketProducts() as $basketProduct): ?>
 			<?php $image = sbEcomProductTable::getFirstImage($basketProduct->getEcomProduct()); ?>
 			<?php
 			if($image instanceof aMediaItem)
@@ -39,7 +41,7 @@
 				$image = '';
 			}
 			?>
-			<tr>
+			<tr class="<?php if(is_int($i / 2)) { echo "first"; } else { echo "second"; } ?>">
 				<td class="sb-ecom-basket-product-image"><?php echo $image; ?></td>
 				<td class="sb-ecom-basket-product-title">
 					<p class="title"><a href="<?php echo url_for('@sb_ecom_product?slug=' . $basketProduct->getEcomProduct()->getSlug()); ?>"><?php echo $basketProduct->getEcomProduct()->getTitle(); ?></a></p>
@@ -54,21 +56,24 @@
 				<td class="sb-ecom-basket-product-tax sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basketProduct->getTax()); ?></td>
 				<td class="sb-ecom-basket-product-remove a-ui"><a class="a-btn icon no-label a-delete alt" href="<?php echo url_for('@sb_ecom_basket_action?action=delete&product=' . $basketProduct->getId()); ?>"><span class="icon"></span>Delete</a>
 			</tr>
-	<?php endforeach; ?>
+	<?php $i++; endforeach; ?>
+			<tr class="sb-ecom-divider">
+				<td colspan="6"><hr/></td>
+			</tr>
 			<tr class="sb-ecom-basket-total-cost">
 				<td></td>
-				<td>Total Cost (Exc. Tax)</td>
-				<td colspan="3" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getCost()); ?></td>
+				<td colspan="3" class="sb-ecom-total-title">Total Cost (Exc. Tax)</td>
+				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getCost()); ?></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-tax">
 				<td></td>
-				<td>Total Tax</td>
-				<td colspan="3" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTax()); ?></td>
+				<td colspan="3" class="sb-ecom-total-title">Total Tax</td>
+				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTax()); ?></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-total">
 				<td></td>
-				<td>Total</td>
-				<td colspan="3" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTotal()); ?></td>
+				<td colspan="3" class="sb-ecom-total-title">Total</td>
+				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTotal()); ?></td>
 			</tr>
 		</tbody>
 	</table>
