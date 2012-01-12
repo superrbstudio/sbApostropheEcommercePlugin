@@ -49,13 +49,13 @@ class BasesbEcomBasketTable
 		//check one doesn't exist already
 		$basketProduct = self::getBasketProductForUserByProductId($productId, self::getUsersBasketIdentifier());
 
-		if(!($basketProduct instanceof sbEcomBasketProduct))
+		if(!($basketProduct instanceof sbEcomBasketProduct) or $basketProduct->isNew())
 		{
 			$basketProduct = new sbEcomBasketProduct();
 			$basketProduct->setSessionId(self::getUsersBasketIdentifier());
 			$basketProduct->setProductId($productId);
 		}
-
+		
 		$basketProduct->setQuantity($basketProduct->getQuantity() + $quantity);
 		return $basketProduct->save();
 	}
@@ -71,36 +71,43 @@ class BasesbEcomBasketTable
 	public static function getBasketProductForUserByProductId($productId)
 	{
 		$root = Doctrine_Query::create()
-						->select()
+						->select('b.*')
 						->from('sbEcomBasketProduct b')
 						->where('b.product_id = ?', $productId)
 						->andWhere('b.session_id = ?', self::getUsersBasketIdentifier())
 						->execute();
-		if(!$root) { return; }
-
-		$prods = $root->getData();
-		$prodCount = count($prods);
-
-		if($prodCount == 1)
+		
+		if(!($root instanceof Doctrine_Collection))
 		{
-			return $prods[0];
+			return false;
 		}
-
-		if($prodCount > 1)
-		{
-			$basketProduct = $prods[0];
-			$count = $basketProduct->getQuantity();
-
-			// add up all quantities
-			for($i = 1; $i < $prodCount; $i++)
+		
+		$i = 0;
+		$basketProduct = new sbEcomBasketProduct();
+		
+		foreach($root as $product)
+		{	
+			if($i == 0)
 			{
-				$count += $prods[$i]->getQuantity();
-				$prods[$i]->delete();
+				$basketProduct = $product;
+				$count = $basketProduct->getQuantity();
 			}
-
-			$basketProduct->setQuantity($count);
-			return $basketProduct;
+			else
+			{
+				$count+= $product->getQuantity();
+				$product->delete();
+			}
+			
+			$i++;
 		}
+		
+		if($i >= 1)
+		{
+			$basketProduct->setQuantity($count);
+			$basketProduct->save();
+		}
+		
+		return $basketProduct;
 	}
 }
 

@@ -9,5 +9,3 @@ class sbEcomBasketTable extends BasesbEcomBasketTable
 {
 	
 }
-
-?>

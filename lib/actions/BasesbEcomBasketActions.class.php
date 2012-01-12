@@ -43,5 +43,81 @@ abstract class BasesbEcomBasketActions extends aEngineActions
 		{
 			$this->redirect('@sb_ecom_basket');
 		}
+		else
+		{
+			// @TODO display json result
+		}
+	}
+	
+	public function executeDelete(sfWebRequest $request)
+	{
+		// verify the parameter
+		$this->forward404Unless($request->getParameter('product') != '');
+		
+		// verify the product
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
+		
+		// delete the product and return to the basket
+		$basketProduct->delete();
+		$this->redirect('@sb_ecom_basket');
+	}
+	
+	public function executePlus(sfWebRequest $request)
+	{
+		// verify the parameter
+		$this->forward404Unless($request->getParameter('product') != '');
+		
+		// verify the product
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
+		
+		$currentCount = $basketProduct->getQuantity();
+		
+		if(is_numeric($request->getParameter('quantity')))
+		{
+			$currentCount+= $request->getParameter('quantity');
+		}
+		else
+		{
+			$currentCount++;
+		}
+		
+		$basketProduct->setQuantity($currentCount);
+		$basketProduct->save();
+		$this->redirect('@sb_ecom_basket');
+	}
+	
+	public function executeSubtract(sfWebRequest $request)
+	{
+		// verify the parameter
+		$this->forward404Unless($request->getParameter('product') != '');
+		
+		// verify the product
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
+		
+		$currentCount = $basketProduct->getQuantity();
+		
+		if(is_numeric($request->getParameter('quantity')))
+		{
+			$currentCount-= $request->getParameter('quantity');
+		}
+		else
+		{
+			$currentCount--;
+		}
+		
+		if($currentCount <= 0)
+		{
+			$basketProduct->delete();
+		}
+		else
+		{
+			$basketProduct->setQuantity($currentCount);
+			$basketProduct->save();
+		}
+		
+		$this->redirect('@sb_ecom_basket');
 	}
 }

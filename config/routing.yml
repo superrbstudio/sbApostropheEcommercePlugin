@@ -28,7 +28,7 @@ sb_ecom_basket:
   class: aRoute
   
 sb_ecom_basket_action:
-  url: /:action 
+  url: /:action
   param: { module: sbEcomBasket }
   class: aRoute
 
