@@ -79,11 +79,11 @@ function sbEcomProductSetUpDescriptions() {
 		return false;
 	});
 	
-	$('.sb-ecom-product-description tr.description-row').each(function() {
+	/*$('.sb-ecom-product-description tr.description-row').each(function() {
 		if($(this).hasClass('new') && $(this).find('.sb-ecom-description-title').val() == '') {
 			$(this).css('display', 'none');
 		}
-	});
+	});*/
 	
 	// Delete Button
 	$('.sb-ecom-product-description .a-delete').click(function() {

@@ -17,7 +17,7 @@ abstract class PluginsbEcomProductDescriptionForm extends BasesbEcomProductDescr
 		$this->setWidget('title', new sfWidgetFormInputText(array(), array('class' => 'small sb-ecom-description-title')));
 		$this->setValidator('title', new sfValidatorString(array('required' => false), array('required' => "Please fill in the description title")));
 		
-		$this->setWidget('description', new aWidgetFormRichTextarea(array('tool' => 'sbEcomProductDescription', 'height' => 142), array('class' => 'sb-ecom-description-description')));
+		$this->setWidget('description', new aWidgetFormRichTextarea(array('tool' => 'sbEcomProductDescription', 'height' => 182), array('class' => 'sb-ecom-description-description')));
 		$this->setValidator('description', new sfValidatorHtml(array('required' => false), array()));
 		
 		$this->setWidget('author_id', new sfWidgetFormInputHidden());

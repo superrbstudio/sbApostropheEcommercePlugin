@@ -13,12 +13,14 @@ abstract class PluginsbEcomProductForm extends BasesbEcomProductForm
 	public function setup()
 	{	
 		parent::setup();
+		$this->getWidgetSchema()->setNameFormat('sb-ecom-product-%s');
 		
 		// get the current user
 		$user = sfContext::getInstance()->getUser();
 		
 		// set the author
 		$this->setWidget('author_id', new sfWidgetFormInputHidden(array(), array()));
+		$this->setDefault('author_id', $user->getGuardUser()->getId());
 		
 		// Main Details
 		$this->setWidget('title', new sfWidgetFormInputText(array('label' => 'Product title<span class="required">*</span>'), array('class' => 'large')));
@@ -64,7 +66,7 @@ abstract class PluginsbEcomProductForm extends BasesbEcomProductForm
 		$this->setValidator('postage_fixed_cost', new sfValidatorNumber(array('min' => 0, 'required' => false), array('min' => 'Please enter a value greater than 0')));
 		
 		// Product Descriptions
-		if(!$this->isNew())
+		/*if(!$this->isNew())
 		{
 			$product = $this->getObject();
 			$j = count($product->Descriptions);
@@ -86,6 +88,7 @@ abstract class PluginsbEcomProductForm extends BasesbEcomProductForm
 			
 			$this->embedForm('newDescriptions', $subForm);
 		}
+		 */
 		
 		// Tags
 		$options['default'] = implode(', ', $this->getObject()->getTags());

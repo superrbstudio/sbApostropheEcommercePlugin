@@ -43,6 +43,6 @@ generator:
           Postage: [ postage_weight_or_fixed, postage_weight, postage_fixed_cost ]
           Stock Details: [ is_out_of_stock, number_in_stock ]
           Categories & Tags: [ categories_list, tags ]
-          Product Descriptions: [ _product_descriptions ]
+          #Product Descriptions: [ _product_descriptions ]
       new:     
         title: New Product
