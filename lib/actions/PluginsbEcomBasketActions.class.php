@@ -31,13 +31,15 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// must be valid
 		$this->forward404Unless($this->basketForm->isValid());
 		
-		$product = sbEcomProductTable::getProductById($this->basketForm->getValue('product_id'));
+		/*$product = sbEcomProductTable::getProductById($this->basketForm->getValue('product_id'));
 		$this->forward404Unless($product instanceof sbEcomProduct);
 		$this->forward404Unless($product->getActive());
 		
 		// product appears to be valid now add to basket
 		$success = sbEcomBasketTable::addProductToBasket($product->getId(), $this->basketForm->getValue('quantity'));
 		$this->getUser()->setFlash('basketAddSuccess', $success);
+		 * 
+		 */
 		
 		if(!$request->isXmlHttpRequest())
 		{

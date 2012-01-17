@@ -1,0 +1,1 @@
+<?php require_once(sfConfig::get('sf_root_dir') . '/plugins/sbApostropheEcommercePlugin/modules/a/templates/sbEcomProductTemplate.php'); ?>
