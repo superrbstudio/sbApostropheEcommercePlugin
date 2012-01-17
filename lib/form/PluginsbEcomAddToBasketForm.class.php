@@ -10,7 +10,7 @@
  *
  * @author pureroon
  */
-class BasesbEcomAddToBasketForm extends sfForm 
+class PluginsbEcomAddToBasketForm extends sfForm 
 {
 	public function setup() 
 	{

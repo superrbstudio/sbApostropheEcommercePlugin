@@ -7,7 +7,7 @@
  * @subpackage sbEcomBasket
  * @author     Giles Smith
  */
-abstract class BasesbEcomBasketActions extends aEngineActions 
+abstract class PluginsbEcomBasketActions extends aEngineActions 
 {	
 	public function preExecute() 
 	{

@@ -1,5 +1,5 @@
 <?php
 
-class sbEcomBasketActions extends BasesbEcomBasketActions 
+class sbEcomBasketActions extends PluginsbEcomBasketActions 
 {
 }

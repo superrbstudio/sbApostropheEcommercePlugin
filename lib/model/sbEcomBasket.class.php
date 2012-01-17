@@ -5,6 +5,6 @@
  *
  * @author pureroon
  */
-class sbEcomBasket extends BasesbEcomBasket
+class sbEcomBasket extends PluginsbEcomBasket
 {
 }

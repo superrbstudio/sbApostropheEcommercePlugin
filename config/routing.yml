@@ -1,26 +1,3 @@
-
-sb_ecom_index:
-  url: /
-  param: { module: sbEcom, action: index }
-  class: aRoute
-  
-sb_ecom_product:
-  url: /item/:slug
-  param: { module: sbEcom, action: product }
-  options: { model: sbEcomProduct, type: object }
-  class: aDoctrineRoute
-  requirements: { slug: '[\w-]+' }
-  
-sb_ecom_search:
-  url: /search
-  param: { module: sbEcom, action: search }
-  class: aRoute
-
-sb_ecom_categories:
-  url: /:cat
-  param: { module: sbEcom, action: category }
-  class: aRoute
-
 # Basket Engine
 sb_ecom_basket:
   url: /
@@ -42,25 +19,3 @@ sb_ecom_checkout_action:
   url: /:action 
   param: { module: sbEcomCheckout }
   class: aRoute
-  
-## Admin Routes
-
-sb_ecom_product_sbEcomAdmin:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                sbEcomProduct
-    module:               sbEcomAdmin
-    prefix_path:          /sb-ecommerce/products
-    column:               id
-    with_wildcard_routes: true
-    collection_actions:
-      new_with_title: post
-    
-sb_ecom_product_sbEcomBrandAdmin:
-  class: sfDoctrineRouteCollection
-  options:
-    model:                sbEcomBrand
-    module:               sbEcomBrandAdmin
-    prefix_path:          /sb-ecommerce/brands
-    column:               id
-    with_wildcard_routes: true

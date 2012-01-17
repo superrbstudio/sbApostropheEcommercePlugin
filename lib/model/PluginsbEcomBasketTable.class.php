@@ -10,7 +10,7 @@
  *
  * @author pureroon
  */
-class BasesbEcomBasketTable
+class PluginsbEcomBasketTable
 {	
 	public static $cookieName = 'sb-ecom-basket-identifier';
 	

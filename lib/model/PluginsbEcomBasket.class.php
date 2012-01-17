@@ -10,7 +10,7 @@
  *
  * @author pureroon
  */
-class BasesbEcomBasket
+class PluginsbEcomBasket
 {
 	protected $basketProducts = array();
 	protected $total          = 0;

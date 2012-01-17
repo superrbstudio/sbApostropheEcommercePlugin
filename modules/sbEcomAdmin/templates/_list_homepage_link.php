@@ -1,1 +1,0 @@
-<?php echo a_button('Product Homepage', url_for('@sb_ecom_product?slug=' . $sb_ecom_product->slug), array('sb-ecom-product-home-btn', 'icon', 'no-label')); ?>

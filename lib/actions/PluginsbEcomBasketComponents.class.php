@@ -7,7 +7,7 @@
  * @subpackage sbEcomBasket
  * @author     Giles Smith
  */
-abstract class BasesbEcomBasketComponents extends sfComponents 
+abstract class PluginsbEcomBasketComponents extends sfComponents 
 {
 	public function preExecute()
   {

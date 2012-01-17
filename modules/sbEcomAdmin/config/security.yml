@@ -1,6 +1,0 @@
-default:
-  # Array-in-array means "OR" in security.yml, don't remove double brackets
-  is_secure: true
-  credentials: [[sb_ecom_product_admin, sb_ecom_product_editor, admin]]
-redirect:
-  is_secure: false
