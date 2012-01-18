@@ -6,3 +6,4 @@ default:
     
   javascripts:
     - /sbApostropheEcommercePlugin/js/sbApostropheEcommerce.js: { data-asset-group: global }
+    - /sbApostropheEcommercePlugin/js/jquery.cookie.js: { data-asset-group: global }
