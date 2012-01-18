@@ -60,9 +60,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 	{
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
+		$this->forward404Unless($request->getParameter('slot') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		// delete the product and return to the basket
@@ -74,9 +75,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 	{
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
+		$this->forward404Unless($request->getParameter('slot') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		$currentCount = $basketProduct->getQuantity();
@@ -99,9 +101,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 	{
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
+		$this->forward404Unless($request->getParameter('slot') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		$currentCount = $basketProduct->getQuantity();

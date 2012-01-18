@@ -149,6 +149,7 @@ class PluginsbEcomBasketTable
 	
 	public static function cleanBasket()
 	{
+		// clean out any broken products and out of date ones
 		Doctrine_Query::create()->delete()->from('sbEcomBasketProduct')
 						->where('session_id IS NULL')
 						->orWhere('product_id IS NULL')

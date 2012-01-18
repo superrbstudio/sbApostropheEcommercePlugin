@@ -39,3 +39,109 @@
 .sb-ecom-add-to-basket {
 	margin-top: 5px;
 }
+
+h1.sb-ecom-basket-title {
+	font-weight: bold;
+	font-size: 2.0em;
+}
+
+#sb-ecom-basket-table {
+	width: 100%;
+	font-size: 1em;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-image {
+	width: 153px;
+	padding: 10px 10px 6px 10px;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-title .title {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-quantity .sb-ecom-basket-product-quantity-value {
+	float: left;
+	display: block;
+	padding: 2px 10px 0 10px;
+	width: 30px;
+	text-align: center;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-quantity .a-btn {
+	width: 10px;
+	text-align: center;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-remove .a-btn {
+	margin: 0 0 0 35px;
+}
+
+#sb-ecom-basket-table th {
+	font-weight: bold;
+	padding-bottom: 5px;
+	text-align: right;
+}
+
+#sb-ecom-basket-table th.sb-ecom-basket-product-image span, 
+#sb-ecom-basket-table th.sb-ecom-basket-product-title span, 
+#sb-ecom-basket-table th.sb-ecom-basket-product-quantity span,
+#sb-ecom-basket-table th.sb-ecom-basket-product-remove span{
+	display: none;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-product-quantity, 
+#sb-ecom-basket-table .sb-ecom-basket-product-cost, 
+#sb-ecom-basket-table .sb-ecom-basket-product-tax, 
+#sb-ecom-basket-table .sb-ecom-basket-product-remove {
+	width: 10%;
+}
+
+#sb-ecom-basket-table tr.first td {
+	background-color: #f1f1f1;
+}
+
+#sb-ecom-basket-table td {
+	vertical-align: middle;
+}
+
+#sb-ecom-basket-table td.sb-ecom-cost {
+	text-align: right;
+}
+
+#sb-ecom-basket-table td.sb-ecom-total-title {
+	text-align: right;
+}
+
+#sb-ecom-basket-table .sb-ecom-basket-total-total td {
+	padding-top: 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.sb-ecom-empty-basket-message.a-ui {
+	font-size: 1.2em;
+	padding: 10px 0;
+}
+
+.sb-ecom-empty-basket-button .a-btn {
+	padding: 10px;
+	margin: 0 0 50px 0;
+	font-size: 1.4em;
+}
+
+.sb-ecom-checkout-link {
+	float: right;
+	margin: 50px 0;
+}
+
+.sb-ecom-checkout-link a.a-btn {
+	padding: 10px;
+	font-size: 1.8em;
+}
+
+.sb-ecom-empty-basket-recommend {
+	font-size: 1.8em;
+	font-weight: bold;
+	padding-bottom: 10px;
+}

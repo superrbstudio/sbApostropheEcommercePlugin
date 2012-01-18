@@ -27,8 +27,8 @@ class PluginsbEcomBasket
 				if($product instanceof sbEcomBasketProduct)
 				{
 					$this->basketProducts[] = $product;
-					$this->total      += ($product->getEcomProduct()->getCost() * $product->getQuantity());
-					$this->tax        += (($product->getEcomProduct()->getCost() * ($product->getEcomProduct()->getTax() / 100)) * $product->getQuantity());
+					$this->total      += ($product->getItemCost() * $product->getQuantity());
+					$this->tax        += (($product->getItemCost() * ($product->getItemTax() / 100)) * $product->getQuantity());
 					$this->numItems   += $product->getQuantity();
 					$this->numProducts++;
 				}
