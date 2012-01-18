@@ -10,6 +10,8 @@ sbEcomBasketProduct:
       type: varchar(255)
     product_id:
       type: integer
+    slot_id:
+      type: integer
     quantity:
       type: integer
       default: 0
