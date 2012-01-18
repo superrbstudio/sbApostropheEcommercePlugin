@@ -31,15 +31,20 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// must be valid
 		$this->forward404Unless($this->basketForm->isValid());
 		
-		/*$product = sbEcomProductTable::getProductById($this->basketForm->getValue('product_id'));
-		$this->forward404Unless($product instanceof sbEcomProduct);
-		$this->forward404Unless($product->getActive());
+		// get the product page and verify
+		$this->product = Doctrine_Core::getTable('aPage')->findOneById($this->basketForm->getValue('product_id'));
+		$this->forward404Unless($this->product instanceof aPage);
+		$this->forward404Unless($this->product->getTemplate() == 'sbEcomProduct');
+		$this->forward404If($this->product->getArchived() and !is_null($this->product->getArchived()));
+		
+		$this->slot = Doctrine_Core::getTable('aSlot')->findOneById($this->basketForm->getValue('slot_id'));
+		$this->forward404Unless($this->slot instanceof aSlot);
+		
+		$this->productParams = unserialize($this->slot->getValue());
+		$this->forward404If($this->productParams['call_to_order'] == true);
 		
 		// product appears to be valid now add to basket
-		$success = sbEcomBasketTable::addProductToBasket($product->getId(), $this->basketForm->getValue('quantity'));
-		$this->getUser()->setFlash('basketAddSuccess', $success);
-		 * 
-		 */
+		sbEcomBasketTable::addProductToBasket(sbEcomBasketTable::createBasketValues($this->product, $this->slot, $this->basketForm->getValue('quantity'), $this->productParams));
 		
 		if(!$request->isXmlHttpRequest())
 		{

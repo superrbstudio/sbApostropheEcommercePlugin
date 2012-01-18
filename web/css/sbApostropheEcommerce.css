@@ -1,0 +1,41 @@
+/* 
+    Document   : sb-ecom-main
+    Created on : Jun 20, 2011, 10:51:55 AM
+    Author     : pureroon
+    Description:
+        Styles for sbApostropheEcommercePlugin
+*/
+
+.sbEcomAddToBasket {
+	background-color: #EFEFEF;
+	border: 1px solid #DDD;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-moz-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.1);
+	box-shadow: 0 0 6px rgba(0,0,0,0.1);
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.sb-ecom-add-to-basket-title, .sb-ecom-add-to-basket-cost, .sb-ecom-add-to-basket-form {
+	float: left;
+}
+
+.sb-ecom-add-to-basket-title {
+	 width: 60%;
+}
+
+.sb-ecom-add-to-basket-cost {
+	width: 14%;
+}
+
+.sb-ecom-add-to-basket-form {
+	width: 26%;
+}
+
+
+.sb-ecom-add-to-basket {
+	margin-top: 5px;
+}

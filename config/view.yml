@@ -2,4 +2,7 @@
 ---
 default:
   stylesheets:
-    - /sbApostropheEcommercePlugin/css/sb-ecom-main.css: { data-asset-group: global }     # sbApostropheEcommercePlugin - Styles
+    - /sbApostropheEcommercePlugin/css/sbApostropheEcommerce.css: { data-asset-group: global }     # sbApostropheEcommercePlugin - Styles
+    
+  javascripts:
+    - /sbApostropheEcommercePlugin/js/sbApostropheEcommerce.js: { data-asset-group: global }

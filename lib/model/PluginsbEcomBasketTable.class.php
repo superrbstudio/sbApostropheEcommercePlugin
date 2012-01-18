@@ -40,24 +40,60 @@ class PluginsbEcomBasketTable
 	/**
 		* Adds a product to a users basket
 		* 
-		* @param type $productId
-		* @param type $sessionId
-		* @return boolean 
+		* @param array $params
+		* @return void 
 		*/
-	public static function addProductToBasket($productId, $quantity = 1)
+	public static function addProductToBasket($params)
 	{
 		//check one doesn't exist already
-		$basketProduct = self::getBasketProductForUserByProductId($productId, self::getUsersBasketIdentifier());
+		$basketProduct = self::getBasketProductForUserByProductId($params['product_id'], $params['slot_id'], self::getUsersBasketIdentifier());
 
 		if(!($basketProduct instanceof sbEcomBasketProduct) or $basketProduct->isNew())
 		{
 			$basketProduct = new sbEcomBasketProduct();
 			$basketProduct->setSessionId(self::getUsersBasketIdentifier());
-			$basketProduct->setProductId($productId);
+			$basketProduct->setProductId($params['product_id']);
+			$basketProduct->setSlotId($params['slot_id']);
 		}
 		
-		$basketProduct->setQuantity($basketProduct->getQuantity() + $quantity);
-		return $basketProduct->save();
+		$basketProduct->setItemCost($params['item_cost']);
+		$basketProduct->setPostageCost($params['postage_cost']);
+		$basketProduct->setItemTax($params['item_tax']);
+		$basketProduct->setItemTitle($params['item_title']);
+		$basketProduct->setItemReference($params['item_reference']);
+		$basketProduct->setQuantity($basketProduct->getQuantity() + $params['quantity']);
+		$basketProduct->save();
+		
+		// clean the basket
+		self::cleanBasket();
+	}
+	
+	public static function createBasketValues(aPage $productPage, aSlot $productSlot, $quantity, $params = array())
+	{
+		switch($params['postage_type'])
+		{
+			case 'fixed':
+				$postage = $params['fixed'];
+				break;
+			
+			case 'weight':
+				$postage = $params['weight'] * $params['cost_per_weight'];
+				break;
+			
+			default:
+				$postage = 0;
+		}
+		
+		return array(
+				'product_id' => $productPage->getId(),
+				'slot_id' => $productSlot->getId(),
+				'quantity' => $quantity,
+				'item_cost' => $params['cost'],
+				'postage_cost' => $postage,
+				'item_tax' => $params['tax'],
+				'item_title' => $params['title'],
+				'item_reference' => $params['reference']
+						);
 	}
 	
 	/**
@@ -68,12 +104,13 @@ class PluginsbEcomBasketTable
 		* @param string $sessionId The users session id
 		* @return sbEcomBasketProduct 
 		*/
-	public static function getBasketProductForUserByProductId($productId)
+	public static function getBasketProductForUserByProductId($productId, $slotId)
 	{
 		$root = Doctrine_Query::create()
 						->select('b.*')
 						->from('sbEcomBasketProduct b')
 						->where('b.product_id = ?', $productId)
+						->andWhere('b.slot_id = ?', $slotId)
 						->andWhere('b.session_id = ?', self::getUsersBasketIdentifier())
 						->execute();
 		
@@ -108,6 +145,16 @@ class PluginsbEcomBasketTable
 		}
 		
 		return $basketProduct;
+	}
+	
+	public static function cleanBasket()
+	{
+		Doctrine_Query::create()->delete()->from('sbEcomBasketProduct')
+						->where('session_id IS NULL')
+						->orWhere('product_id IS NULL')
+						->orWhere('slot_id IS NULL')
+						->orWhere('updated_at < DATE_SUB(CURDATE(),INTERVAL ' . sfConfig::get('app_sbApostropheEcommerce_clean_basket_days', 100) . ' DAY)')
+						->execute();
 	}
 }
 
