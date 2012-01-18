@@ -10,6 +10,8 @@ sbEcomBasketProduct:
       type: varchar(255)
     product_id:
       type: integer
+    slot_id:
+      type: integer
     quantity:
       type: integer
       default: 0
@@ -33,6 +35,19 @@ sbEcomBasketProduct:
       local: product_id
       foreign: id
       onDelete: CASCADE
+    EcomSlot:
+      class: aSlot
+      foreignAlias: EcomBasketProductSlot
+      local: slot_id
+      foreign: id
+      onDelete: CASCADE
+  indexes:
+    # this is here to make basket clean ups easier
+    updated_at: { fields: [ updated_at ] }
+    # find users baskets quicker
+    session_id: { fields: [ session_id ] }
+    
+    
 sbEcomAddToBasketSlot:
   # Doctrine doesn't produce useful forms with column aggregation inheritance anyway,
   # and slots often use serialization into the value column... the Doctrine forms are not
