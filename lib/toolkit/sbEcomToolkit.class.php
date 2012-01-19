@@ -41,4 +41,14 @@ class sbEcomToolkit
 	{
 		return sfConfig::get('app_sbEcom_currency_symbol', '&pound;') . self::formatNumber($cost);
 	}
+	
+	public static function getCategoryTemplates()
+	{
+		return sfConfig::get('app_sbApostropheEcommerce_category_templates', array('sbEcomCategory'));
+	}
+	
+	public static function getProductTemplates()
+	{
+		return sfConfig::get('app_sbApostropheEcommerce_product_templates', array('sbEcomProduct'));
+	}
 }

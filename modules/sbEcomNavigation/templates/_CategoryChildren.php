@@ -1,0 +1,1 @@
+<?php require_once(sfConfig::get('sf_root_dir') . '/plugins/apostrophePlugin/modules/aNavigation/templates/_tabs.php'); ?>
