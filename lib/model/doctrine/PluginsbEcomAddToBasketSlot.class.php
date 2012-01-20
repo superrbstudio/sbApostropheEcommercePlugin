@@ -13,5 +13,10 @@
 abstract class PluginsbEcomAddToBasketSlot extends BasesbEcomAddToBasketSlot
 {
 	protected $editDefault = true;
-
+	
+	public function getSearchText()
+  {
+		$value = unserialize($this->value);
+		return $value['title'] . ' ' . $value['reference'];
+  }
 }
