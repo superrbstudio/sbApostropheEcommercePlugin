@@ -5,7 +5,7 @@
  *
  * @author Giles Smith <tech@superrb.com>
  */
-class PluginsbEcomAddToBasketSlotEditForm
+class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
 {
 	// Ensures unique IDs throughout the page
   protected $id;
