@@ -16,6 +16,8 @@ abstract class PluginsbEcomAddToBasketForm extends sfForm
 	{
 		parent::setup();
 		
+		$this->disableCSRFProtection(); // breaks cache and form values arent saved
+		
 		$this->setWidget('product_id', new sfWidgetFormInputHidden());
 		$this->setValidator('product_id', new sfValidatorDoctrineChoice(array('model' => 'aPage')));
 		
