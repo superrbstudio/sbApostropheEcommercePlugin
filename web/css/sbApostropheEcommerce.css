@@ -19,6 +19,11 @@
 	margin-bottom: 10px;
 }
 
+.a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon {
+	background-image: url('../images/slot-basket-icon.png');
+	background-position: top right;
+}
+
 .sb-ecom-add-to-basket-title, .sb-ecom-add-to-basket-cost, .sb-ecom-add-to-basket-form {
 	float: left;
 }
