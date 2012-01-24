@@ -19,9 +19,13 @@
 	margin-bottom: 10px;
 }
 
-.a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon, 
-.a-ui .a-btn.sbecomproduct.icon > .icon, .a-ui.a-btn.sbecomproduct.icon > .icon{
+.a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon {
 	background-image: url('../images/slot-basket-icon.png');
+	background-position: top right;
+}
+
+.a-ui .a-btn.sbecomproduct.icon > .icon, .a-ui.a-btn.sbecomproduct.icon > .icon {
+	background-image: url('../images/slot-product-icon.png');
 	background-position: top right;
 }
 
