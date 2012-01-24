@@ -1,14 +1,9 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of BasesbEcomAddToBasketForm
+ * BasesbEcomAddToBasketForm - Sets up the Add to Basket Slot
  *
- * @author pureroon
+ * @author Giles Smith <tech@superrb.com>
  */
 abstract class PluginsbEcomAddToBasketForm extends sfForm 
 {
