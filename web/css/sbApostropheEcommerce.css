@@ -24,7 +24,8 @@
 	background-position: top right;
 }
 
-.a-ui .a-btn.sbecomproduct.icon > .icon, .a-ui.a-btn.sbecomproduct.icon > .icon {
+.a-ui .a-btn.sbecomproduct.icon > .icon, .a-ui.a-btn.sbecomproduct.icon > .icon, 
+.a-ui .a-btn.sbecomproducts.icon > .icon, .a-ui.a-btn.sbecomproducts.icon > .icon{
 	background-image: url('../images/slot-product-icon.png');
 	background-position: top right;
 }

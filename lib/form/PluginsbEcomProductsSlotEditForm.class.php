@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of PluginsbEcomProductSlotEditForm
+ * Description of PluginsbEcomProductsSlotEditForm
  *
  * @author Giles Smith <tech@superrb.com>
  */
-class PluginsbEcomProductSlotEditForm extends BaseForm
+abstract class PluginsbEcomProductsSlotEditForm extends BaseForm
 {
 	// Ensures unique IDs throughout the page
   protected $id;
@@ -16,12 +16,9 @@ class PluginsbEcomProductSlotEditForm extends BaseForm
   }
   public function configure()
   {
-    // ADD YOUR FIELDS HERE
-    
-    // A simple example: a slot with a single 'text' field with a maximum length of 100 characters
-		$this->allowedPages = sbEcomProductTable::getProductsForChoiceWidget(false, null, null);
-    $this->setWidgets(array('product_id' => new aWidgetFormChoice(array('choices' => $this->allowedPages, 'multiple' => true))));
-    $this->setValidators(array('product_id' => new sfValidatorChoice(array('choices' => array_keys($this->allowedPages)))));
+		$choices = sbEcomProductTable::getProductsForChoiceWidget(false, null, null);
+    $this->setWidgets(array('products' => new sfWidgetFormChoice(array('choices' => $choices, 'multiple' => true))));
+    $this->setValidators(array('products' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($choices), 'multiple' => true))));
     
     // Ensures unique IDs throughout the page. Hyphen between slot and form to please our CSS
     $this->widgetSchema->setNameFormat('slot-form-' . $this->id . '[%s]');
