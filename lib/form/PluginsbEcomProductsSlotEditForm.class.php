@@ -16,9 +16,9 @@ abstract class PluginsbEcomProductsSlotEditForm extends BaseForm
   }
   public function configure()
   {
-		$choices = sbEcomProductTable::getProductsForChoiceWidget(false, null, null);
-    $this->setWidgets(array('products' => new sfWidgetFormChoice(array('choices' => $choices, 'multiple' => true))));
-    $this->setValidators(array('products' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($choices), 'multiple' => true))));
+		$this->allowedPages = sbEcomProductTable::getProductsForChoiceWidget(false, null, null);
+    $this->setWidgets(array('products' => new aWidgetFormChoice(array('choices' => $this->allowedPages, 'multiple' => true))));
+    $this->setValidators(array('products' => new sfValidatorChoice(array('required' => false, 'choices' => array_keys($this->allowedPages), 'multiple' => true))));
     
     // Ensures unique IDs throughout the page. Hyphen between slot and form to please our CSS
     $this->widgetSchema->setNameFormat('slot-form-' . $this->id . '[%s]');

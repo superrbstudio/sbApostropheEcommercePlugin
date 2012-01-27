@@ -32,7 +32,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
 		{
 			$query = Doctrine::getTable('aPage')->createQuery('p');
 		}
-		
+
 		$tempProducts = self::getProducts($version, $culture, $query);
 		$products = array();
 		

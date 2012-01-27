@@ -20,7 +20,7 @@ class PluginsbEcomProductSlotEditForm extends BaseForm
     
     // A simple example: a slot with a single 'text' field with a maximum length of 100 characters
 		$this->allowedPages = sbEcomProductTable::getProductsForChoiceWidget(false, null, null);
-    $this->setWidgets(array('product_id' => new aWidgetFormChoice(array('choices' => $this->allowedPages, 'multiple' => true))));
+    $this->setWidgets(array('product_id' => new aWidgetFormChoice(array('choices' => $this->allowedPages))));
     $this->setValidators(array('product_id' => new sfValidatorChoice(array('choices' => array_keys($this->allowedPages)))));
     
     // Ensures unique IDs throughout the page. Hyphen between slot and form to please our CSS
