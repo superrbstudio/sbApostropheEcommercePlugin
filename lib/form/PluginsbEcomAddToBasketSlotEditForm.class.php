@@ -30,8 +30,9 @@ class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
 		$this->setWidget('tax', new sfWidgetFormInputText(array('label' => 'Tax (%)')));
 		$this->setValidator('tax', new sfValidatorNumber(array('required' => true, 'min' => 0, 'max' => 100), array('required' => 'Please enter the Tax percentage value', 'invalid' => 'Please enter a numeric value (0-100)')));
 		
-		$this->setWidget('call_to_order', new sfWidgetFormInputCheckbox());
-		$this->setValidator('call_to_order', new sfValidatorBoolean());
+		$choices = array('add_to_basket' => 'Add to basket', 'call_to_order' => 'Call to order (With price)', 'call_to_order_no_price' => 'Call to order (No price)');
+		$this->setWidget('call_to_order', new aWidgetFormChoice(array('choices' => $choices, 'label' => 'Purchase type')));
+		$this->setValidator('call_to_order', new sfValidatorChoice(array('choices' => array_keys($choices))));
 		
 		$postageChoices = sfConfig::get('app_sbApostropheEcommerce_postage_options', array('free' => 'Free post', 'weight' => 'Postage by Weight', 'fixed' => 'Fixed Cost'));
 		$this->setWidget('postage_type', new sfWidgetFormChoice(array('choices' => $postageChoices)));
