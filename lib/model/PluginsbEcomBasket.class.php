@@ -15,6 +15,7 @@ class PluginsbEcomBasket
 	protected $basketProducts = array();
 	protected $total          = 0;
 	protected $tax            = 0;
+	protected $postage        = 0;
 	protected $numProducts    = 0;
 	protected $numItems       = 0;
 	
@@ -27,8 +28,9 @@ class PluginsbEcomBasket
 				if($product instanceof sbEcomBasketProduct)
 				{
 					$this->basketProducts[] = $product;
-					$this->total      += ($product->getItemCost() * $product->getQuantity());
-					$this->tax        += (($product->getItemCost() * ($product->getItemTax() / 100)) * $product->getQuantity());
+					$this->total      += $product->getCost();
+					$this->tax        += $product->getTax();
+					$this->postage    += $product->getPostage();
 					$this->numItems   += $product->getQuantity();
 					$this->numProducts++;
 				}
@@ -51,9 +53,14 @@ class PluginsbEcomBasket
 		return $this->tax;
 	}
 	
+	public function getPostage()
+	{
+		return $this->postage;
+	}
+	
 	public function getTotal()
 	{
-		return $this->total + $this->tax;
+		return $this->total + $this->tax + $this->postage;
 	}
 	
 	public function getNumProducts()

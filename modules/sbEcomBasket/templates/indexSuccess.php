@@ -46,6 +46,10 @@
 				<td colspan="3" class="sb-ecom-total-title">Total Tax</td>
 				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTax()); ?></td>
 			</tr>
+			<tr class="sb-ecom-basket-total-postage">
+				<td colspan="3" class="sb-ecom-total-title">Total Postage</td>
+				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getPostage()); ?></td>
+			</tr>
 			<tr class="sb-ecom-basket-total-total">
 				<td colspan="3" class="sb-ecom-total-title">Total</td>
 				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTotal()); ?></td>

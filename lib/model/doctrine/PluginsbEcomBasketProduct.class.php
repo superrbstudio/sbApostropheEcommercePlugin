@@ -22,6 +22,11 @@ abstract class PluginsbEcomBasketProduct extends BasesbEcomBasketProduct
 		return (($this->getItemTax() / 100) * $this->getItemCost()) * $this->getQuantity();
 	}
 	
+	public function getPostage()
+	{
+		return $this->getPostageCost() * $this->getQuantity();
+	}
+	
 	public function getTotalCost()
 	{
 		return $this->getCost() + $this->getTax();

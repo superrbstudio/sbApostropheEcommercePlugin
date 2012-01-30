@@ -41,7 +41,7 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		$this->forward404Unless($this->slot instanceof aSlot);
 		
 		$this->productParams = unserialize($this->slot->getValue());
-		$this->forward404If($this->productParams['call_to_order'] == true);
+		$this->forward404If(in_array($this->productParams['call_to_order'], array('call_to_order', 'call_to_order_no_price')));
 		
 		// product appears to be valid now add to basket
 		sbEcomBasketTable::addProductToBasket(sbEcomBasketTable::createBasketValues($this->product, $this->slot, $this->basketForm->getValue('quantity'), $this->productParams));
