@@ -1,0 +1,19 @@
+app:  
+  # Ecommerce Plugin
+  sbApostropheEcommerce:
+    
+    # Let the plugin know which templates are products and categories
+    # Remember to add these templates as normal to apostrophe
+    product_templates:
+      - sbEcomProduct
+    category_templates:
+      - sbEcomCategory
+    
+     # Delete stale basket items older than this
+    clean_basket_days: 5
+    
+    # Contact telephone - used when products arent available through the website
+    contact_phone: +44 (0)12 3456 7890
+    
+    # Set which module to use for payment using the engine route
+    payment_route: sb_ecom_paypal_payments_pro_with_iframe
