@@ -1,5 +1,56 @@
 options: 
   type: INNODB
+  
+sbEcomCheckout:
+  actAs:
+    Timestampable: ~
+  columns:
+    contact_name: 
+      type: string(255)
+    contact_email:
+      type: string(255)
+    contact_telephone:
+      type: string(100)
+    contact_mobile:
+      type: string(100)
+    delivery_street_address:
+      type: string(255)
+    delivery_post_office_box_number:
+      type: string(255)
+    delivery_locality:
+      type: string(255)
+    delivery_region:
+      type: string(255)
+    delivery_postal_code:
+      type: string(100)
+    delivery_country:
+      type: string(50)
+    billing_street_address:
+      type: string(255)
+    billing_post_office_box_number:
+      type: string(255)
+    billing_locality:
+      type: string(255)
+    billing_region:
+      type: string(255)
+    billing_postal_code:
+      type: string(100)
+    billing_country:
+      type: string(50)
+    status:
+      type: enum
+      values: [ 'Paid', 'Awaiting Payment' ]
+    payment_reference:
+      type: string(9999)
+  indexes:
+    status: { fields: [ status ] }
+    delivery_country: { fields: [ delivery_country ] }
+    delivery_region: { fields: [ delivery_region ] }
+    billing_country: { fields: [ billing_country ] }
+    billing_region: { fields: [ billing_region ] }
+    contact_email: { fields: [ contact_email ] }
+    
+    
 
 # Basket Items attached to session
 sbEcomBasketProduct:
@@ -28,19 +79,27 @@ sbEcomBasketProduct:
       type: string(255)
     item_reference:
       type: string(255)
+    checkout_id:
+      type: integer
   relations:
     EcomProduct:
       class: aPage
       foreignAlias: EcomBasketProduct
       local: product_id
       foreign: id
-      onDelete: CASCADE
+      onDelete: SET NULL
     EcomSlot:
       class: aSlot
       foreignAlias: EcomBasketProductSlot
       local: slot_id
       foreign: id
-      onDelete: CASCADE
+      onDelete: SET NULL
+    EcomCheckout:
+      class: sbEcomCheckout
+      foreignAlias: EcomCheckoutProduct
+      local: checkout_id
+      foreign: id
+      onDelete: SET NULL
   indexes:
     # this is here to make basket clean ups easier
     updated_at: { fields: [ updated_at ] }
