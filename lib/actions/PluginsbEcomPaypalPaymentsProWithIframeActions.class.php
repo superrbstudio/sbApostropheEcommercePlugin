@@ -15,7 +15,12 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$this->validCheckout = false;
-		$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($this->getUser()->getAttribute('checkout_id'));
+		$this->checkout = null;
+		
+		if(is_numeric($this->getUser()->getAttribute('checkout_id')))
+		{
+			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($this->getUser()->getAttribute('checkout_id'));
+		}
 		
 		if($this->checkout instanceof sbEcomCheckout)
 		{
