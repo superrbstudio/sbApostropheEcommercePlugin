@@ -12,6 +12,12 @@
  */
 class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 {
+	public function preExecute() 
+	{
+		parent::preExecute();
+		$this->getUser()->setFlash('aCacheInvalid', true);
+	}
+	
 	public function executeIndex(sfWebRequest $request)
 	{
 		$this->validCheckout = false;
