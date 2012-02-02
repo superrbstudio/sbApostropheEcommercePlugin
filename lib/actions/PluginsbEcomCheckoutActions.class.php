@@ -21,7 +21,6 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			$this->form->setDefault('delivery_country', 'GB');
 			$this->form->setDefault('billing_country', 'GB');
 		}
-		
 	}
 	
 	public function executeProcess(sfWebRequest $request)
@@ -37,9 +36,8 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 		// return to form or forward to chosen payment gateway
 		if($this->form->isValid() and $this->basket instanceof sbEcomBasket)
 		{
-			// create a checkout item and set the status as 'Not Paid'
 			$this->checkout = new sbEcomCheckout();
-			$this->checkout->setStatus('Awaiting Payment');
+			$this->checkout->setStatus('Awaiting Payment');			
 			
 			// set vals
 			$this->checkout->setContactTitle($this->form->getValue('contact_title'));
@@ -64,13 +62,14 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			// attach all the products
 			foreach($this->basket->getBasketProducts() as $product)
 			{
+				$product->setSessionId(null);
 				$this->checkout->EcomCheckoutProduct[] = $product;
 			}
 			
 			// save and continue
 			$this->checkout->save();
 			$this->getUser()->setAttribute('checkout_id', $this->checkout->getId());
-			$this->redirect($this->generateUrl(sfConfig::get('app_sbEcommercePlugin_payment_module', 'sbEcomPaypalPaymentsProWithIframe') . '/index'));
+			$this->redirect($this->generateUrl(sfConfig::get('app_sbEcommercePlugin_payment_route', 'sb_ecom_paypal_payments_pro_with_iframe')));
 		}
 		
 		$this->redirect('sbEcomCheckout/index');
