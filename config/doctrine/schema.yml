@@ -5,7 +5,11 @@ sbEcomCheckout:
   actAs:
     Timestampable: ~
   columns:
-    contact_name: 
+    contact_title:
+      type: string(100)
+    contact_firstname: 
+      type: string(255)
+    contact_lastname:
       type: string(255)
     contact_email:
       type: string(255)

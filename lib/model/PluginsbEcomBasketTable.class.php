@@ -34,7 +34,10 @@ class PluginsbEcomBasketTable
 	
 	public static function getProductsInUsersBasket()
 	{
-		return sbEcomBasketProductTable::getInstance()->findBy('session_id', self::getUsersBasketIdentifier());
+		return Doctrine_Core::getTable('sbEcomBasketProduct')->createQuery()
+						->where('session_id = ?', self::getUsersBasketIdentifier())
+						->andWhere('checkout_id IS NULL')
+						->execute();
 	}
 	
 	/**
@@ -151,10 +154,8 @@ class PluginsbEcomBasketTable
 	{
 		// clean out any broken products and out of date ones
 		Doctrine_Query::create()->delete()->from('sbEcomBasketProduct')
-						->where('session_id IS NULL')
-						->orWhere('product_id IS NULL')
-						->orWhere('slot_id IS NULL')
-						->orWhere('updated_at < DATE_SUB(CURDATE(),INTERVAL ' . sfConfig::get('app_sbApostropheEcommerce_clean_basket_days', 100) . ' DAY)')
+						->where('updated_at < DATE_SUB(CURDATE(),INTERVAL ' . sfConfig::get('app_sbApostropheEcommerce_clean_basket_days', 100) . ' DAY)')
+						->andWhere('checkout_id IS NULL')
 						->execute();
 	}
 }

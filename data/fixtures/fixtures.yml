@@ -39,3 +39,22 @@ aPage:
                     Slot:
                       type: aText 
                       value: "Checkout"
+      payment_gateway:
+        slug: "/checkout/payment"
+        published_at: '<?php echo $now ?>'
+        engine: sbEcomPaypalPaymentsProWithIframe
+        Areas:
+          payment_gateway_en_title:
+            name: title
+            culture: en
+            latest_version: 1
+            AreaVersions:
+              payment_gateway_en_title_version_1:
+                version: 1
+                AreaVersionSlots:
+                  payment_gateway_en_title_version_1_permid_1:
+                    permid: 1
+                    Slot:
+                      type: aText 
+                      value: "Payment"
+      

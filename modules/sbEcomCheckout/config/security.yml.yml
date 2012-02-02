@@ -1,2 +1,0 @@
-default:
-  require_ssl: true

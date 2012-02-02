@@ -19,3 +19,8 @@ sb_ecom_checkout_action:
   url: /:action 
   param: { module: sbEcomCheckout }
   class: aRoute
+  
+sb_ecom_paypal_payments_pro_with_iframe:
+  url: /
+  param: { module: sbEcomPaypalPaymentsProWithIframe, action index }
+  class: aRoute
