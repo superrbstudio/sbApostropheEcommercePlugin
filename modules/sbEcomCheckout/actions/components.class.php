@@ -1,6 +1,5 @@
 <?php
 
-class sbEcomCheckoutComponents extends aComponents 
+class sbEcomCheckoutComponents extends PluginsbEcomCheckoutComponents
 {
-	
 }

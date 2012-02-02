@@ -1,9 +1,5 @@
 <?php
 
-class sbEcomCheckoutActions extends aEngineActions 
+class sbEcomCheckoutActions extends PluginsbEcomCheckoutActions
 {
-	public function executeIndex(sfWebRequest $request)
-	{
-		
-	}
 }
