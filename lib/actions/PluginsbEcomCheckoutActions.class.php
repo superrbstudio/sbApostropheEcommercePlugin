@@ -63,6 +63,7 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			foreach($this->basket->getBasketProducts() as $product)
 			{
 				$product->setSessionId(null);
+				$product->save();
 				$this->checkout->EcomCheckoutProduct[] = $product;
 			}
 			
