@@ -31,5 +31,4 @@ abstract class PluginsbEcomBasketProduct extends BasesbEcomBasketProduct
 	{
 		return $this->getCost() + $this->getTax();
 	}
-
 }

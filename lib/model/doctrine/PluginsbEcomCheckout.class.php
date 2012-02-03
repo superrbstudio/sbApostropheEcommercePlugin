@@ -12,5 +12,44 @@
  */
 abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 {
-
+	public function getCost()
+	{
+		$cost = 0;
+		
+		foreach($this->getEcomCheckoutProduct() as $product)
+		{
+			$cost += $product->getCost();
+		}
+		
+		return $cost;
+	}
+	
+	public function getTax()
+	{
+		$cost = 0;
+		
+		foreach($this->getEcomCheckoutProduct() as $product)
+		{
+			$cost += $product->getTax();
+		}
+		
+		return $cost;
+	}
+	
+	public function getPostage()
+	{
+		$cost = 0;
+		
+		foreach($this->getEcomCheckoutProduct() as $product)
+		{
+			$cost += $product->getPostage();
+		}
+		
+		return $cost;
+	}
+	
+	public function getTotalCost()
+	{
+		return $this->getCost() + $this->getTax() + $this->getPostage();
+	}
 }

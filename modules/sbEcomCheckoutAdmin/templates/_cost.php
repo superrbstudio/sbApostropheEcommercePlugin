@@ -1,0 +1,1 @@
+<?php echo sbEcomToolkit::costFormat($sb_ecom_checkout->getTotalCost()); ?>
