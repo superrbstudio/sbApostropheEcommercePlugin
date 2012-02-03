@@ -44,6 +44,7 @@ sbEcomCheckout:
     status:
       type: enum
       values: [ 'Paid', 'Awaiting Payment', 'Cancelled' ]
+      default: 'Awaiting Payment'
     payment_reference:
       type: string(9999)
   indexes:
