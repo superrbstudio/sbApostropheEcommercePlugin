@@ -116,6 +116,6 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			$this->redirect($this->generateUrl(sfConfig::get('app_sbEcommercePlugin_payment_route', 'sb_ecom_paypal_payments_pro_with_iframe')));
 		}
 		
-		$this->redirect('sbEcomCheckout/index');
+		$this->redirect($this->generateUrl('sb_ecom_checkout'));
 	}
 }

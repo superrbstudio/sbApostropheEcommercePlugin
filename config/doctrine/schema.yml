@@ -43,7 +43,7 @@ sbEcomCheckout:
       type: string(50)
     status:
       type: enum
-      values: [ 'Paid', 'Awaiting Payment' ]
+      values: [ 'Paid', 'Awaiting Payment', 'Cancelled' ]
     payment_reference:
       type: string(9999)
   indexes:
