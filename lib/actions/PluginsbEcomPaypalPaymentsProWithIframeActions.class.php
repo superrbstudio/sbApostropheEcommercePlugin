@@ -20,7 +20,6 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 	
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->validCheckout = false;
 		$this->checkout = null;
 		
 		if(is_numeric($this->getUser()->getAttribute('checkout_id')))
@@ -28,10 +27,9 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($this->getUser()->getAttribute('checkout_id'));
 		}
 		
-		if($this->checkout instanceof sbEcomCheckout)
+		if(!($this->checkout instanceof sbEcomCheckout))
 		{
-			$this->validCheckout = true;
+			$this->redirect($this->generateUrl('sb_ecom_checkout'));
 		}
-		
 	}
 }

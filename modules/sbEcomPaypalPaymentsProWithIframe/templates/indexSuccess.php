@@ -2,9 +2,14 @@
 
 <?php slot('a-subnav', ''); ?>
 
-<?php if ($validCheckout): ?>
-	<p>Checkout payment to process: <?php echo $checkout->getId(); ?></p>
-<?php else: ?>
-	<p>No Checkout to process</p>
-<?php endif; ?>
+<div id="sb-ecom-main-basket" class="sb-ecom-main clearfix">
+	
+	<h1 class="sb-ecom-checkout-title">Checkout</h1>
+	<h2 class="sb-ecom-checkout-subtitle">Step 2 of 2</h2>
+	
+	<?php include_component('sbEcomBasket', 'BasketSummaryExpanded'); ?>
+	
+	<p>PAYPAL IFRAME HERE</p>
+	
+</div>
 

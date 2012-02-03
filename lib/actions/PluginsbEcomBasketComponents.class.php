@@ -8,14 +8,13 @@
  * @author     Giles Smith
  */
 abstract class PluginsbEcomBasketComponents extends sfComponents 
-{
-	public function preExecute()
-  {
-    parent::preExecute();
-		$this->getUser()->setFlash('aCacheInvalid', true);
-  }
-	
+{	
 	public function executeBasketSummary()
+	{
+		$this->basket = sbEcomBasketTable::getUsersBasket();
+	}
+	
+	public function executeBasketSummaryExpanded()
 	{
 		$this->basket = sbEcomBasketTable::getUsersBasket();
 	}

@@ -8,6 +8,9 @@
 	<h2 class="sb-ecom-checkout-subtitle">Step 1 of 2</h2>
 
 <?php if($basket->getNumProducts() > 0) : ?>
+	
+	<?php include_component('sbEcomBasket', 'BasketSummaryExpanded'); ?>
+	
 	<form action="<?php echo url_for('@sb_ecom_checkout_action?action=process'); ?>" method="post">
 		
 		<div class="sb-ecom-checkout-form">
