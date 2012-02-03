@@ -18,7 +18,7 @@ generator:
         title: 'Checkout Orders'
         display: [ contact_firstname, contact_lastname, contact_email, status, _products, _cost, created_at, updated_at ]
         actions: { }
-        sort: [ updated_at DESC ]
+        sort: [ updated_at, desc ]
       filter:
         fields:   [ contact_firstname, contact_lastname, contact_email, status ]
         display:  [ contact_firstname, contact_lastname, contact_email, status ]
