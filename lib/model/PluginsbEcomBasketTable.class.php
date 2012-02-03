@@ -36,7 +36,6 @@ class PluginsbEcomBasketTable
 	{
 		return Doctrine_Core::getTable('sbEcomBasketProduct')->createQuery()
 						->where('session_id = ?', self::getUsersBasketIdentifier())
-						->andWhere('checkout_id IS NULL')
 						->execute();
 	}
 	

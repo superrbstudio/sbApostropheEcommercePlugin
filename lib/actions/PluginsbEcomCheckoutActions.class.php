@@ -27,6 +27,35 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			$this->form->setDefault('delivery_country', 'GB');
 			$this->form->setDefault('billing_country', 'GB');
 		}
+		
+		// does the user have an outstanding checkout?
+		if(is_numeric($this->getUser()->getAttribute('checkout_id')))
+		{
+			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($this->getUser()->getAttribute('checkout_id'));
+			
+			if($this->checkout instanceof sbEcomCheckout)
+			{
+				$this->form->setDefaults(array(
+						'contact_title' => $this->checkout->getContactTitle(),
+						'contact_firstname' => $this->checkout->getContactFirstname(),
+						'contact_lastname' => $this->checkout->getContactLastname(),
+						'contact_email' => $this->checkout->getContactEmail(),
+						'contact_telephone' => $this->checkout->getContactTelephone(), 
+						'contact_mobile' => $this->checkout->getContactMobile(),
+						'delivery_street_address' => $this->checkout->getDeliveryStreetAddress(),
+						'delivery_post_office_box_number' => $this->checkout->getDeliveryPostOfficeBoxNumber(), 
+						'delivery_locality' => $this->checkout->getDeliveryLocality(), 
+						'delivery_region' => $this->checkout->getDeliveryRegion(), 
+						'delivery_postal_code' => $this->checkout->getDeliveryPostalCode(), 
+						'delivery_country' => $this->checkout->getDeliveryCountry(), 
+						'billing_street_address' => $this->checkout->getBillingStreetAddress(),
+						'billing_post_office_box_number' => $this->checkout->getBillingPostOfficeBoxNumber(), 
+						'billing_locality' => $this->checkout->getBillingLocality(), 
+						'billing_region' => $this->checkout->getBillingRegion(), 
+						'billing_postal_code' => $this->checkout->getBillingPostalCode(), 
+						'billing_country' => $this->checkout->getBillingCountry()));
+			}
+		}
 	}
 	
 	public function executeProcess(sfWebRequest $request)
@@ -42,8 +71,17 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 		// return to form or forward to chosen payment gateway
 		if($this->form->isValid() and $this->basket instanceof sbEcomBasket)
 		{
-			$this->checkout = new sbEcomCheckout();
-			$this->checkout->setStatus('Awaiting Payment');			
+						// does the user have an unfinished checkout?
+			if(is_numeric($this->getUser()->getAttribute('checkout_id')))
+			{
+				$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($this->getUser()->getAttribute('checkout_id'));
+			}
+			
+			if(!($this->checkout instanceof sbEcomCheckout))
+			{
+				$this->checkout = new sbEcomCheckout();
+				$this->checkout->setStatus('Awaiting Payment');			
+			}
 			
 			// set vals
 			$this->checkout->setContactTitle($this->form->getValue('contact_title'));
@@ -68,7 +106,6 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			// attach all the products
 			foreach($this->basket->getBasketProducts() as $product)
 			{
-				$product->setSessionId(null);
 				$product->save();
 				$this->checkout->EcomCheckoutProduct[] = $product;
 			}
