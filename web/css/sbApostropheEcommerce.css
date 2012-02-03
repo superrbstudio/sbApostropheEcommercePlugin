@@ -19,7 +19,7 @@
 	margin-bottom: 10px;
 }
 
-.a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon {
+.a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon, .a-ui .alt.sb-ecom-checkouts-btn > .icon {
 	background-image: url('../images/slot-basket-icon.png');
 	background-position: top right;
 }
@@ -155,4 +155,12 @@ h1.sb-ecom-basket-title {
 	font-size: 1.8em;
 	font-weight: bold;
 	padding-bottom: 10px;
+}
+
+.sbEcomCheckoutAdmin .a-subnav-wrapper {
+	display: none;
+}
+
+.sbEcomCheckoutAdmin .a-content, .sbEcomCheckoutAdmin .a-admin-content, .sbEcomCheckoutAdmin .a-admin-footer {
+	width: 100%;
 }

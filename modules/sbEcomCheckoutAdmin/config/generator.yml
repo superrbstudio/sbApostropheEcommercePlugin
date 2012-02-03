@@ -1,0 +1,26 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           sbEcomCheckout
+    theme:                 aAdmin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sb_ecom_checkout_admin
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: 'Checkout Orders'
+        display: [ contact_firstname, contact_lastname, contact_email, status, _products, created_at, updated_at ]
+        actions: { }
+      filter:
+        fields:   [ contact_firstname, contact_lastname, contact_email, status ]
+        display:  [ contact_firstname, contact_lastname, contact_email, status ]
+      form:    ~
+      edit:    ~
+      #new:     ~

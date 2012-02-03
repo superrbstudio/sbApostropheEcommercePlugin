@@ -1,0 +1,1 @@
+<?php echo count($sb_ecom_checkout->EcomCheckoutProduct); ?>

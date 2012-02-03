@@ -24,3 +24,13 @@ sb_ecom_paypal_payments_pro_with_iframe:
   url: /
   param: { module: sbEcomPaypalPaymentsProWithIframe, action: index }
   class: aRoute
+  
+# Checkout engine admin
+sb_ecom_checkout_admin:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                sbEcomCheckout
+    module:               sbEcomCheckoutAdmin
+    prefix_path:          /admin/checkouts
+    column:               id
+    with_wildcard_routes: true
