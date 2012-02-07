@@ -35,4 +35,39 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		// create urls
 		$this->baseUrl = $request->getUriPrefix();
 	}
+	
+	public function executeReturn(sfWebRequest $request)
+	{
+		// must be posted
+		$this->forward404Unless($request->getMethod() == 'POST');
+		
+		// get the checkout
+		if(is_numeric($request->getParameter('id')))
+		{
+			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($request->getParameter('id'));
+		}
+		
+		// must be a valid checkout
+		$this->forward404Unless($this->checkout instanceof sbEcomCheckout);
+		
+		// can't be complete already
+		$this->forward404If($this->checkout->getStatus() == 'Complete');
+		
+		$this->checkout->setPaymentReference($request->getParameter('txn_id'));
+		$this->checkout->setStatus('Paid');
+		
+		foreach($this->checkout->getEcomCheckoutProduct() as $product)
+		{
+			$product->setSessionId('');
+			$product->save();
+		}
+		
+		$this->checkout->save();
+		
+		// @TODO needs more verification here, I think there is a call back to Paypal to double check.
+		
+		// @TODO send receipt email
+		
+		return sfView::NONE;
+	}
 }

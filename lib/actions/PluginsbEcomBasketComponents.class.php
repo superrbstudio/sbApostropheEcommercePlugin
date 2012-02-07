@@ -12,6 +12,12 @@ abstract class PluginsbEcomBasketComponents extends sfComponents
 	public function executeBasketSummary()
 	{
 		$this->basket = sbEcomBasketTable::getUsersBasket();
+		
+		// if the there are no products remove attached checkout
+		if($this->basket->getNumProducts() == 0)
+		{
+			$this->getUser()->setAttribute('checkout_id', null);
+		}
 	}
 	
 	public function executeBasketSummaryExpanded()
