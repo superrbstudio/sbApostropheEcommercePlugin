@@ -20,9 +20,15 @@ sb_ecom_checkout_action:
   param: { module: sbEcomCheckout }
   class: aRoute
   
+# Routes for the Paypal Payments Pro with Iframe Checkout Module
 sb_ecom_paypal_payments_pro_with_iframe:
   url: /
   param: { module: sbEcomPaypalPaymentsProWithIframe, action: index }
+  class: aRoute
+  
+sb_ecom_paypal_payments_pro_with_iframe_notify:
+  url: /return/:id
+  param: { module: sbEcomPaypalPaymentsProWithIframe, action: return }
   class: aRoute
   
 # Checkout engine admin

@@ -22,8 +22,8 @@
 		<input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_currency_code'); ?>" />
 		<input type="hidden" name="paymentaction" value="sale" />
 		<input type="hidden" name="template" value="templateD" />
-		<input type="hidden" name="return" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_return_url'); ?>" />
-		<input type="hidden" name="notify_url" value="" />
+		<input type="hidden" name="return" value="<?php echo $baseUrl; ?><?php echo url_for('@sb_ecom_checkout_action?action=thanks'); ?>" />
+		<input type="hidden" name="notify_url" value="<?php echo $baseUrl; ?><?php echo url_for('@sb_ecom_paypal_payments_pro_with_iframe_notify?id=' . $checkout->getId()); ?>" />
 		
 		<input type="hidden" name="address1" value="<?php echo $checkout->getDeliveryStreetAddress(); ?>" />
 		<input type="hidden" name="address2" value="<?php echo $checkout->getDeliveryPostOfficeBoxNumber();?>" />

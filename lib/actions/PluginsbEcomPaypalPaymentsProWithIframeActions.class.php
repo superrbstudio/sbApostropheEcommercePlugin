@@ -31,5 +31,8 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		{
 			$this->redirect($this->generateUrl('sb_ecom_checkout'));
 		}
+		
+		// create urls
+		$this->baseUrl = $request->getUriPrefix();
 	}
 }
