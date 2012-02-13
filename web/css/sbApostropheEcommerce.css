@@ -164,3 +164,27 @@ h1.sb-ecom-basket-title {
 .sbEcomCheckoutAdmin .a-content, .sbEcomCheckoutAdmin .a-admin-content, .sbEcomCheckoutAdmin .a-admin-footer {
 	width: 100%;
 }
+
+.sbEcomCheckoutAdmin .sb-ecom-checkout-products {
+	width: 100%;
+	margin: 0 0 20px 0;
+}
+
+.sbEcomCheckoutAdmin .sb-ecom-checkout-products th {
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.sbEcomCheckoutAdmin .sb-ecom-checkout-products td {
+	vertical-align: middle;
+	padding: 3px;
+}
+
+.sbEcomCheckoutAdmin .sb-ecom-checkout-products .total-title, .sbEcomCheckoutAdmin .sb-ecom-checkout-products .total-cost {
+	text-align: right;
+}
+
+.sbEcomCheckoutAdmin .sb-ecom-checkout-products .first td {
+	background-color: #f1f1f1;
+}
