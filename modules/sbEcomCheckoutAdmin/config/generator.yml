@@ -28,7 +28,7 @@ generator:
         display:
           Order Status: [ status, payment_reference ]
           Products Purchased: [ _products_purchased ]
-          Contact: [ contact_title, contact_firstname, contact_lastname, contact_email ]
+          Contact: [ contact_title, contact_firstname, contact_lastname, contact_email, contact_telephone, contact_mobile ]
           Delivery Address: [ delivery_street_address, delivery_post_office_box_number, delivery_locality, delivery_region, delivery_postal_code, delivery_country ]
           Billing Address: [ billing_street_address, billing_post_office_box_number, billing_locality, billing_region, billing_postal_code, billing_country ]
       #new:     ~
