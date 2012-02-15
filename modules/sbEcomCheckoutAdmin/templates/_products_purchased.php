@@ -14,8 +14,8 @@
 		<tr class="<?php if(is_int($i / 2)): echo "first"; else: echo "second"; endif; ?>">
 			<td><?php echo $product->getItemTitle(); ?><br/><?php echo $product->getItemReference(); ?></td>
 			<td><?php echo $product->getQuantity(); ?></td>
-			<td><?php echo sbEcomToolkit::costFormat($product->getItemCost()); ?></td>
-			<td><?php echo sbEcomToolkit::costFormat($product->getItemTax()); ?></td>
+			<td><?php echo sbEcomToolkit::costFormat($product->getCost()); ?></td>
+			<td><?php echo sbEcomToolkit::costFormat($product->getTax()); ?></td>
 			<td><?php echo sbEcomToolkit::costFormat($product->getPostageCost()); ?></td>
 		</tr>
 <?php $i++; endforeach; ?>
