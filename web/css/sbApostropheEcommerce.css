@@ -188,3 +188,7 @@ h1.sb-ecom-basket-title {
 .sbEcomCheckoutAdmin .sb-ecom-checkout-products .first td {
 	background-color: #f1f1f1;
 }
+.sbEcomProducts select {
+  height: 300px;
+  min-width: 300px;
+}
