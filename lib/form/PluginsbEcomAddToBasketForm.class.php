@@ -19,7 +19,7 @@ abstract class PluginsbEcomAddToBasketForm extends sfForm
 		$this->setWidget('slot_id', new sfWidgetFormInputHidden());
 		$this->setValidator('slot_id', new sfValidatorDoctrineChoice(array('model' => 'aSlot')));
 		
-		for($i = 1; $i <= 10; $i++){ $choices[$i] = $i; }
+		for($i = 1; $i <= sfConfig::get('app_sbApostropheEcommerce_max_add_to_basket_quantity', 10); $i++){ $choices[$i] = $i; }
 		$this->setWidget('quantity', new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Quantity')));
 		$this->setValidator('quantity', new sfValidatorChoice(array('choices' => array_keys($choices))));
 		
