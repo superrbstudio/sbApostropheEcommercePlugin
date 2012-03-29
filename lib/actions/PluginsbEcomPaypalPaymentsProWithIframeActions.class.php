@@ -64,10 +64,17 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		
 		$this->checkout->save();
 		
-		// @TODO needs more verification here, I think there is a call back to Paypal to double check.
-		
-		// @TODO send receipt email
+		// Send the confirmation email
+    $this->sendConfirmationEmail();
 		
 		return sfView::NONE;
 	}
+  
+  /*
+   * Override this method to handle your requirements
+   */
+  public function sendConfirmationEmail()
+  {
+    return true;
+  }
 }
