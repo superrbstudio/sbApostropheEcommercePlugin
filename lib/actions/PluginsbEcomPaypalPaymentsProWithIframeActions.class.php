@@ -39,7 +39,7 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 	public function executeReturn(sfWebRequest $request)
 	{
 		// must be posted
-		$this->forward404Unless($request->getMethod() == 'POST');
+		//$this->forward404Unless($request->getMethod() == 'POST');
 		
 		// get the checkout
 		if(is_numeric($request->getParameter('id')))
@@ -52,6 +52,9 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		
 		// can't be complete already
 		$this->forward404If($this->checkout->getStatus() == 'Complete');
+    
+    // can't be paid
+    $this->forward404If($this->checkout->getStatus() == 'Paid');
 		
 		$this->checkout->setPaymentReference($request->getParameter('txn_id'));
 		$this->checkout->setStatus('Paid');
