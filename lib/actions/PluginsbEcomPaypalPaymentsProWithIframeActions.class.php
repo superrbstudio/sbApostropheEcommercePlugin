@@ -50,11 +50,8 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		// must be a valid checkout
 		$this->forward404Unless($this->checkout instanceof sbEcomCheckout);
 		
-		// can't be complete already
-		$this->forward404If($this->checkout->getStatus() == 'Complete');
-    
-    // can't be paid
-    $this->forward404If($this->checkout->getStatus() == 'Paid');
+		// Only Awaiting payment can be changed
+		$this->forward404Unless($this->checkout->getStatus() == 'Awaiting Payment');
 		
 		$this->checkout->setPaymentReference($request->getParameter('txn_id'));
 		$this->checkout->setStatus('Paid');

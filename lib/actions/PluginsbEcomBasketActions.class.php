@@ -18,6 +18,11 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$this->basket = sbEcomBasketTable::getUsersBasket();
+    
+    if($this->basket->getNumProducts() == 0)
+    {
+      $this->getUser()->setAttribute('checkout_id', null);
+    }
 	}
 	
 	public function executeAdd(sfWebRequest $request)
