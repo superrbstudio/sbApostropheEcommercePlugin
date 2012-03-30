@@ -15,9 +15,9 @@
 	
 	<form style="display:none" target="hss_iframe" name="form_iframe" method="post" action="<?php echo sfConfig::get('app_sbApostropheEcommerce_gateway_url'); ?>">
 		<input type="hidden" name="cmd" value="_hosted-payment" />
-		<input type="hidden" name="subtotal" value="<?php echo $checkout->getCost(); ?>" />
-		<input type="hidden" name="shipping" value="<?php echo $checkout->getPostage(); ?>" />
-		<input type="hidden" name="tax" value="<?php echo $checkout->getTax(); ?>" />
+		<input type="hidden" name="subtotal" value="<?php echo round($checkout->getCost(), 2); ?>" />
+		<input type="hidden" name="shipping" value="<?php echo round($checkout->getPostage(), 2); ?>" />
+		<input type="hidden" name="tax" value="<?php echo round($checkout->getTax(), 2); ?>" />
 		<input type="hidden" name="business" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_merchant_id'); ?>" />
 		<input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_currency_code'); ?>" />
 		<input type="hidden" name="paymentaction" value="sale" />
