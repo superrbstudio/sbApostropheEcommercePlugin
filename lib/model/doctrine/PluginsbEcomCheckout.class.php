@@ -10,6 +10,7 @@
  * @author     ##NAME## <##EMAIL##>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
+
 abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 {
 	public function getCost()
@@ -52,4 +53,85 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 	{
 		return $this->getCost() + $this->getTax() + $this->getPostage();
 	}
+  
+  /**
+   * Sets the checkout as Paid and attaches the payment reference from whichever gateway you have used
+   * Detaches all the products from the session so they don't appear in the user's basket any more.
+   * 
+   * Can report sale to Google Analytics if required
+   * 
+   * @param string $paymentReference 
+   */
+  public function setPaymentComplete($paymentReference) 
+  {
+    $this->setPaymentReference($paymentReference);
+    $this->setStatus('Paid');
+    
+    // Track sale with Google Analytics if required
+    $ga = sfConfig::get('app_a_googleAnalytics', '');
+    
+    if(isset($ga['serverSideEcommerce']) and $ga['serverSideEcommerce'] == true and isset($ga['account']) and $ga['account'] != '')
+    {
+      $this->reportSaleToGoogleAnalytics($ga);
+    }
+		
+    // detach the products from the session
+		foreach($this->getEcomCheckoutProduct() as $product)
+		{
+			$product->setSessionId('');
+			$product->save();
+		}
+		
+		$this->save();
+    
+    return true;
+  }
+  
+  /**
+   * Used for server side reporting of sales to Google Analytics
+   * Helpful when using a payment gateway in an iframe, or external website
+   * 
+   * @param array $ga 
+   */
+  protected function reportSaleToGoogleAnalytics($ga)
+  {
+    require_once(sfConfig::get('sf_plugins_dir') . '/sbApostropheEcommercePlugin/lib/php-ga/src/autoload.php');
+    
+    $tracker = new UnitedPrototype\GoogleAnalytics\Tracker($ga['account'], $_SERVER['HTTP_HOST']);
+    
+    // create the visitor
+    $visitor = new UnitedPrototype\GoogleAnalytics\Visitor();
+    if(!isset($ga['domainName']) or $ga['domainName'] == ''){ $ga['domainName'] = $_SERVER['HTTP_HOST']; }
+    $visitor->setIpAddress($ga['domainName']);
+    $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
+    $visitor->setScreenResolution('1024x768');
+    
+    // create the Session and attach to the user's session id
+    $session = new UnitedPrototype\GoogleAnalytics\Session();
+    $session->setSessionId($this->EcomCheckoutProduct[0]->getSessionId());
+    
+    // create transaction
+    $transaction = new UnitedPrototype\GoogleAnalytics\Transaction();
+    if(!isset($ga['siteName']) or $ga['siteName'] == '') { $ga['siteName'] = 'My Ecommerce Site'; }
+    $transaction->setAffiliation($ga['siteName']);
+    $transaction->setOrderId($this->getId());
+    $transaction->setTotal($this->getTotalCost());
+    $transaction->setTax($this->getTax());
+    $transaction->setShipping($this->getPostage());
+    $transaction->setCity($this->getDeliveryLocality());
+    $transaction->setRegion($this->getDeliveryRegion());
+    $transaction->setCountry($this->getDeliveryCountry());
+    
+    foreach($this->getEcomCheckoutProduct() as $product)
+    {
+      $item = new UnitedPrototype\GoogleAnalytics\Item();
+      $item->setName($product->getItemTitle());
+      $item->setSku($product->getItemReference());
+      $item->setPrice($product->getItemCost() + round($product->getItemCost() * ($product->getTax() / 100)));
+      $item->setQuantity($product->getQuantity());
+      $transaction->addItem($item);
+    }
+    
+    $tracker->trackTransaction($transaction, $session, $visitor);
+  }
 }

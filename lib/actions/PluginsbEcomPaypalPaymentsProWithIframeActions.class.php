@@ -53,19 +53,14 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		// Only Awaiting payment can be changed
 		$this->forward404Unless($this->checkout->getStatus() == 'Awaiting Payment');
 		
-		$this->checkout->setPaymentReference($request->getParameter('txn_id'));
-		$this->checkout->setStatus('Paid');
-		
-		foreach($this->checkout->getEcomCheckoutProduct() as $product)
-		{
-			$product->setSessionId('');
-			$product->save();
-		}
-		
-		$this->checkout->save();
+    // Set the checkout as paid
+		$this->checkout->setPaymentComplete($request->getParameter('txn_id'));
 		
 		// Send the confirmation email
-    $this->sendConfirmationEmail();
+    //$this->sendConfirmationEmail();
+    
+    var_dump($this->checkout->getStatus());
+    die;
 		
 		return sfView::NONE;
 	}
