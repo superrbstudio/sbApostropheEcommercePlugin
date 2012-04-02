@@ -17,12 +17,12 @@
 		<input type="hidden" name="cmd" value="_hosted-payment" />
 		<input type="hidden" name="subtotal" value="<?php echo round($checkout->getCost(), 2); ?>" />
 		<input type="hidden" name="shipping" value="<?php echo round($checkout->getPostage(), 2); ?>" />
-		<input type="hidden" name="tax" value="<?php echo round($checkout->getTax(), 2); ?>" />
+		<input type="hidden" name="tax" value="<?php echo round($checkout->getTax() + $checkout->getPostageTax(), 2); ?>" />
 		<input type="hidden" name="business" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_merchant_id'); ?>" />
 		<input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_currency_code'); ?>" />
 		<input type="hidden" name="paymentaction" value="sale" />
 		<input type="hidden" name="template" value="templateD" />
-		<input type="hidden" name="return" value="<?php echo $baseUrl; ?><?php echo url_for('@sb_ecom_checkout_action?action=thanks'); ?>" />
+		<input type="hidden" name="return" value="<?php echo $baseUrl; ?><?php echo url_for('@sb_ecom_paypal_payments_pro_with_iframe_thanks'); ?>" />
 		<input type="hidden" name="notify_url" value="<?php echo $baseUrl; ?><?php echo url_for('@sb_ecom_paypal_payments_pro_with_iframe_notify?id=' . $checkout->getId()); ?>" />
 		
 		<input type="hidden" name="address1" value="<?php echo $checkout->getDeliveryStreetAddress(); ?>" />

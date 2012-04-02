@@ -45,22 +45,27 @@ class PluginsbEcomBasket
 	
 	public function getCost()
 	{
-		return $this->total;
+		return (float)round($this->total, 2);
 	}
 	
 	public function getTax()
 	{
-		return $this->tax;
+		return (float)round($this->tax, 2);
 	}
 	
 	public function getPostage()
 	{
-		return $this->postage;
+		return (float)round($this->postage, 2);
 	}
+  
+  public function getPostageTax()
+  {
+    return (float)round($this->getPostage() * (sfConfig::get('app_sbApostropheEcommerce_postage_tax', 20) / 100));
+  }
 	
 	public function getTotal()
 	{
-		return $this->total + $this->tax + $this->postage;
+		return $this->total + $this->getTax() + $this->getPostage() + $this->getPostageTax();
 	}
 	
 	public function getNumProducts()

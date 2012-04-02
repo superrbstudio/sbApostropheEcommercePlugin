@@ -31,6 +31,11 @@ sb_ecom_paypal_payments_pro_with_iframe_notify:
   param: { module: sbEcomPaypalPaymentsProWithIframe, action: return }
   class: aRoute
   
+sb_ecom_paypal_payments_pro_with_iframe_thanks:
+  url: /thanks
+  param: { module: sbEcomPaypalPaymentsProWithIframe, action: thanks }
+  class: aRoute
+  
 # Checkout engine admin
 sb_ecom_checkout_admin:
   class: sfDoctrineRouteCollection

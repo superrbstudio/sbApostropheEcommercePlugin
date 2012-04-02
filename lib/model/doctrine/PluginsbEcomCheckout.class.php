@@ -22,7 +22,7 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 			$cost += $product->getCost();
 		}
 		
-		return $cost;
+		return (float)round($cost, 2);
 	}
 	
 	public function getTax()
@@ -34,7 +34,7 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 			$cost += $product->getTax();
 		}
 		
-		return $cost;
+		return (float)round($cost, 2);
 	}
 	
 	public function getPostage()
@@ -46,12 +46,24 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 			$cost += $product->getPostage();
 		}
 		
-		return $cost;
+		return (float)round($cost, 2);
 	}
+  
+  public function getPostageTax()
+  {
+    $cost = 0;
+		
+		foreach($this->getEcomCheckoutProduct() as $product)
+		{
+			$cost += $product->getPostageTax();
+		}
+		
+		return (float)round($cost, 2);
+  }
 	
 	public function getTotalCost()
 	{
-		return $this->getCost() + $this->getTax() + $this->getPostage();
+		return (float)round($this->getCost() + $this->getTax() + $this->getPostage() + $this->getPostageTax(), 2);
 	}
   
   /**
@@ -116,7 +128,7 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
     $transaction->setAffiliation($ga['siteName']);
     $transaction->setOrderId($this->getId());
     $transaction->setTotal($this->getTotalCost());
-    $transaction->setTax($this->getTax());
+    $transaction->setTax($this->getTax() + $this->getPostageTax());
     $transaction->setShipping($this->getPostage());
     $transaction->setCity($this->getDeliveryLocality());
     $transaction->setRegion($this->getDeliveryRegion());

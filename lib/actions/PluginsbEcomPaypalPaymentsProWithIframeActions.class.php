@@ -35,6 +35,11 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		// create urls
 		$this->baseUrl = $request->getUriPrefix();
 	}
+  
+  public function executeThanks(sfWebRequest $request)
+  {
+    
+  }
 	
 	public function executeReturn(sfWebRequest $request)
 	{
@@ -57,10 +62,7 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		$this->checkout->setPaymentComplete($request->getParameter('txn_id'));
 		
 		// Send the confirmation email
-    //$this->sendConfirmationEmail();
-    
-    var_dump($this->checkout->getStatus());
-    die;
+    $this->sendConfirmationEmail();
 		
 		return sfView::NONE;
 	}

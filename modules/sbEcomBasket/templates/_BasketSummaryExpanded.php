@@ -25,16 +25,20 @@
 				<td colspan="5"><hr/></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-cost">
-				<td colspan="2" class="sb-ecom-total-title">Total Cost (Exc. Tax)</td>
+				<td colspan="2" class="sb-ecom-total-title">Subtotal</td>
 				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getCost()); ?></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-tax">
-				<td colspan="2" class="sb-ecom-total-title">Total Tax</td>
+				<td colspan="2" class="sb-ecom-total-title">Tax</td>
 				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getTax()); ?></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-postage">
-				<td colspan="2" class="sb-ecom-total-title">Total Postage</td>
+				<td colspan="2" class="sb-ecom-total-title">Postage</td>
 				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getPostage()); ?></td>
+			</tr>
+      <tr class="sb-ecom-basket-total-postage">
+				<td colspan="2" class="sb-ecom-total-title">Postage Tax</td>
+				<td colspan="2" class="sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basket->getPostageTax()); ?></td>
 			</tr>
 			<tr class="sb-ecom-basket-total-total">
 				<td colspan="2" class="sb-ecom-total-title">Total</td>
