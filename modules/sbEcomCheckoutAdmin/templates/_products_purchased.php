@@ -31,6 +31,10 @@
 			<td colspan="3" class="total-title">Postage:</td>
 			<td colspan="2" class="total-cost"><?php echo sbEcomToolkit::costFormat($sb_ecom_checkout->getPostage()); ?></td>
 		</tr>
+    <tr>
+			<td colspan="3" class="total-title">Postage Tax:</td>
+			<td colspan="2" class="total-cost"><?php echo sbEcomToolkit::costFormat($sb_ecom_checkout->getPostageTax()); ?></td>
+		</tr>
 		<tr>
 			<td colspan="3" class="total-title grand-total">Total:</td>
 			<td colspan="2" class="total-cost grand-total"><?php echo sbEcomToolkit::costFormat($sb_ecom_checkout->getTotalCost()); ?></td>

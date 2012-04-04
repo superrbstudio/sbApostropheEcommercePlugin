@@ -60,7 +60,7 @@ class PluginsbEcomBasket
   
   public function getPostageTax()
   {
-    return (float)round($this->getPostage() * (sfConfig::get('app_sbApostropheEcommerce_postage_tax', 20) / 100));
+    return (float)round($this->getPostage() * (sfConfig::get('app_sbApostropheEcommerce_postage_tax', 20) / 100), 2);
   }
 	
 	public function getTotal()
@@ -78,5 +78,3 @@ class PluginsbEcomBasket
 		return $this->numItems;
 	}
 }
-
-?>
