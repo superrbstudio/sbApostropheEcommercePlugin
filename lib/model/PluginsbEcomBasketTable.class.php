@@ -60,6 +60,7 @@ class PluginsbEcomBasketTable
 		
 		$basketProduct->setItemCost($params['item_cost']);
 		$basketProduct->setPostageCost($params['postage_cost']);
+    $basketProduct->setPostageCostWithOthers($params['postage_cost_with_others']);
 		$basketProduct->setItemTax($params['item_tax']);
 		$basketProduct->setItemTitle($params['item_title']);
 		$basketProduct->setItemReference($params['item_reference']);
@@ -76,14 +77,17 @@ class PluginsbEcomBasketTable
 		{
 			case 'fixed':
 				$postage = $params['fixed'];
+        $postage_with_others = $params['fixed_with_others'];
 				break;
 			
 			case 'weight':
 				$postage = $params['weight'] * $params['cost_per_weight'];
+        $postage_with_others = $params['weight'] * $params['cost_per_weight_with_others'];
 				break;
 			
 			default:
 				$postage = 0;
+        $postage_with_others = 0;
 		}
 		
 		return array(
@@ -92,6 +96,7 @@ class PluginsbEcomBasketTable
 				'quantity' => $quantity,
 				'item_cost' => $params['cost'],
 				'postage_cost' => $postage,
+        'postage_cost_with_others' => $postage_with_others,
 				'item_tax' => $params['tax'],
 				'item_title' => $params['title'],
 				'item_reference' => $params['reference']
@@ -157,6 +162,52 @@ class PluginsbEcomBasketTable
 						->andWhere('checkout_id IS NULL')
 						->execute();
 	}
+  
+  public static function calculateBasketPostage($products)
+  {
+    $high = array('key' => 0, 'value' => 0);
+    
+    // Work out most expensive item to post
+    foreach($products as $product)
+    {
+      if($product->getPostageCost() > $high['value'])
+      {
+        $high['key'] = $product->getId();
+        $high['value'] = $product->getPostageCost();
+      }
+    }
+    
+    $postage = 0;
+    
+    // now add up the postage
+    foreach($products as $product)
+    {
+      if($product->getId() == $high['key'])
+      {
+        // if there is more than one get the higher cost for the first item and then the lower for the rest
+        if($product->getQuantity() > 1 and $product->getPostageCostWithOthers() != 0)
+        {
+          $postage += $product->getPostageCost();
+          $postage += ($product->getPostageCostWithOthers() * ($product->getQuantity() - 1));
+        }
+        else
+        {
+          $postage += $product->getPostage();
+        }
+      }
+      else
+      {
+        if($product->getPostageWithOthers() != 0)
+        {
+          $postage += $product->getPostageWithOthers();
+        }
+        else
+        {
+          $postage += $product->getPostage();
+        }
+      }
+    }
+    
+    return $postage;
+  }
 }
-
-?>

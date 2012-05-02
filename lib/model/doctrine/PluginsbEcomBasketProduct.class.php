@@ -39,6 +39,15 @@ abstract class PluginsbEcomBasketProduct extends BasesbEcomBasketProduct
 		return (float)round($this->getPostageCost() * $this->getQuantity(), 2);
 	}
   
+  /** 
+   * Returns the secondary postage cost for the quantity of items
+   * @return float 
+   */
+	public function getPostageWithOthers()
+	{
+		return (float)round($this->getPostageCostWithOthers() * $this->getQuantity(), 2);
+	}
+  
   /**
    * Returns the postage tax for the quantity of items
    * @return type 

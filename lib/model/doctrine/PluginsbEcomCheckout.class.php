@@ -39,26 +39,12 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
 	
 	public function getPostage()
 	{
-		$cost = 0;
-		
-		foreach($this->getEcomCheckoutProduct() as $product)
-		{
-			$cost += $product->getPostage();
-		}
-		
-		return (float)round($cost, 2);
+		return (float)round(sbEcomBasketTable::calculateBasketPostage($this->getEcomCheckoutProduct()), 2);
 	}
   
   public function getPostageTax()
-  {
-    $cost = 0;
-		
-		foreach($this->getEcomCheckoutProduct() as $product)
-		{
-			$cost += $product->getPostageTax();
-		}
-		
-		return (float)round($cost, 2);
+  {	
+		return (float)round($this->getPostage() * (sfConfig::get('app_sbApostropheEcommerce_postage_tax', 20) / 100), 2);
   }
 	
 	public function getTotalCost()

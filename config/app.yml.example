@@ -17,3 +17,12 @@ app:
     
     # Set which module to use for payment using the engine route
     payment_route: sb_ecom_paypal_payments_pro_with_iframe
+
+    # Set the percentage of tax to add onto postage
+    postage_tax: 20
+
+    # Set the units of weight used (default kg)
+    weight_unit: kg
+
+    # Set the currency symbol to be used throughout the website (default &pound;)
+    currency_symbol: &pound;

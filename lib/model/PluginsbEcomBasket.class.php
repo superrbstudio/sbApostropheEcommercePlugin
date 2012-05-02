@@ -12,12 +12,13 @@
  */
 class PluginsbEcomBasket
 {
-	protected $basketProducts = array();
-	protected $total          = 0;
-	protected $tax            = 0;
-	protected $postage        = 0;
-	protected $numProducts    = 0;
-	protected $numItems       = 0;
+	protected $basketProducts    = array();
+	protected $total             = 0;
+	protected $tax               = 0;
+	protected $numProducts       = 0;
+	protected $numItems          = 0;
+  protected $postage           = 0;
+  protected $postageCalculated = false;
 	
 	public function __construct($products = null) 
 	{
@@ -30,7 +31,6 @@ class PluginsbEcomBasket
 					$this->basketProducts[] = $product;
 					$this->total      += $product->getCost();
 					$this->tax        += $product->getTax();
-					$this->postage    += $product->getPostage();
 					$this->numItems   += $product->getQuantity();
 					$this->numProducts++;
 				}
@@ -53,9 +53,23 @@ class PluginsbEcomBasket
 		return (float)round($this->tax, 2);
 	}
 	
+  /**
+   * Calculates the basket postage cost
+   * Works out the most expensive item and uses the main postage cost and then uses the
+   * secondary cost for all other items. If no secondary then the primary is used.
+   * 
+   * @return float
+   */
 	public function getPostage()
 	{
-		return (float)round($this->postage, 2);
+    if($this->postageCalculated == true)
+    {
+      return $this->postage;
+    }
+    
+    $this->postageCalculated = true;
+    $this->postage = (float)round(sbEcomBasketTable::calculateBasketPostage($this->getBasketProducts()), 2);
+		return $this->postage;
 	}
   
   public function getPostageTax()

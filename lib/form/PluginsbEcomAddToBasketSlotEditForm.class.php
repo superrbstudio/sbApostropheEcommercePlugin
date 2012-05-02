@@ -43,9 +43,15 @@ class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
 		
 		$this->setWidget('cost_per_weight', new sfWidgetFormInputText(array('label' => 'Cost per ' . sfConfig::get('app_sbApostropheEcommerce_weight_unit', 'kg'))));
 		$this->setValidator('cost_per_weight', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric cost per ' . sfConfig::get('app_sbApostropheEcommerce_weight_unit', 'kg'))));
+    
+    $this->setWidget('cost_per_weight_with_others', new sfWidgetFormInputText(array('label' => 'Cost per ' . sfConfig::get('app_sbApostropheEcommerce_weight_unit', 'kg') . ' (with others)')));
+		$this->setValidator('cost_per_weight_with_others', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric cost per ' . sfConfig::get('app_sbApostropheEcommerce_weight_unit', 'kg'))));
 		
 		$this->setWidget('fixed', new sfWidgetFormInputText(array('label' => 'Fixed postage (' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;') . ')')));
-		$this->setValidator('fixed', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric weight in Kg')));
+		$this->setValidator('fixed', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric cost in ' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;'))));
+    
+    $this->setWidget('fixed_with_others', new sfWidgetFormInputText(array('label' => 'Fixed postage (' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;') . ') (with others)')));
+		$this->setValidator('fixed_with_others', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric cost in ' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;'))));
     
     // Ensures unique IDs throughout the page. Hyphen between slot and form to please our CSS
     $this->widgetSchema->setNameFormat('slot-form-' . $this->id . '[%s]');
