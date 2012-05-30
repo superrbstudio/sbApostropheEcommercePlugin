@@ -56,6 +56,59 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
 		
 		return $products;
 	}
+  
+  /**
+   * Returns the lowest price for a given product id
+   * @param integer $id
+   * @return float 
+   */
+  public static function getLowestCostForProductById($id)
+  {
+    $product = parent::retrieveByIdWithSlots($id);
+    
+    if($product instanceof aPage)
+    {
+      $costs = self::getCostsFromAreas($product);
+    }
+    
+    return false;
+  }
+  
+  /**
+   * Returns the highest price for a given product id
+   * @param integer $id
+   * @return float 
+   */
+  public static function getHighestCostForProductById($id)
+  {
+    $product = parent::retrieveByIdWithSlots($id);
+    
+    if($product instanceof aPage)
+    {
+      //return $product->getLowestCost();
+    }
+    
+    return false;
+  }
+  
+  private static function getCostsFromAreas($product)
+  {
+    $areaNames = sfConfig::get('app_sbApostropheEcommerce_product_detail_areas', array('product-detail'));
+    
+    if(count($areaNames) > 0)
+    {
+      foreach($areaNames as $name)
+      {
+        $slots = $product->getArea($name);
+        
+        if(count($slots) > 0)
+        {
+          foreach($slots as $slot)
+          {
+            var_dump($slot->getType());
+          }
+        }
+      }
+    }
+  }
 }
-
-?>

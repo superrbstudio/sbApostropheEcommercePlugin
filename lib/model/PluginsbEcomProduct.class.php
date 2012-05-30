@@ -7,5 +7,4 @@
  */
 abstract class PluginsbEcomProduct extends PluginaPage
 {
-	//put your code here
 }

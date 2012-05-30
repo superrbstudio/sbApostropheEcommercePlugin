@@ -1,4 +1,4 @@
-app:  
+all:  
   # Ecommerce Plugin
   sbApostropheEcommerce:
     
@@ -8,6 +8,10 @@ app:
       - sbEcomProduct
     category_templates:
       - sbEcomCategory
+
+    # These areas contain details about the product on the product pages
+    product_detail_areas:
+      - product-detail   
     
      # Delete stale basket items older than this
     clean_basket_days: 5
