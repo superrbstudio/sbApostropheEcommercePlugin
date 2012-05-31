@@ -39,7 +39,7 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// get the product page and verify
 		$this->product = Doctrine_Core::getTable('aPage')->findOneById($this->basketForm->getValue('product_id'));
 		$this->forward404Unless($this->product instanceof aPage);
-		$this->forward404Unless($this->product->getTemplate() == 'sbEcomProduct');
+		$this->forward404Unless(in_array($this->product->getTemplate(), sfConfig::get('app_sbApostropheEcommerce_product_templates', 'sbEcomProduct')));
 		$this->forward404If($this->product->getArchived() and !is_null($this->product->getArchived()));
 		
 		$this->slot = Doctrine_Core::getTable('aSlot')->findOneById($this->basketForm->getValue('slot_id'));
