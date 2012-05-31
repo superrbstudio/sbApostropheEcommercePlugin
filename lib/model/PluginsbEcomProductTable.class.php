@@ -62,38 +62,82 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
    * @param integer $id
    * @return float 
    */
-  public static function getLowestCostForProductById($id)
+  public static function getLowestCostForProductById($id, $includeTax = false)
   {
     $product = parent::retrieveByIdWithSlots($id);
     
     if($product instanceof aPage)
     {
-      $costs = self::getCostsFromAreas($product);
+      return self::getLowestCostForProduct($product, $includeTax);
     }
     
-    return false;
+    return 0;
+  }
+  
+  public static function getLowestCostForProduct(aPage $product, $includeTax = false)
+  {
+    $costs = self::getCostsFromAreas($product);
+    return self::extractLowestCost($costs, $includeTax);
   }
   
   /**
-   * Returns the highest price for a given product id
+   * Returns the lowest price for a given product id
    * @param integer $id
    * @return float 
    */
-  public static function getHighestCostForProductById($id)
+  public static function getHighestCostForProductById($id, $includeTax = false)
   {
     $product = parent::retrieveByIdWithSlots($id);
     
     if($product instanceof aPage)
     {
-      //return $product->getLowestCost();
+      return self::getHighestCostForProduct($product, $includeTax);
     }
     
-    return false;
+    return 0;
   }
   
-  private static function getCostsFromAreas($product)
+  public static function getHighestCostForProduct(aPage $product, $includeTax = false)
+  {
+    $costs = self::getCostsFromAreas($product);
+    return self::extractHighestCost($costs, $includeTax);
+  }
+  
+  private static function extractHighestCost($costs, $includeTax = false)
+  {
+    if($includeTax)
+    {
+      return floatval(round($costs['high']['cost'] * ($costs['high']['tax'] / 100), 2));
+    }
+    else
+    {
+      return floatval(round($costs['high']['cost'], 2));
+    }
+  }
+  
+  private static function extractLowestCost($costs, $includeTax = false)
+  {
+    if($includeTax)
+    {
+      return floatval(round($costs['low']['cost'] * ($costs['low']['tax'] / 100), 2));
+    }
+    else
+    {
+      return floatval(round($costs['low']['cost'], 2));
+    }
+  }
+  
+  /**
+   * Returns an array of high and low costs
+   * @param aPage $product
+   * @return array
+   */
+  private static function getCostsFromAreas(aPage $product)
   {
     $areaNames = sfConfig::get('app_sbApostropheEcommerce_product_detail_areas', array('product-detail'));
+    
+    $costs = array('high' => array('cost' => 0, 'tax' => 0),
+                   'low'  => array('cost' => 0, 'tax' => 0));
     
     if(count($areaNames) > 0)
     {
@@ -105,10 +149,25 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
         {
           foreach($slots as $slot)
           {
-            var_dump($slot->getType());
+            if(in_array($slot->getType(), sfConfig::get('app_sbApostropheEcommerce_product_add_to_basket_slots', array('sbEcomAddToBasket'))))
+            {
+              $values = unserialize($slot->getValue());
+              
+              if($values['cost'] > $costs['high']['cost'])
+              {
+                $costs['high'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
+              }
+              
+              if(($values['cost'] < $costs['low']['cost'] and $values['cost'] > 0) or $costs['low']['cost'] == 0)
+              {
+                $costs['low'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
+              }
+            }
           }
         }
       }
     }
+    
+    return $costs;
   }
 }
