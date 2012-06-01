@@ -74,7 +74,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
     return 0;
   }
   
-  public static function getLowestCostForProduct(aPage $product, $includeTax = false)
+  public static function getLowestCostForProduct($product, $includeTax = false)
   {
     $costs = self::getCostsFromAreas($product);
     return self::extractLowestCost($costs, $includeTax);
@@ -97,7 +97,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
     return 0;
   }
   
-  public static function getHighestCostForProduct(aPage $product, $includeTax = false)
+  public static function getHighestCostForProduct($product, $includeTax = false)
   {
     $costs = self::getCostsFromAreas($product);
     return self::extractHighestCost($costs, $includeTax);
