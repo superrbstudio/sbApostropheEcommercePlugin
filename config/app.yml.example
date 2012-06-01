@@ -10,6 +10,7 @@ all:
       - sbEcomCategory
 
     # These areas contain details about the product on the product pages
+    # You must specify them so that the plugin can work out product details
     product_detail_areas:
       - product-detail   
     
