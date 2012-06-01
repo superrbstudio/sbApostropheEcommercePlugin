@@ -107,7 +107,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
   {
     if($includeTax)
     {
-      return floatval(round($costs['high']['cost'] + ($costs['high']['tax'] / 100), 2));
+      return floatval(round($costs['high']['cost'] + ($costs['high']['cost'] * ($costs['high']['tax'] / 100)), 2));
     }
     else
     {
@@ -119,7 +119,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
   {
     if($includeTax)
     {
-      return floatval(round($costs['low']['cost'] + ($costs['low']['tax'] / 100), 2));
+      return floatval(round($costs['low']['cost'] + ($costs['low']['cost'] * ($costs['low']['tax'] / 100)), 2));
     }
     else
     {
