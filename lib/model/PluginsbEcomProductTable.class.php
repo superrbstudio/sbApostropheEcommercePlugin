@@ -74,7 +74,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
     return 0;
   }
   
-  public static function getLowestCostForProduct(aPage $product, $includeTax = false)
+  public static function getLowestCostForProduct($product, $includeTax = false)
   {
     $costs = self::getCostsFromAreas($product);
     return self::extractLowestCost($costs, $includeTax);
@@ -97,7 +97,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
     return 0;
   }
   
-  public static function getHighestCostForProduct(aPage $product, $includeTax = false)
+  public static function getHighestCostForProduct($product, $includeTax = false)
   {
     $costs = self::getCostsFromAreas($product);
     return self::extractHighestCost($costs, $includeTax);
@@ -107,7 +107,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
   {
     if($includeTax)
     {
-      return floatval(round($costs['high']['cost'] * ($costs['high']['tax'] / 100), 2));
+      return floatval(round($costs['high']['cost'] + ($costs['high']['tax'] / 100), 2));
     }
     else
     {
@@ -119,7 +119,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
   {
     if($includeTax)
     {
-      return floatval(round($costs['low']['cost'] * ($costs['low']['tax'] / 100), 2));
+      return floatval(round($costs['low']['cost'] + ($costs['low']['tax'] / 100), 2));
     }
     else
     {
@@ -132,7 +132,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
    * @param aPage $product
    * @return array
    */
-  private static function getCostsFromAreas(aPage $product)
+  private static function getCostsFromAreas($product)
   {
     $areaNames = sfConfig::get('app_sbApostropheEcommerce_product_detail_areas', array('product-detail'));
     
@@ -151,7 +151,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
           {
             if(in_array($slot->getType(), sfConfig::get('app_sbApostropheEcommerce_product_add_to_basket_slots', array('sbEcomAddToBasket'))))
             {
-              $values = unserialize($slot->getValue());
+              $values = $slot->getArrayValue();
               
               if($values['cost'] > $costs['high']['cost'])
               {
