@@ -113,7 +113,7 @@ class PluginsbEcomCheckoutActions extends aEngineActions
 			// save and continue
 			$this->checkout->save();
 			$this->getUser()->setAttribute('checkout_id', $this->checkout->getId());
-			$this->redirect($this->generateUrl(sfConfig::get('app_sbEcommercePlugin_payment_route', 'sb_ecom_paypal_payments_pro_with_iframe')));
+			$this->redirect($this->generateUrl(sfConfig::get('app_sbApostropheEcommerce_payment_route', 'sb_ecom_paypal_payments_pro_with_iframe')));
 		}
 		
 		$this->redirect($this->generateUrl('sb_ecom_checkout'));
