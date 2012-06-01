@@ -132,7 +132,7 @@ abstract class PluginsbEcomProductTable extends PluginaPageTable
    * @param aPage $product
    * @return array
    */
-  private static function getCostsFromAreas(aPage $product)
+  private static function getCostsFromAreas($product)
   {
     $areaNames = sfConfig::get('app_sbApostropheEcommerce_product_detail_areas', array('product-detail'));
     
