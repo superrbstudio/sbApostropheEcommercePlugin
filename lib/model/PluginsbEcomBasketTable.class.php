@@ -77,12 +77,30 @@ class PluginsbEcomBasketTable
 		{
 			case 'fixed':
 				$postage = $params['fixed'];
-        $postage_with_others = $params['fixed_with_others'];
+        
+        if(isset($params['fixed_with_others']))
+        {
+          $postage_with_others = $params['fixed_with_others'];
+        }
+        else
+        {
+          $postage_with_others = 0;
+        }
+        
 				break;
 			
 			case 'weight':
 				$postage = $params['weight'] * $params['cost_per_weight'];
-        $postage_with_others = $params['weight'] * $params['cost_per_weight_with_others'];
+        
+        if(iset($params['cost_per_weight_with_others']))
+        {
+          $postage_with_others = $params['weight'] * $params['cost_per_weight_with_others'];
+        }
+        else
+        {
+          $postage_with_others = 0;
+        }
+        
 				break;
 			
 			default:

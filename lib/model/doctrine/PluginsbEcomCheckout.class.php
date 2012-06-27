@@ -125,11 +125,11 @@ abstract class PluginsbEcomCheckout extends BasesbEcomCheckout
       $item = new UnitedPrototype\GoogleAnalytics\Item();
       $item->setName($product->getItemTitle());
       $item->setSku($product->getItemReference());
-      $item->setPrice($product->getItemCost() + round($product->getItemCost() * ($product->getTax() / 100)));
+      $item->setPrice($product->getItemCost());
       $item->setQuantity($product->getQuantity());
       $transaction->addItem($item);
     }
-    
+
     $tracker->trackTransaction($transaction, $session, $visitor);
   }
 }
