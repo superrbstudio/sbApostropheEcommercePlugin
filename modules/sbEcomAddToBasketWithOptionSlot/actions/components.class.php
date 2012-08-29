@@ -1,0 +1,4 @@
+<?php
+class sbEcomAddToBasketWithOptionSlotComponents extends PluginsbEcomAddToBasketWithOptionSlotComponents
+{
+}

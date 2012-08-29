@@ -29,25 +29,40 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 	{	
 		// must be posted
 		$this->forward404Unless($request->getMethod() == 'POST');
+    
+    $basketParameters = $request->getParameter('sb_ecom_add_to_basket');
+    var_dump($basketParameters);
 		
-		$this->basketForm = new sbEcomAddToBasketForm();
+		// get the product page and verify
+		$this->product = Doctrine_Core::getTable('aPage')->findOneById($basketParameters['product_id']);
+		$this->forward404Unless($this->product instanceof aPage);
+		$this->forward404Unless(in_array($this->product->getTemplate(), sfConfig::get('app_sbApostropheEcommerce_product_templates', 'sbEcomProduct')));
+		$this->forward404If($this->product->getArchived() and !is_null($this->product->getArchived()));
+		
+		$this->slot = Doctrine_Core::getTable('aSlot')->findOneById($basketParameters['slot_id']);
+		$this->forward404Unless($this->slot instanceof aSlot);
+		
+		$this->productParams = unserialize($this->slot->getValue());
+		$this->forward404If(in_array($this->productParams['call_to_order'], array('call_to_order', 'call_to_order_no_price')));
+    
+    // is there an option param from the sbEcomAddToBasketWithOptionSlot
+    if(isset($basketParameters['add_to_basket_type']) and $basketParameters['add_to_basket_type'] == 'withOption')
+    {
+      $this->basketForm = new sbEcomAddToBasketWithOptionForm(null, array('optionValues' => sbEcomAddToBasketWithOptionSlotTable::convertOptionValuesToSelectOptions($this->slot)));
+    }
+    else
+    {
+      $this->basketForm = new sbEcomAddToBasketForm();
+    }
+    
 		$this->basketForm->bind($request->getParameter('sb_ecom_add_to_basket'));
 		
 		// must be valid
 		$this->forward404Unless($this->basketForm->isValid());
 		
-		// get the product page and verify
-		$this->product = Doctrine_Core::getTable('aPage')->findOneById($this->basketForm->getValue('product_id'));
-		$this->forward404Unless($this->product instanceof aPage);
-		$this->forward404Unless(in_array($this->product->getTemplate(), sfConfig::get('app_sbApostropheEcommerce_product_templates', 'sbEcomProduct')));
-		$this->forward404If($this->product->getArchived() and !is_null($this->product->getArchived()));
-		
-		$this->slot = Doctrine_Core::getTable('aSlot')->findOneById($this->basketForm->getValue('slot_id'));
-		$this->forward404Unless($this->slot instanceof aSlot);
-		
-		$this->productParams = unserialize($this->slot->getValue());
-		$this->forward404If(in_array($this->productParams['call_to_order'], array('call_to_order', 'call_to_order_no_price')));
-		
+    // send the selected slot form
+    $this->productParams['productForm'] = $this->basketForm;
+    
 		// product appears to be valid now add to basket
 		sbEcomBasketTable::addProductToBasket(sbEcomBasketTable::createBasketValues($this->product, $this->slot, $this->basketForm->getValue('quantity'), $this->productParams));
 		

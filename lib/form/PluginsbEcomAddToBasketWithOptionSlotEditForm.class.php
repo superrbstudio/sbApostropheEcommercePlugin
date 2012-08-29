@@ -1,13 +1,18 @@
 <?php
 
-/**
- * Description of PluginsbEcomAddToBasketSlotEditForm
- *
- * @author Giles Smith <tech@superrb.com>
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
-class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
+
+/**
+ * Description of PluginsbEcomAddToBasketWithOptionSlotEditForm
+ *
+ * @author pureroon
+ */
+class PluginsbEcomAddToBasketWithOptionSlotEditForm extends BaseForm
 {
-	// Ensures unique IDs throughout the page
+  // Ensures unique IDs throughout the page
   protected $id;
   public function __construct($id, $defaults = array(), $options = array(), $CSRFSecret = null)
   {
@@ -15,14 +20,11 @@ class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
     parent::__construct($defaults, $options, $CSRFSecret);
   }
   public function configure()
-  {
+  { 
     // ADD YOUR FIELDS HERE
 		
 		$this->setWidget('title', new sfWidgetFormInputText());
 		$this->setValidator('title', new sfValidatorString(array('required' => true), array('required' => 'Please enter a title for this basket option')));
-		
-		$this->setWidget('reference', new sfWidgetFormInputText());
-		$this->setValidator('reference', new sfValidatorString(array('required' => true), array('required' => 'Please enter a product reference for this basket option')));
 		
 		$this->setWidget('cost', new sfWidgetFormInputText(array('label' => 'Cost (' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;') . ')')));
 		$this->setValidator('cost', new sfValidatorNumber(array('required' => true, 'min' => 0)));
@@ -53,10 +55,42 @@ class PluginsbEcomAddToBasketSlotEditForm extends BaseForm
     $this->setWidget('fixed_with_others', new sfWidgetFormInputText(array('label' => 'Fixed postage (' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;') . ') (with others)')));
 		$this->setValidator('fixed_with_others', new sfValidatorNumber(array('required' => false), array('invalid' => 'Please enter a numeric cost in ' . sfConfig::get('app_sbApostropheEcommerce_currency_symbol', '&pound;'))));
     
+    $this->setWidget('option_name', new sfWidgetFormInputText(array('label' => 'Option Name')));
+    $this->setValidator('option_name', new sfValidatorString(array('required' => true), array('required' => 'Please enter the option name')));
+    
+    $this->setWidget('option_value', new sfWidgetFormInputHidden(array(), array('class' => 'option-value')));
+    $this->setValidator('option_value', new sfValidatorCallback(array('callback' => array($this, 'validateOptions'))));
+    
     // Ensures unique IDs throughout the page. Hyphen between slot and form to please our CSS
     $this->widgetSchema->setNameFormat('slot-form-' . $this->id . '[%s]');
     
     // You don't have to use our form formatter, but it makes things nice
     $this->widgetSchema->setFormFormatterName('aAdmin');
+  }
+  
+  public static function validateOptions($validator, $value)
+  {
+    $returnValues = array();
+    $values = json_decode($value);
+    
+    if(!$values)
+    {
+      throw new sfValidatorError($validator, 'Unable to decode option values');
+    }
+    
+    foreach($values as $value)
+    {
+      if($value->value != '' and $value->reference != '' and is_numeric($value->cost))
+      {
+        $returnValues[$value->value] = $value;
+      }
+    }
+    
+    if(count($returnValues) == 0)
+    {
+      throw new sfValidatorError($validator, 'Please select at least one option value (the cost must be numeric)');
+    }
+    
+    return json_encode(array_values($returnValues));
   }
 }

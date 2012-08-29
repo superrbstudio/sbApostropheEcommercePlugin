@@ -42,3 +42,51 @@ function sbEcommerceSetupAddToBasketEditSlot(slotId) {
 		}
 	}
 }
+
+function sbEcommerceSetupAddToBasketEditSlotOptions(slotId) {
+  // first get the value of the hidden field and unserialize it
+  var slotOptionValues = $('#' + slotId + '_option_value').val();
+  var newArray = true;
+  var valuesArray;
+  var valueRows = new Array();
+  
+  function createValueRow(value, reference, cost) {
+    // get the current number of value rows
+    var currentRows = $('#a-' + slotId + ' .option-values-container .value-row').length;
+    
+    if(cost == null){ cost = 0 }
+    
+    // create the inputs
+    var valueLabel = $('<label>').text('Option Value');
+    var valueInput = $('<input>').val(value).attr('type', 'text').attr('name', 'option-value[' + currentRows + '][value]');
+    var referenceLabel = $('<label>').text('Reference');
+    var referenceInput = $('<input>').val(reference).attr('type', 'text').attr('name', 'option-value[' + currentRows + '][reference]');
+    var costLabel = $('<label>').text('Cost Difference');
+    var costInput = $('<input>').val(cost).attr('type', 'text').attr('name', 'option-value[' + currentRows + '][cost]');
+    
+    var valueRow = $('<div>').attr('class', 'value-row a-form-row').append($('<div>').attr('class', 'option-value-value option-value-item clearfix').append(valueLabel).append(valueInput)).append($('<div>').attr('class', 'option-value-reference option-value-item clearfix').append(referenceLabel).append(referenceInput)).append($('<div>').attr('class', 'option-value-cost option-value-item clearfix').append(costLabel).append(costInput));
+    $('#a-' + slotId + ' .option-values-container').append(valueRow);
+  }
+  
+  // find current value
+  if(slotOptionValues != '') {
+    valuesArray = $.parseJSON(slotOptionValues);
+    if(valuesArray != null) {
+      newArray = false;
+    }
+  }
+  
+  if(newArray == true) {
+    createValueRow(null, null, null);
+  } else {
+    $.each(valuesArray, function(key, option) {
+      createValueRow(option.value, option.reference, option.cost);
+    });
+  }
+  
+  // set up the add a new option value
+  $('#a-' + slotId + ' .add-new-option').click(function() {
+    createValueRow(null, null, null);
+    return false;
+  });
+}
