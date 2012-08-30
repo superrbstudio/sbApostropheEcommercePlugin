@@ -31,7 +31,6 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		$this->forward404Unless($request->getMethod() == 'POST');
     
     $basketParameters = $request->getParameter('sb_ecom_add_to_basket');
-    var_dump($basketParameters);
 		
 		// get the product page and verify
 		$this->product = Doctrine_Core::getTable('aPage')->findOneById($basketParameters['product_id']);
@@ -81,9 +80,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
 		$this->forward404Unless($request->getParameter('slot') != '');
+    $this->forward404Unless($request->getParameter('title') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'), $request->getParameter('title'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		// delete the product and return to the basket
@@ -96,9 +96,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
 		$this->forward404Unless($request->getParameter('slot') != '');
+    $this->forward404Unless($request->getParameter('title') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'), $request->getParameter('title'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		$currentCount = $basketProduct->getQuantity();
@@ -122,9 +123,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// verify the parameter
 		$this->forward404Unless($request->getParameter('product') != '');
 		$this->forward404Unless($request->getParameter('slot') != '');
+    $this->forward404Unless($request->getParameter('title') != '');
 		
 		// verify the product
-		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'));
+		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'), $request->getParameter('title'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
 		
 		$currentCount = $basketProduct->getQuantity();

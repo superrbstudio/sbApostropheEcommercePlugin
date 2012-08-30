@@ -26,13 +26,13 @@
 					<p class="subtitle">Ref: <?php echo $basketProduct->getItemReference(); ?></p>
 				</td>
 				<td class="sb-ecom-basket-product-quantity a-ui">
-					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=subtract&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId()); ?>"><span>-</span></a>
+					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=subtract&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId() . '&title=' . $basketProduct->getItemTitle()); ?>"><span>-</span></a>
 					<span class="sb-ecom-basket-product-quantity-value"><?php echo $basketProduct->getQuantity(); ?></span>
-					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=plus&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId()); ?>"><span>+</span></a>
+					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=plus&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId() . '&title=' . $basketProduct->getItemTitle()); ?>"><span>+</span></a>
 				</td>
 				<td class="sb-ecom-basket-product-cost sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basketProduct->getCost()); ?></td>
 				<td class="sb-ecom-basket-product-tax sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basketProduct->getTax()); ?></td>
-				<td class="sb-ecom-basket-product-remove a-ui"><a class="a-btn icon no-label a-delete alt" href="<?php echo url_for('@sb_ecom_basket_action?action=delete&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId()); ?>"><span class="icon"></span>Delete</a>
+				<td class="sb-ecom-basket-product-remove a-ui"><a class="a-btn icon no-label a-delete alt" href="<?php echo url_for('@sb_ecom_basket_action?action=delete&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId() . '&title=' . $basketProduct->getItemTitle()); ?>"><span class="icon"></span>Delete</a>
 			</tr>
 	<?php $i++; endforeach; ?>
 			<tr class="sb-ecom-divider">

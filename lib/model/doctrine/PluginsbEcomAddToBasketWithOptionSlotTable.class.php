@@ -18,9 +18,15 @@ class PluginsbEcomAddToBasketWithOptionSlotTable extends aSlotTable
   }
   
   public static function convertOptionValuesToSelectOptions($slot)
-  {
+  { 
     // configure options
     $options = array();
+    
+    if(!($slot instanceof sbEcomAddToBasketWithOptionSlot))
+    {
+      return $options;
+    }
+    
     $slotValues = $slot->getArrayValue();
     $values = json_decode($slotValues['option_value']);
     

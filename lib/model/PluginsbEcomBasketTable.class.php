@@ -48,7 +48,7 @@ class PluginsbEcomBasketTable
 	public static function addProductToBasket($params)
 	{
 		//check one doesn't exist already
-		$basketProduct = self::getBasketProductForUserByProductId($params['product_id'], $params['slot_id'], self::getUsersBasketIdentifier());
+		$basketProduct = self::getBasketProductForUserByProductId($params['product_id'], $params['slot_id'], $params['item_title']);
 
 		if(!($basketProduct instanceof sbEcomBasketProduct) or $basketProduct->isNew())
 		{
@@ -107,7 +107,27 @@ class PluginsbEcomBasketTable
 				$postage = 0;
         $postage_with_others = 0;
 		}
-		
+    
+    // check the form type
+    if(isset($params['productForm']) and $params['productForm'] instanceof sbEcomAddToBasketWithOptionForm)
+    { 
+      // find the correct slot value
+      $slotValues = $productSlot->getArrayValue();
+      $slotOptions = json_decode($slotValues['option_value']);
+      
+      var_dump($params['productForm']->getValue('option_value'));
+      
+      foreach($slotOptions as $option)
+      {
+        if($option->value == $params['productForm']->getValue('option_value'))
+        {
+          $params['cost'] = $params['cost'] + $option->cost;
+          $params['reference'] = $option->reference;
+          $params['title'] = $params['title'] . ' ' . $option->value;
+        }
+      }
+    }
+    
 		return array(
 				'product_id' => $productPage->getId(),
 				'slot_id' => $productSlot->getId(),
@@ -118,7 +138,7 @@ class PluginsbEcomBasketTable
 				'item_tax' => $params['tax'],
 				'item_title' => $params['title'],
 				'item_reference' => $params['reference']
-						);
+		);
 	}
 	
 	/**
@@ -129,13 +149,14 @@ class PluginsbEcomBasketTable
 		* @param string $sessionId The users session id
 		* @return sbEcomBasketProduct 
 		*/
-	public static function getBasketProductForUserByProductId($productId, $slotId)
+	public static function getBasketProductForUserByProductId($productId, $slotId, $productName)
 	{
 		$root = Doctrine_Query::create()
 						->select('b.*')
 						->from('sbEcomBasketProduct b')
 						->where('b.product_id = ?', $productId)
 						->andWhere('b.slot_id = ?', $slotId)
+            ->andWhere('b.item_title = ?', $productName)
 						->andWhere('b.session_id = ?', self::getUsersBasketIdentifier())
 						->execute();
 		
