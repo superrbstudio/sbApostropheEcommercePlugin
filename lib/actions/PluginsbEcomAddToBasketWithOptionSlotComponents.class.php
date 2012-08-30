@@ -27,5 +27,6 @@ class PluginsbEcomAddToBasketWithOptionSlotComponents extends aSlotComponents
     $this->addToBasketForm = new sbEcomAddToBasketWithOptionForm(null, array('optionValues' => sbEcomAddToBasketWithOptionSlotTable::convertOptionValuesToSelectOptions($this->slot)));
 		$this->addToBasketForm->setDefault('product_id', $this->pageid);
 		$this->addToBasketForm->setDefault('slot_id', $this->slot->id);
+    $this->priceOptions = json_encode(sbEcomAddToBasketWithOptionSlotTable::convertOptionValuesToPriceDifferenceArray($this->slot));
   }
 }

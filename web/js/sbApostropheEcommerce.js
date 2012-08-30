@@ -90,3 +90,22 @@ function sbEcommerceSetupAddToBasketEditSlotOptions(slotId) {
     return false;
   });
 }
+
+function sbEcommerceSetUpAddToBasketSlotWithOptionCosting(slotId, costs) {
+  var currentCost    = Number($('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text());
+  var costsArray = $.parseJSON(costs);
+  
+  function updateCost() {
+    $.each(costsArray, function(value, cost) {
+      if($('#' + slotId + ' .sb-ecom-add-basket-option select').val() == value) {
+        $('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text(Number(currentCost) + Number(cost));
+      }
+    }); 
+  }
+  
+  $('#' + slotId + ' .sb-ecom-add-basket-option select').change(function() {
+    updateCost();
+  });
+  
+  updateCost();
+}

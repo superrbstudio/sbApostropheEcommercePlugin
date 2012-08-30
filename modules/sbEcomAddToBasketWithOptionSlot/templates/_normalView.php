@@ -25,5 +25,6 @@
 		<?php echo $addToBasketForm->render(); ?>
 		<input type="submit" name="add-to-basket" value="Add to basket" class="a-btn sb-ecom-add-to-basket big"/>
 	</form>
+  <?php a_js_call('sbEcommerceSetUpAddToBasketSlotWithOptionCosting(?,?)', 'a-slot-' . $pageid . '-' . $name . '-' . $permid, html_entity_decode($priceOptions)); ?>
 	<?php endif; ?>
 <?php endif; ?>

@@ -34,9 +34,31 @@ class PluginsbEcomAddToBasketWithOptionSlotTable extends aSlotTable
     {
       foreach($values as $key => $value)
       {
-        if($value->cost < 0) { $string = ' (-' . sbEcomToolkit::costFormat(0 - $value->cost) . ')'; } else { $string = ' (+' . sbEcomToolkit::costFormat($value->cost) . ')'; }
-        if($value->cost == 0) { $string = '' ; }
-        $options[$value->value] = $value->value . ', Ref: ' . $value->reference . $string;
+        $options[$value->value] = $value->value;
+      }
+    }
+    
+    return $options;
+  }
+  
+  public static function convertOptionValuesToPriceDifferenceArray($slot)
+  {
+    // configure options
+    $options = array();
+    
+    if(!($slot instanceof sbEcomAddToBasketWithOptionSlot))
+    {
+      return $options;
+    }
+    
+    $slotValues = $slot->getArrayValue();
+    $values = json_decode($slotValues['option_value']);
+    
+    if($values)
+    {
+      foreach($values as $key => $value)
+      {
+        $options[$value->value] = $value->cost;
       }
     }
     

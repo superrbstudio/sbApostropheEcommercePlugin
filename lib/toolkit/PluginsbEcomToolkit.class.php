@@ -34,7 +34,7 @@ class PluginsbEcomToolkit
 	 */
 	public static function costFormat($cost)
 	{
-		return sfConfig::get('app_sbEcom_currency_symbol', '&pound;') . self::formatNumber($cost);
+		return sfConfig::get('app_sbEcom_currency_symbol', '&pound;') . '<span class="cost-value">' . self::formatNumber($cost) . '</span>';
 	}
 	
 	public static function getCategoryTemplates()
