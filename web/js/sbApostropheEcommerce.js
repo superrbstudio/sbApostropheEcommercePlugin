@@ -91,6 +91,11 @@ function sbEcommerceSetupAddToBasketEditSlotOptions(slotId) {
   });
 }
 
+Number.prototype.formatMoney = function(c, d, t){
+var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, t = t == undefined ? "." : t, s = n < 0 ? "-" : "", i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
+
 function sbEcommerceSetUpAddToBasketSlotWithOptionCosting(slotId, costs) {
   var currentCost    = Number($('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text());
   var costsArray = $.parseJSON(costs);
@@ -98,7 +103,7 @@ function sbEcommerceSetUpAddToBasketSlotWithOptionCosting(slotId, costs) {
   function updateCost() {
     $.each(costsArray, function(value, cost) {
       if($('#' + slotId + ' .sb-ecom-add-basket-option select').val() == value) {
-        $('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text(Number(currentCost) + Number(cost));
+        $('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text((Number(currentCost) + Number(cost)).formatMoney(2, '.', ','));
       }
     }); 
   }
