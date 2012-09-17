@@ -97,7 +97,7 @@ var n = this, c = isNaN(c = Math.abs(c)) ? 2 : c, d = d == undefined ? "," : d, 
 };
 
 function sbEcommerceSetUpAddToBasketSlotWithOptionCosting(slotId, costs) {
-  var currentCost    = Number($('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text());
+  var currentCost    = Number($('#' + slotId + ' .sb-ecom-add-to-basket-cost-value .cost-value').text().replace(/[^\d.]/g, ""));
   var costsArray = $.parseJSON(costs);
   
   function updateCost() {
