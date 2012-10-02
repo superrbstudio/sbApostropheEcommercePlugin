@@ -192,3 +192,5 @@
 <?php endif; ?>	
 
 </div>
+
+<?php a_js_call('sbEcommerceDeliveryDuplicate()'); ?>

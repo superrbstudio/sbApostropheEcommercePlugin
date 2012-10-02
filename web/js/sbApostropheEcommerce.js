@@ -114,3 +114,47 @@ function sbEcommerceSetUpAddToBasketSlotWithOptionCosting(slotId, costs) {
   
   updateCost();
 }
+
+function sbEcommerceDeliveryDuplicate() {
+  
+  $('#delivery-billing').click(function(){
+    
+    var streetAddress = $("#sb_ecom_checkout_delivery_street_address").val();
+    var townCity      = $("#sb_ecom_checkout_delivery_locality").val();
+    var county        = $("#sb_ecom_checkout_delivery_region").val();
+    var postCode      = $("#sb_ecom_checkout_delivery_postal_code").val();
+    var country       = $("#sb_ecom_checkout_delivery_country").val();
+    
+    if(this.checked==true) {
+      $("#sb_ecom_checkout_billing_street_address").val(streetAddress);
+      $("#sb_ecom_checkout_billing_locality").val(townCity);
+      $("#sb_ecom_checkout_billing_region").val(county);
+      $("#sb_ecom_checkout_billing_postal_code").val(postCode);
+      $("#sb_ecom_checkout_billing_country").val(country); 
+      
+      $("#sb_ecom_checkout_delivery_street_address").keyup(function() {
+        $("#sb_ecom_checkout_billing_street_address").val( this.value );
+      });
+      $("#sb_ecom_checkout_delivery_locality").keyup(function() {
+        $("#sb_ecom_checkout_billing_locality").val( this.value );
+      });   
+      $("#sb_ecom_checkout_delivery_region").keyup(function() {
+        $("#sb_ecom_checkout_billing_region").val( this.value );
+      });
+      $("#sb_ecom_checkout_delivery_postal_code").keyup(function() {
+        $("#sb_ecom_checkout_billing_postal_code").val( this.value );
+      }); 
+      $("#sb_ecom_checkout_delivery_country").change(function() {
+        $("#sb_ecom_checkout_billing_country").val( this.value );
+      });      
+    } else {
+      $("#sb_ecom_checkout_delivery_street_address").unbind('keyup');
+      $("#sb_ecom_checkout_delivery_locality").unbind('keyup');
+      $("#sb_ecom_checkout_delivery_region").unbind('keyup');
+      $("#sb_ecom_checkout_delivery_postal_code").unbind('keyup');
+      $("#sb_ecom_checkout_delivery_country").unbind('change');
+    } 
+    
+  })
+  
+}
