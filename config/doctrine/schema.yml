@@ -115,10 +115,10 @@ sbEcomBasketProduct:
     session_id: { fields: [ session_id ] }
     
     
-#sbEcomProduct:
-#  inheritance:
-#    extends: aPage
-#    type: column_aggregation
+sbEcomProduct:
+  inheritance:
+    extends: aPage
+    type: simple
     
 sbEcomAddToBasketSlot:
   # Doctrine doesn't produce useful forms with column aggregation inheritance anyway,
