@@ -97,19 +97,21 @@ class PluginsbEcomProductTable extends aPageTable
    */
   public static function getHighestCostForProductById($id, $includeTax = false)
   {
-    $product = parent::retrieveByIdWithSlots($id);
-    
-    if($product instanceof aPage)
-    {
-      return self::getHighestCostForProduct($product, $includeTax);
-    }
-    
-    return 0;
+    return sbEcomProductTable::getHighestCostForProduct($id, $includeTax);
   }
   
   public static function getHighestCostForProduct($product, $includeTax = false)
   {
-    $costs = self::getCostsFromAreas($product);
+    if (is_numeric($product))
+    {
+      $product = sbEcomProductTable::retrieveByIdWithSlots($product);
+    }
+    else
+    {
+      $product = sbEcomProductTable::retrieveBySlugWithSlots($product['slug']);
+    }
+      
+    $costs = sbEcomProductTable::getCostsFromAreas($product);
     return self::extractHighestCost($costs, $includeTax);
   }
   
@@ -153,7 +155,7 @@ class PluginsbEcomProductTable extends aPageTable
     {
       foreach($areaNames as $name)
       {
-        $slots = $product->getArea($name);
+        $slots = $product->getSlotsByAreaName($name);
         
         if(count($slots) > 0)
         {
