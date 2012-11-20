@@ -74,19 +74,21 @@ class PluginsbEcomProductTable extends aPageTable
    */
   public static function getLowestCostForProductById($id, $includeTax = false)
   {
-    $product = parent::retrieveByIdWithSlots($id);
-    
-    if($product instanceof aPage)
-    {
-      return self::getLowestCostForProduct($product, $includeTax);
-    }
-    
-    return 0;
+    return sbEcomProductTable::getLowestCostForProduct($id, $includeTax);
   }
   
   public static function getLowestCostForProduct($product, $includeTax = false)
   {
-    $costs = self::getCostsFromAreas($product);
+    if (is_numeric($product))
+    {
+      $product = sbEcomProductTable::retrieveByIdWithSlots($product);
+    }
+    else
+    {
+      $product = sbEcomProductTable::retrieveBySlugWithSlots($product['slug']);
+    }
+      
+    $costs = sbEcomProductTable::getCostsFromAreas($product);
     return self::extractLowestCost($costs, $includeTax);
   }
   
