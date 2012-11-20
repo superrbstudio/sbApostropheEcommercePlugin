@@ -184,4 +184,33 @@ class PluginsbEcomProductTable extends aPageTable
     
     return $costs;
   }
+  
+  public static function getProductImage($productId)
+  {
+    if (is_numeric($productId))
+    {
+      $product = sbEcomProductTable::retrieveByIdWithSlots($productId);
+    }
+    else
+    {
+      $product = sbEcomProductTable::retrieveBySlugWithSlots($productId['slug']);
+    }
+    
+    $areas = $product->getAreas();
+    $areaNames = array();
+    
+    foreach($areas as $area)
+    {
+      $areaNames[] = $area->getName();
+    }
+    
+    $images = $product->getMediaForAreas($areaNames, 'image', 1);
+    
+    if(count($images) > 0 and $images[0] instanceof aMediaItem)
+    {
+      return $images[0];
+    }
+    
+    return null;
+  }
 }
