@@ -24,6 +24,39 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
       $this->getUser()->setAttribute('checkout_id', null);
     }
 	}
+  
+  /**
+   * Returns a JSON feed of the basket
+   * @param sfWebRequest $request
+   * @return type
+   */
+  public function executeBasketFeed(sfWebRequest $request)
+  {
+    $this->basket = sbEcomBasketTable::getUsersBasket();
+    
+    $basket   = array('subTotal' => $this->basket->getCost(),
+                      'subTotalTax' => $this->basket->getTax(),
+                      'postage' => $this->basket->getPostage(),
+                      'postageTax' => $this->basket->getPostageTax(),
+                      'total' => $this->basket->getTotal(),
+                      'numProducts' => $this->basket->getNumProducts(),
+                      'products' => array());
+    
+    foreach($this->basket->getBasketProducts() as $basketProduct)
+    {
+      $product = array('title' => $basketProduct->getItemTitle(),
+                       'reference' => $basketProduct->getItemReference(),
+                       'quantity' => $basketProduct->getQuantity(),
+                       'cost' => $basketProduct->getCost(),
+                       'tax' => $basketProduct->getTax());
+      $basket['products'][] = $product;
+    }
+    
+    $this->setLayout(false);
+    $this->getResponse()->setContentType('application/json');
+    $this->getResponse()->setContent(json_encode(array('basket' => $basket)));
+    return sfView::NONE;
+  }
 	
 	public function executeAdd(sfWebRequest $request)
 	{	

@@ -4,6 +4,11 @@ sb_ecom_basket:
   param: { module: sbEcomBasket, action: index }
   class: aRoute
   
+sb_ecom_basket_feed:
+  url: /feed
+  param: { module: sbEcomBasket, action: BasketFeed }
+  class: aRoute
+  
 sb_ecom_basket_action:
   url: /:action
   param: { module: sbEcomBasket }
