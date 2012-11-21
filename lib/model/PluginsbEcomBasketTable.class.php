@@ -64,7 +64,19 @@ class PluginsbEcomBasketTable
 		$basketProduct->setItemTax($params['item_tax']);
 		$basketProduct->setItemTitle($params['item_title']);
 		$basketProduct->setItemReference($params['item_reference']);
-		$basketProduct->setQuantity($basketProduct->getQuantity() + $params['quantity']);
+    
+    if(isset($params['allowed_duplicates']) and $params['allowed_duplicates'] == false)
+    {
+      // only 1 of these products is allowed
+      $basketProduct->setQuantity(1);
+      $basketProduct->setAllowDuplicates(false);
+    }
+    else
+    {
+      $basketProduct->setQuantity($basketProduct->getQuantity() + $params['quantity']);
+      $basketProduct->setAllowDuplicates(true);
+    }
+		
 		$basketProduct->save();
 		
 		// clean the basket
@@ -73,6 +85,9 @@ class PluginsbEcomBasketTable
 	
 	public static function createBasketValues(aPage $productPage, aSlot $productSlot, $quantity, $params = array())
 	{
+    // are duplicates allowed in the basket?
+    $allowedDuplicates = true;
+    
 		switch($params['postage_type'])
 		{
 			case 'fixed':
@@ -128,6 +143,11 @@ class PluginsbEcomBasketTable
       }
     }
     
+    if(isset($params['productForm']) and $params['productForm'] instanceof sbEcomAddToBasketNoQuantityForm)
+    {
+      $allowedDuplicates = false;
+    }
+    
 		return array(
 				'product_id' => $productPage->getId(),
 				'slot_id' => $productSlot->getId(),
@@ -137,7 +157,8 @@ class PluginsbEcomBasketTable
         'postage_cost_with_others' => $postage_with_others,
 				'item_tax' => $params['tax'],
 				'item_title' => $params['title'],
-				'item_reference' => $params['reference']
+				'item_reference' => $params['reference'],
+        'allowed_duplicates' => $allowedDuplicates
 		);
 	}
 	

@@ -1,0 +1,4 @@
+<?php
+class sbEcomAddToBasketNoQuantitySlotComponents extends PluginsbEcomAddToBasketNoQuantitySlotComponents
+{
+}

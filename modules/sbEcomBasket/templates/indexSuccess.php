@@ -26,9 +26,11 @@
 					<p class="subtitle">Ref: <?php echo $basketProduct->getItemReference(); ?></p>
 				</td>
 				<td class="sb-ecom-basket-product-quantity a-ui">
+          <?php if($basketProduct->getAllowDuplicates()): ?>
 					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=subtract&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId() . '&title=' . $basketProduct->getItemTitle()); ?>"><span>-</span></a>
 					<span class="sb-ecom-basket-product-quantity-value"><?php echo $basketProduct->getQuantity(); ?></span>
 					<a class="a-btn" href="<?php echo url_for('@sb_ecom_basket_action?action=plus&product=' . $basketProduct->getEcomProduct()->getId() . '&slot=' . $basketProduct->getSlotId() . '&title=' . $basketProduct->getItemTitle()); ?>"><span>+</span></a>
+          <?php endif; ?>
 				</td>
 				<td class="sb-ecom-basket-product-cost sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basketProduct->getCost()); ?></td>
 				<td class="sb-ecom-basket-product-tax sb-ecom-cost"><?php echo sbEcomToolkit::costFormat($basketProduct->getTax()); ?></td>

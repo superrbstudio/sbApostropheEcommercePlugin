@@ -49,6 +49,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
     {
       $this->basketForm = new sbEcomAddToBasketWithOptionForm(null, array('optionValues' => sbEcomAddToBasketWithOptionSlotTable::convertOptionValuesToSelectOptions($this->slot)));
     }
+    elseif(isset($basketParameters['add_to_basket_type']) and $basketParameters['add_to_basket_type'] == 'noQuantity')
+    {
+      $this->basketForm = new sbEcomAddToBasketNoQuantityForm();
+    }
     else
     {
       $this->basketForm = new sbEcomAddToBasketForm();
@@ -115,6 +119,9 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		// verify the product
 		$basketProduct = sbEcomBasketTable::getBasketProductForUserByProductId($request->getParameter('product'), $request->getParameter('slot'), $request->getParameter('title'));
 		$this->forward404Unless($basketProduct instanceof sbEcomBasketProduct);
+    
+    // are we allowed to add more?
+    $this->forward404Unless($basketProduct->getAllowDuplicates());
 		
 		$currentCount = $basketProduct->getQuantity();
 		
