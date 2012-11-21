@@ -44,11 +44,23 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
     
     foreach($this->basket->getBasketProducts() as $basketProduct)
     {
+      $image = sbEcomProductTable::getProductImage($basketProduct->getEcomProduct()->getId());
+      
+      if($image)
+      {
+        $image = $image->getScaledUrl(array('width' => sfConfig::get('app_sbApostropheEcommerce_basket_thumb_width', 100), 'height' => sfConfig::get('app_sbApostropheEcommerce_basket_thumb_height', 100), 'resizeType' => sfConfig::get('app_sbApostropheEcommerce_basket_thumb_resize_type', 'c')));
+      }
+      else
+      {
+        $image = '';
+      }
+      
       $product = array('title' => $basketProduct->getItemTitle(),
                        'reference' => $basketProduct->getItemReference(),
                        'quantity' => $basketProduct->getQuantity(),
                        'cost' => $basketProduct->getCost(),
-                       'tax' => $basketProduct->getTax());
+                       'tax' => $basketProduct->getTax(),
+                       'image' => $image);
       $basket['products'][] = $product;
     }
     
