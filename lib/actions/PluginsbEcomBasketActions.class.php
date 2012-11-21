@@ -40,8 +40,8 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
                       'postageTax' => $this->basket->getPostageTax(),
                       'total' => $this->basket->getTotal(),
                       'numProducts' => $this->basket->getNumProducts(),
-                      'basket-url' => url_for('@sb_ecom_basket'),
-                      'checkout-url' => url_for('@sb_ecom_checkout'),
+                      'basketUrl' => url_for('@sb_ecom_basket'),
+                      'checkoutUrl' => url_for('@sb_ecom_checkout'),
                       'products' => array());
     
     foreach($this->basket->getBasketProducts() as $basketProduct)
