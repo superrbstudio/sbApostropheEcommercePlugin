@@ -71,7 +71,10 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		}
 		else
 		{
-			// @TODO display json result
+      $this->setLayout(false);
+      $this->getResponse()->setContentType('application/json');
+			$this->getResponse()->setContent(json_encode(array('success' => true)));
+      return sfView::NONE;
 		}
 	}
 	
@@ -88,7 +91,18 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		
 		// delete the product and return to the basket
 		$basketProduct->delete();
-		$this->redirect('@sb_ecom_basket');
+    
+		if(!$request->isXmlHttpRequest())
+		{
+			$this->redirect('@sb_ecom_basket');
+		}
+		else
+		{
+      $this->setLayout(false);
+      $this->getResponse()->setContentType('application/json');
+			$this->getResponse()->setContent(json_encode(array('success' => true)));
+      return sfView::NONE;
+		}
 	}
 	
 	public function executePlus(sfWebRequest $request)
@@ -115,7 +129,19 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 		
 		$basketProduct->setQuantity($currentCount);
 		$basketProduct->save();
-		$this->redirect('@sb_ecom_basket');
+    
+    
+		if(!$request->isXmlHttpRequest())
+		{
+			$this->redirect('@sb_ecom_basket');
+		}
+		else
+		{
+      $this->setLayout(false);
+      $this->getResponse()->setContentType('application/json');
+			$this->getResponse()->setContent(json_encode(array('success' => true)));
+      return sfView::NONE;
+		}
 	}
 	
 	public function executeSubtract(sfWebRequest $request)
@@ -150,6 +176,16 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
 			$basketProduct->save();
 		}
 		
-		$this->redirect('@sb_ecom_basket');
+		if(!$request->isXmlHttpRequest())
+		{
+			$this->redirect('@sb_ecom_basket');
+		}
+		else
+		{
+      $this->setLayout(false);
+      $this->getResponse()->setContentType('application/json');
+			$this->getResponse()->setContent(json_encode(array('success' => true)));
+      return sfView::NONE;
+		}
 	}
 }
