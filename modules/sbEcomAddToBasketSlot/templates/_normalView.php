@@ -21,7 +21,6 @@
 	</div>
 	<?php if($addToBasketForm instanceof sbEcomAddToBasketForm): ?>
 	<form action="<?php echo url_for('@sb_ecom_basket_action?action=add'); ?>" method="post" class="a-ui sb-ecom-add-to-basket-form">
-		<?php echo $addToBasketForm->renderHiddenFields(); ?>
 		<?php echo $addToBasketForm->render(); ?>
 		<input type="submit" name="add-to-basket" value="Add to basket" class="a-btn sb-ecom-add-to-basket big"/>
 	</form>
