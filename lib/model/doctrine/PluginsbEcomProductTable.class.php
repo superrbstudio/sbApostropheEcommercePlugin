@@ -163,7 +163,7 @@ class PluginsbEcomProductTable extends aPageTable
         {
           foreach($slots as $slot)
           {
-            if(in_array($slot->getType(), sfConfig::get('app_sbApostropheEcommerce_product_add_to_basket_slots', array('sbEcomAddToBasket'))))
+            if(in_array($slot->getType(), sfConfig::get('app_sbApostropheEcommerce_product_add_to_basket_slots', array('sbEcomAddToBasket', 'sbEcomAddToBasketNoQuantity', 'sbEcomAddToBasketWithOption'))))
             {
               $values = $slot->getArrayValue();
               
