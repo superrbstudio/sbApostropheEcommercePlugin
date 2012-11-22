@@ -62,6 +62,7 @@ abstract class PluginsbEcomBasketActions extends aEngineActions
                        'quantity' => $basketProduct->getQuantity(),
                        'cost' => $basketProduct->getCost(),
                        'tax' => $basketProduct->getTax(),
+                       'url' => url_for($basketProduct->getEcomProduct()->getSlug()),
                        'image' => $image);
       $basket['products'][] = $product;
     }
