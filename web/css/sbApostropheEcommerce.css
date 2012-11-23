@@ -21,7 +21,7 @@
 
 .a-ui .a-btn.sbecomaddtobasket.icon > .icon, .a-ui.a-btn.sbecomaddtobasket.icon > .icon, 
 .a-ui .a-btn.sbecomaddtobasketwithoption.icon > .icon, .a-ui.a-btn.sbecomaddtobasketwithoption.icon > .icon, 
-.a-ui .a-btn.sbecomaddtobasketnoquantity.icon > .icon, .a-ui.a-btn.sbecomaddtobasketnoquantity.icon > .icon
+.a-ui .a-btn.sbecomaddtobasketnoquantity.icon > .icon, .a-ui.a-btn.sbecomaddtobasketnoquantity.icon > .icon,
 .a-ui .alt.sb-ecom-checkouts-btn > .icon {
 	background-image: url('../images/slot-basket-icon.png');
 	background-position: top right;
