@@ -107,7 +107,7 @@ class PluginsbEcomBasketTable
 			case 'weight':
 				$postage = $params['weight'] * $params['cost_per_weight'];
         
-        if(iset($params['cost_per_weight_with_others']))
+        if(isset($params['cost_per_weight_with_others']))
         {
           $postage_with_others = $params['weight'] * $params['cost_per_weight_with_others'];
         }
