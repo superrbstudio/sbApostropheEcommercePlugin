@@ -15,7 +15,7 @@
   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" />
     <input type="hidden" name="cmd" value="_xclick" />
     <input type="hidden" name="upload" value="1">
-    <input type="hidden" name="business" value="giles@superrb.com" />
+    <input type="hidden" name="business" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_business'); ?>" />
     <input type="hidden" name="item_name" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_item_name'); ?> - Checkout ID #<?php echo $checkout->getId(); ?>" />
     <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_sbApostropheEcommerce_currency_code'); ?>" />
     <input type="hidden" name="amount" value="<?php echo round($checkout->getCost(), 2); ?>" />
