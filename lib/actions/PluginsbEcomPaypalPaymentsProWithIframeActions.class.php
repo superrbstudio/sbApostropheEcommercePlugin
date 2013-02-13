@@ -51,6 +51,10 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		{
 			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($request->getParameter('id'));
 		}
+    else
+    {
+      return sfView::NONE;
+    }
 		
 		// must be a valid checkout
 		$this->forward404Unless($this->checkout instanceof sbEcomCheckout);
