@@ -51,22 +51,24 @@ class PluginsbEcomPaypalPaymentsProWithIframeActions extends aEngineActions
 		{
 			$this->checkout = sbEcomCheckoutTable::getInstance()->findOneById($request->getParameter('id'));
 		}
-    else
-    {
-      return sfView::NONE;
-    }
+        else
+        {
+          return sfView::NONE;
+        }
 		
 		// must be a valid checkout
 		$this->forward404Unless($this->checkout instanceof sbEcomCheckout);
 		
 		// Only Awaiting payment can be changed
-		$this->forward404Unless($this->checkout->getStatus() == 'Awaiting Payment');
-		
-    // Set the checkout as paid
-		$this->checkout->setPaymentComplete($request->getParameter('txn_id'));
-		
-		// Send the confirmation email
-    $this->sendConfirmationEmail();
+		if($this->checkout->getStatus() == 'Awaiting Payment')
+        {
+
+            // Set the checkout as paid
+            $this->checkout->setPaymentComplete($request->getParameter('txn_id'));
+
+            // Send the confirmation email
+            $this->sendConfirmationEmail();
+        }
 		
 		return sfView::NONE;
 	}
