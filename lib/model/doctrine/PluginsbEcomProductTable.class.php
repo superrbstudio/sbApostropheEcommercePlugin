@@ -166,22 +166,44 @@ class PluginsbEcomProductTable extends aPageTable
             if(in_array($slot->getType(), sfConfig::get('app_sbApostropheEcommerce_product_add_to_basket_slots', array('sbEcomAddToBasket', 'sbEcomAddToBasketNoQuantity', 'sbEcomAddToBasketWithOption'))))
             {
               $values = $slot->getArrayValue();
-              
-              if($values['cost'] > $costs['high']['cost'])
-              {
-                $costs['high'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
-              }
-              
-              if(($values['cost'] < $costs['low']['cost'] and $values['cost'] > 0) or $costs['low']['cost'] == 0)
-              {
-                $costs['low'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
-              }
+
+                // special case for add to basket with option
+                if($slot->getType() == 'sbEcomAddToBasketWithOption')
+                {
+                    $baseCost = $values['cost'];
+                    $options = json_decode($values['option_value']);
+
+                    foreach($options as $option)
+                    {
+                        if(($baseCost + $option->cost) > $costs['high']['cost'])
+                        {
+                            $costs['high'] = array('cost' => ($baseCost + $option->cost), 'tax' => $values['tax']);
+                        }
+
+                        if((($baseCost + $option->cost) < $costs['low']['cost'] and ($baseCost + $option->cost) > 0) or $costs['low']['cost'] == 0)
+                        {
+                            $costs['low'] = array('cost' => ($baseCost + $option->cost), 'tax' => $values['tax']);
+                        }
+                    }
+                }
+                else
+                {
+                    if($values['cost'] > $costs['high']['cost'])
+                    {
+                        $costs['high'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
+                    }
+
+                    if((($values['cost'] < $costs['low']['cost'] and $values['cost'] > 0)) or $costs['low']['cost'] == 0)
+                    {
+                        $costs['low'] = array('cost' => $values['cost'], 'tax' => $values['tax']);
+                    }
+                }
             }
           }
         }
       }
     }
-    
+
     return $costs;
   }
   
